@@ -1,0 +1,106 @@
+/**
+ * Variable
+ */
+:root {
+    --app-color-accent: #4166f5;
+    --app-color-accent-text: #fff;
+    --app-color-primary: #222;
+    --app-color-primary-dark: #000;
+    --app-color-primary-text: #fff;
+}
+
+/**
+ * Global
+ */
+body {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1.5rem;
+    align-items: end;
+    min-height: 0;
+    padding: 1.5rem;
+}
+
+body > * {
+    cursor: pointer;
+}
+
+/**
+ * Margin
+ */
+section > :not(:first-child) {
+    margin-top: 0.75rem;
+}
+
+/**
+ * Font
+ */
+@font-face {
+    font-family: raleway;
+    font-weight: normal;
+    font-style: normal;
+    src: url('../font/raleway.woff2') format('woff2');
+}
+
+body {
+    font-family: raleway;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+figcaption {
+    font-size: 0.85rem;
+}
+
+/**
+ * Color
+ */
+body {
+    color: var(--app-color-primary-text);
+    background: var(--app-color-primary);
+}
+
+figcaption {
+    background: var(--app-color-primary-dark);
+}
+
+section:hover,
+body > figure:hover > figcaption {
+    color: var(--app-color-accent-text);
+    background: var(--app-color-accent);
+}
+
+body > * {
+    border: 0.0625rem solid var(--app-color-primary-dark);
+}
+
+body > :hover {
+    border-color: var(--app-color-accent);
+}
+
+/**
+ * Figure
+ */
+figcaption {
+    padding: 0.75rem;
+}
+
+audio,
+iframe,
+img,
+video {
+    width: 100%;
+    max-height: 14rem;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/**
+ * Section
+ */
+section {
+    align-self: start;
+    padding: 0.75rem;
+}

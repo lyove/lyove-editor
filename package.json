@@ -1,0 +1,37 @@
+{
+  "name": "lyove",
+  "version": "0.0.1",
+  "description": "A HTML standards-compliant and dependency-free rich text editor",
+  "keywords": [
+    "contenteditable",
+    "editor",
+    "html-editor",
+    "rte",
+    "rich-text",
+    "rich-text-editor",
+    "wysiwyg",
+    "wysiwyg-editor"
+  ],
+  "author": "Lyove",
+  "license": "MIT",
+  "bugs": "https://github.com/lyove/editor/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lyove/editor.git"
+  },
+  "browser": "./dist/editor.js",
+  "module": "./dist/editor.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:css && npm run build:js",
+    "build:css": "esbuild src/editor.css --minify --outfile=dist/editor.css",
+    "build:js": "esbuild src/editor.js --minify --bundle --outfile=dist/editor.js --target=es2020 --format=esm",
+    "clean": "rm -rf dist",
+    "start": "npx --yes servor --reload . index.html 2000"
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.49"
+  }
+}

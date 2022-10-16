@@ -1,0 +1,211 @@
+/**
+ * Variable
+ */
+:root {
+    --app-color-accent: #f4a261;
+    --app-color-accent-dark: #e76f51;
+    --app-color-accent-light: #e9c46a;
+    --app-color-accent-text: #000;
+    --app-color-border: #000;
+    --app-color-error: #d23632;
+    --app-color-error-text: #fff;
+    --app-color-primary: #264653;
+    --app-color-primary-dark: #000;
+    --app-color-primary-light: #2a9d8f;
+    --app-color-primary-text: #fff;
+}
+
+:root:is(.light, .dark) {
+    --editor-block-background: var(--app-color-primary-dark);
+    --editor-block-color: var(--app-color-primary-text);
+    --editor-border: var(--app-color-border);
+    --editor-button-background: var(--app-color-primary-dark);
+    --editor-button-color: var(--app-color-primary-text);
+    --editor-cancel-background: var(--app-color-primary-light);
+    --editor-cancel-color: var(--app-color-primary-text);
+    --editor-dialog-backdrop: #000000cc;
+    --editor-dialog-background: var(--app-color-primary-text);
+    --editor-dialog-color: var(--app-color-primary);
+    --editor-error: var(--app-color-error);
+    --editor-focus: var(--app-color-accent-light);
+    --editor-hover: var(--app-color-accent-light);
+    --editor-placeholder: var(--app-color-primary-light);
+    --editor-slot: var(--app-color-primary-light);
+    --editor-sortover: var(--app-color-primary-dark);
+    --editor-toolbar-background: var(--app-color-primary-text);
+    --editor-toolbar-color: var(--app-color-primary);
+}
+
+:root.dark {
+    --app-color-accent: #4166f5;
+    --app-color-accent-dark: #003cc1;
+    --app-color-accent-light: #8193ff;
+    --app-color-accent-text: #fff;
+    --app-color-border: #000;
+    --app-color-error: #b22222;
+    --app-color-error-text: #fff;
+    --app-color-primary: #222;
+    --app-color-primary-dark: #000;
+    --app-color-primary-light: #494949;
+    --app-color-primary-text: #fff;
+    --editor-dialog-backdrop: #ffffffcc;
+    --editor-dialog-background: var(--app-color-primary);
+    --editor-dialog-color: var(--app-color-primary-text);
+    --editor-toolbar-background: var(--app-color-primary);
+    --editor-toolbar-color: var(--app-color-primary-text);
+}
+
+/**
+ * Custom Elements
+ */
+:host * {
+    pointer-events: none;
+}
+
+/**
+ * Layout
+ */
+body {
+    max-width: 66rem;
+    margin: 3rem auto;
+    padding: 0.75rem;
+}
+
+#header {
+    position: absolute;
+    top: 0;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+}
+
+#header,
+#footer {
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+}
+
+:is(#header, #footer) > * {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 0.375rem;
+    border: 0;
+}
+
+/**
+ * Margin Top
+ */
+:is(lyove-editor editor-textarea, #rte, #rte div) > :not(:is(:first-child)) {
+    margin-top: 1.5rem;
+}
+
+:is(details, figure, section) > :not(:first-child) {
+    margin-top: 0.75rem;
+}
+
+/**
+ * Font
+ */
+@font-face {
+    font-family: knewave;
+    font-display: swap;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../font/knewave.woff') format('woff');
+}
+
+@font-face {
+    font-family: raleway;
+    font-display: swap;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../font/raleway.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: spartan;
+    font-display: swap;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../font/spartan.woff2') format('woff2');
+}
+
+body {
+    font-family: raleway;
+}
+
+blockquote {
+    font-family: knewave;
+}
+
+#header label:first-child {
+    font-variation-settings: 'wght' 700;;
+}
+
+/**
+ * Color
+ */
+body {
+    color: var(--app-color-primary);
+    background: var(--app-color-primary-text);
+}
+
+:root.dark body {
+    color: var(--app-color-primary-text);
+    background: var(--app-color-primary);
+}
+
+
+#header,
+#header select {
+    color: var(--app-color-primary-text);
+    background: var(--app-color-primary-dark);
+}
+
+
+
+#rte app-block {
+    color: var(--app-color-accent-text);
+    background: var(--app-color-accent-dark);
+}
+
+#clear {
+    color: var(--app-color-primary-text);
+    background: var(--app-color-primary-light);
+    cursor: pointer;
+}
+
+#save {
+    color: var(--app-color-error-text);
+    background: var(--app-color-error);
+    cursor: pointer;
+}
+
+/**
+ * Block
+ */
+#rte app-block {
+    display: block;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+#rte app-block::before {
+    display: inline-block;
+    vertical-align: middle;
+    content: var(--editor-text-block);
+}
+
+/**
+ * Form
+ */
+#header :is(option, select) {
+    height: 1.5rem;
+    line-height: 1.5rem;
+    vertical-align: middle;
+    cursor: pointer;
+}
