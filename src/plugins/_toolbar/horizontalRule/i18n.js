@@ -5,6 +5,6 @@
  */
 export default {
     'zh-cn': {
-        'Horizontal Rule': 'Horizontale Rule',
+        'Horizontal Rule': '水平线',
     },
 };

@@ -5,6 +5,7 @@
  */
 export default {
     'zh-cn': {
+        'Table': '表格',
         'Cancel': 'Cancel',
         'Columns': 'Columns',
         'Delete next column': 'Delete next column',
@@ -21,6 +22,5 @@ export default {
         'Sort row to the beginning': 'Sort row to the beginning',
         'Sort column to the end': 'Sort column to the end',
         'Sort row to the end': 'Sort row to the end',
-        'Table': 'Table',
     },
 };

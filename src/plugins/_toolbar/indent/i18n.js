@@ -5,7 +5,7 @@
  */
 export default {
     'zh-cn': {
-        'Indent': 'Indent',
+        'Indent': '缩进',
         'Indent left': 'Indent left',
         'Indent right': 'Indent right',
     },

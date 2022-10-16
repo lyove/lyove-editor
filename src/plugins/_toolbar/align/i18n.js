@@ -5,7 +5,7 @@
  */
 export default {
     'zh-cn': {
-        'Align': 'Align',
+        'Align': '对齐方式',
         'Align center': 'Align center',
         'Align left': 'Align left',
         'Align right': 'Align right',

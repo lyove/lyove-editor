@@ -5,6 +5,6 @@
  */
 export default {
     'zh-cn': {
-        'Heading': 'Heading',
+        'Heading': '标题',
     },
 };

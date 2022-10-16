@@ -5,6 +5,6 @@
  */
 export default {
     'zh-cn': {
-        'color': 'Color',
+        'Color': '字体颜色',
     },
 };

@@ -5,6 +5,6 @@
  */
 export default {
     'zh-cn': {
-        'Blockquote': 'Blockquote',
+        'Blockquote': '引用',
     },
 };

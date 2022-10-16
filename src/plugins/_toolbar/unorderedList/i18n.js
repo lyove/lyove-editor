@@ -5,6 +5,6 @@
  */
 export default {
     'zh-cn': {
-        'Unordered List': 'Unordered List',
+        'Unordered List': '无序列表',
     },
 };

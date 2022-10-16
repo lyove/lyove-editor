@@ -5,6 +5,6 @@
  */
 export default {
     'zh-cn': {
-        'FontSize': 'FontSize',
+        'FontSize': '字号',
     },
 };

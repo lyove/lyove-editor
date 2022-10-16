@@ -5,6 +5,6 @@
  */
 export default {
     'zh-cn': {
-        'background': 'Background',
+        'Background': '背景颜色',
     },
 };

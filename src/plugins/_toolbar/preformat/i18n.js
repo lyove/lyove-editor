@@ -5,6 +5,6 @@
  */
 export default {
     'zh-cn': {
-        'Preformatted Text': 'Preformatted Text',
+        'Preformatted Text': '预设文本格式',
     },
 };

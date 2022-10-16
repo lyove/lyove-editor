@@ -123,7 +123,7 @@ export default class Color extends Plugin {
     init() {
         this._i18n(i18n);
         this._toolbar({
-            label: this._('color'), 
+            label: this._('Color'), 
             command: this.constructor.name,
             arrowDown: Icons['arrow-down'],
             uuid: guid()

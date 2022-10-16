@@ -5,6 +5,6 @@
  */
 export default {
     'zh-cn': {
-        'Ordered List': 'Ordered List',
+        'Ordered List': '有序列表',
     },
 };

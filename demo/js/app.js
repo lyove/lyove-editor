@@ -3,7 +3,6 @@ import SrcEditor from '../../src/editor.js';
 document.addEventListener('DOMContentLoaded', async () => {
     const textarea = document.documentElement;
     const header = document.getElementById('header');
-    const mode = document.getElementById('mode');
     const lang = document.getElementById('lang');
     const rte = document.getElementById('rte');
     const rte2 = document.getElementById('rte2');
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         Array.from(header.getElementsByTagName('select')).forEach(item => (item.disabled = flag));
         clear.disabled = flag;
     };
-    const setMode = () => mode.value ? textarea.setAttribute('class', mode.value) : textarea.removeAttribute('class');
     const init = () => {
         editor?.destroy();
         const Editor = SrcEditor;
@@ -51,7 +49,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         }
     };
-    mode.addEventListener('change', setMode);
     lang.addEventListener('change', init);
     clear.addEventListener('click', () => {
         editor.setHtml('');
@@ -69,7 +66,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             toggle(false);
         }
     });
-    setMode();
     init();
     save.textContent = rte?.hidden ? 'Save' : 'Edit';
 });

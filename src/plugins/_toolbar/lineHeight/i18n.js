@@ -5,6 +5,6 @@
  */
 export default {
     'zh-cn': {
-        'LineHeight': 'Line Height',
+        'LineHeight': '行高',
     },
 };
