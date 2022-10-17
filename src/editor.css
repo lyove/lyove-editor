@@ -19,7 +19,7 @@
   --editor-hover: #1672f3;
   --editor-placeholder: #19191933;
   --editor-slot: #1672f3;
-  --editor-sortover: #191919;
+  --editor-sortover: #1672f3;
   --editor-submit-background: #1672f3;
   --editor-cancel-background: #191919;
   --editor-toolbar-background: #fff;
@@ -46,6 +46,7 @@ lyove-editor {
   position: relative;
   display: block;
   border: 1px solid var(--editor-border-color);
+  border-radius: 6px;
 }
 
 lyove-editor [disabled] {
@@ -65,7 +66,7 @@ lyove-editor editor-toolbar {
   position: relative;
   color: var(--editor-toolbar-color);
   border-bottom: 1px solid var(--editor-border-color);
-  background: var(--editor-toolbar-background);
+  /* background: var(--editor-toolbar-background); */
   padding: 4px;
 }
 
@@ -88,48 +89,6 @@ lyove-editor editor-formatbar {
 lyove-editor editor-formatbar:empty,
 lyove-editor editor-focusbar:empty {
   display: none;
-}
-
-lyove-editor editor-focusbar .trigger {
-  display: inline-block;
-  width: var(--editor-trigger-width);
-  height: var(--editor-trigger-height);
-  background: var(--editor-toolbar-background);
-  border-radius: 2px;
-  text-align: center;
-  cursor: pointer;
-}
-
-lyove-editor editor-focusbar .trigger:hover {
-  background-color: #eff2f5;
-  box-shadow: 0 3px 15px -3px rgb(13 20 33 / 13%);
-}
-
-lyove-editor editor-focusbar .trigger-content {
-  display: flex;
-  align-items: center;
-  margin-left: 2px;
-  background: var(--editor-toolbar-background);
-  border: 1px solid var(--editor-border-color);
-  border-radius: 3px;
-  box-shadow: 0 3px 15px -3px rgb(13 20 33 / 13%);
-}
-
-lyove-editor editor-focusbar .trigger-content[hidden] {
-  display: none;
-}
-
-lyove-editor editor-focusbar .trigger button[data-command] {
-  padding: 0;
-}
-
-lyove-editor editor-focusbar .trigger button[data-command] .btn-icon {
-  width: var(--editor-trigger-width);
-  height: var(--editor-trigger-height);
-}
-
-lyove-editor editor-focusbar .trigger-content button[data-command] {
-  padding: 2px;
 }
 
 lyove-editor editor-menubar button[data-command],
@@ -228,7 +187,7 @@ lyove-editor editor-toolbar button[data-command] .btn-arrow.up,
 lyove-editor editor-formatbar button[data-command] .btn-arrow.up,
 lyove-editor editor-focusbar button[data-active] .btn-arrow.up,
 lyove-editor editor-dropdown button[data-command] .btn-arrow.up {
-  animation: fadeup 200ms ease-in-out;
+  animation: arrowFadeup 200ms ease-in-out;
   animation-fill-mode: forwards;
 }
 
@@ -237,11 +196,11 @@ lyove-editor editor-toolbar button[data-command] .btn-arrow.down,
 lyove-editor editor-formatbar button[data-command] .btn-arrow.down,
 lyove-editor editor-focusbar button[data-active] .btn-arrow.down,
 lyove-editor editor-dropdown button[data-command] .btn-arrow.down {
-  animation: fadedown 200ms ease-in-out;
+  animation: arrowFadedown 200ms ease-in-out;
   animation-fill-mode: forwards;
 }
 
-@keyframes fadeup{
+@keyframes arrowFadeup{
   0%{
     transform: rotate(0deg);
   }
@@ -249,7 +208,7 @@ lyove-editor editor-dropdown button[data-command] .btn-arrow.down {
     transform: rotate(180deg);
   }
 }
-@keyframes fadedown{
+@keyframes arrowFadedown{
   0%{
     transform: rotate(180deg);
   }
@@ -282,15 +241,49 @@ lyove-editor editor-dropdown button[data-active] .btn-label {
   color: var(--editor-focus);
 }
 
+/* Focusbar */
 lyove-editor editor-focusbar > .trigger {
   display: inline-flex;
+  width: var(--editor-trigger-width);
+  height: var(--editor-trigger-height);
+  background: var(--editor-toolbar-background);
+  border-radius: 2px;
+  padding: 0 2px;
+  text-align: center;
   cursor: pointer;
 }
+
 lyove-editor editor-focusbar > .trigger:hover {
   background-color: #eff2f5;
+  border-radius: 4px;
+  box-shadow: 0 3px 15px -3px rgb(13 20 33 / 13%);
 }
-lyove-editor editor-focusbar .toolbox {
+
+lyove-editor editor-focusbar > .trigger-content {
+  display: flex;
+  align-items: center;
+  margin-left: 2px;
+  background: var(--editor-toolbar-background);
   border: 1px solid var(--editor-border-color);
+  border-radius: 3px;
+  box-shadow: 0 3px 15px -3px rgb(13 20 33 / 13%);
+}
+
+lyove-editor editor-focusbar > .trigger-content[hidden] {
+  display: none;
+}
+
+lyove-editor editor-focusbar > .trigger button[data-command] {
+  padding: 0;
+}
+
+lyove-editor editor-focusbar > .trigger button[data-command] .btn-icon {
+  width: var(--editor-trigger-width);
+  height: var(--editor-trigger-height);
+}
+
+lyove-editor editor-focusbar > .trigger-content button[data-command] {
+  padding: 2px;
 }
 
 /**
@@ -650,7 +643,7 @@ lyove-editor *[data-tip-placement='left']:hover:after {
 lyove-editor editor-textarea {
   display: block;
   position: relative;
-  padding: 1.0rem 1.25rem;
+  padding: 1.0rem 1.5rem;
 }
 
 lyove-editor editor-textarea::before {
@@ -671,7 +664,6 @@ lyove-editor editor-textarea:empty::after {
 
 lyove-editor editor-textarea :hover,
 lyove-editor editor-textarea :focus {
-  /* outline: 0.0625rem dashed var(--editor-focus); */
   outline: none;
 }
 
@@ -683,8 +675,8 @@ lyove-editor editor-textarea [contenteditable] {
 }
 
 lyove-editor editor-textarea [contenteditable="true"]:hover {
-  /* outline: 0.0625rem dashed var(--editor-hover); */
   outline: none;
+  background-color: #f9f9f9;
 }
 
 lyove-editor editor-textarea [contenteditable="true"]:empty::after {
@@ -698,7 +690,6 @@ lyove-editor editor-textarea [contenteditable="true"]:empty::after {
 lyove-editor editor-textarea slot[contenteditable] {
   display: block;
   padding: 0.25rem;
-  /* outline: 0.0625rem dotted var(--editor-slot); */
   outline: none;
 }
 
@@ -718,10 +709,9 @@ lyove-editor editor-textarea [data-sortable][data-sort]:hover {
   cursor: grab;
 }
 
-lyove-editor
-  editor-textarea
-  :is([data-sortover], [contenteditable][data-sortover]) {
-  outline: 0.25rem dashed var(--editor-sortover);
+lyove-editor editor-textarea :is([data-sortover], [contenteditable][data-sortover]) {
+  outline: 1px dashed var(--editor-sortover);
+  /* cursor: move; */
 }
 
 /**
@@ -783,7 +773,8 @@ lyove-editor editor-textarea table[data-command="table"] {
 }
 
 lyove-editor editor-textarea table :is(th, td)[contenteditable] {
-  height: 1.5rem;
+  line-height: 1.5rem;
+  padding: 4px 6px;
 }
 
 lyove-editor editor-textarea table :is(thead, tbody) tr:last-child :is(td, th) {

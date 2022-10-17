@@ -47,7 +47,7 @@ export default class Base extends Plugin {
      * @inheritDoc
      */
     static get config() {
-        return { browser: {}, filter: {}, lang: 'en', plugins: [], pluginsDisabled: false };
+        return { browser: {}, filter: {}, lang: 'en', plugins: [] };
     }
 
     /**
@@ -64,6 +64,7 @@ export default class Base extends Plugin {
             children: [
                 TagGroup.AUDIO,
                 TagGroup.BLOCK,
+                TagGroup.BREAK,
                 TagGroup.CONTAINER,
                 TagGroup.FIGURE,
                 TagGroup.HEADING,

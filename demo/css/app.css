@@ -16,13 +16,6 @@
 }
 
 /**
- * Custom Elements
- */
-:host * {
-    pointer-events: none;
-}
-
-/**
  * Layout
  */
 body {
@@ -57,51 +50,8 @@ body {
 }
 
 /**
- * Margin Top
- */
-:is(lyove-editor editor-textarea, #rte, #rte div) > :not(:is(:first-child)) {
-    margin-top: 1.5rem;
-}
-
-:is(details, figure, section) > :not(:first-child) {
-    margin-top: 0.75rem;
-}
-
-/**
  * Font
  */
-@font-face {
-    font-family: knewave;
-    font-display: swap;
-    font-style: normal;
-    font-weight: normal;
-    src: url('../font/knewave.woff') format('woff');
-}
-
-@font-face {
-    font-family: raleway;
-    font-display: swap;
-    font-style: normal;
-    font-weight: normal;
-    src: url('../font/raleway.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: spartan;
-    font-display: swap;
-    font-style: normal;
-    font-weight: normal;
-    src: url('../font/spartan.woff2') format('woff2');
-}
-
-body {
-    font-family: raleway;
-}
-
-blockquote {
-    font-family: knewave;
-}
-
 #header label:first-child {
     font-variation-settings: 'wght' 700;;
 }
@@ -125,13 +75,6 @@ body {
     text-align: right;
 }
 
-
-
-#rte app-block {
-    color: var(--app-color-accent-text);
-    background: var(--app-color-accent-dark);
-}
-
 #clear {
     color: var(--app-color-primary-text);
     background: var(--app-color-primary-light);
@@ -142,21 +85,6 @@ body {
     color: var(--app-color-error-text);
     background: var(--app-color-error);
     cursor: pointer;
-}
-
-/**
- * Block
- */
-#rte app-block {
-    display: block;
-    padding: 0.75rem;
-    text-align: center;
-}
-
-#rte app-block::before {
-    display: inline-block;
-    vertical-align: middle;
-    content: var(--editor-text-block);
 }
 
 /**

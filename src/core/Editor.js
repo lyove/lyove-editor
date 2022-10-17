@@ -411,30 +411,21 @@ export default class Editor {
      */
     init() {
         const config = this.config;
+        const { mode, plugins: cfgPlugins } = config;
 
         // Plugins
-        const builtinPlugins = this.constructor[EditorMode[config.mode]]?.plugins || this.constructor.defaultConfig?.plugins || [];
+        const builtinPlugins = this.constructor[EditorMode[mode]]?.plugins || this.constructor.defaultConfig?.plugins || [];
         const maxPlugins = this.constructor.maxConfig?.plugins;
         const pluginsSet = new Set();
-        let configured = builtinPlugins;
-        if (Array.isArray(config?.plugins) && config.plugins.length > 0) {
-            const cfgPlugins = config.plugins;
-            if (!config?.pluginsDisabled) {
-                configured = [];
-                cfgPlugins.forEach((p) => {
-                    const b = maxPlugins.find((i) => i.name === p);
-                    b && configured.push(b);
-                });
-            } else {
-                configured = configured.filter((i) => !cfgPlugins.includes(i.name));
-            }
-        }
+        const configured = Array.isArray(cfgPlugins) && cfgPlugins.length > 0 
+            ?  maxPlugins.filter((m) => cfgPlugins.includes(m)) 
+            : builtinPlugins;
         configured.forEach((plugin) => {
-            const addPlugins = (item) => {
-                item.dependencies?.forEach(addPlugins);
+            const flatPlugins = (item) => {
+                item.dependencies?.forEach(flatPlugins);
                 pluginsSet.add(item);
             };
-            addPlugins(plugin)
+            flatPlugins(plugin);
         });
         pluginsSet.forEach((item) => {
             Object.entries(item.config).forEach(([key, val]) => {

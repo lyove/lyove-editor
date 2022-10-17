@@ -103,15 +103,19 @@ export default class FocusbarListener extends BarListener {
         const { x, y } = focusElement.getBoundingClientRect();
         const { x: tx, y: ty } = textarea.getBoundingClientRect();
         const diff = x - tx + focusbar.clientWidth - textarea.clientWidth;
-        const top = y - ty - focusElement.scrollTop + textarea.offsetTop - focusbar.clientHeight;
+        const top = y - ty - focusElement.scrollTop + textarea.offsetTop;
         let left = focusbar.clientWidth < textarea.clientWidth ? x - tx : 0;
 
         if (left > 0 && diff > 0) {
             left = left > diff ? (left - diff) / 2 : 0;
         }
+
+        if(focusElement.localName === "li") {
+            left -= 16;
+        }
         
-        focusbar.style.left = `${left - 16}px`;
-        focusbar.style.top = `${top + 20}px`;
+        focusbar.style.left = `${left - 20}px`;
+        focusbar.style.top = `${top}px`;
     }
 
     /**

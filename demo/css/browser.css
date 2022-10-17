@@ -35,21 +35,6 @@ section > :not(:first-child) {
 /**
  * Font
  */
-@font-face {
-    font-family: raleway;
-    font-weight: normal;
-    font-style: normal;
-    src: url('../font/raleway.woff2') format('woff2');
-}
-
-body {
-    font-family: raleway;
-}
-
-h2 {
-    font-size: 1.25rem;
-}
-
 figcaption {
     font-size: 0.85rem;
 }
