@@ -120,6 +120,53 @@ remove the formatting text-level element.
 ```js
 import Editor from './dist/editor.js';
 
+const rte = document.getElementById("rich_text_editor");
+```
+
+```js
+Editor.create(rte, {
+    lang: "en",
+    mode: 'default', // default | max | min
+});
+```
+
+**Config plugins**
+```js
+Editor.create(rte, {
+    lang: "en",
+    plugins: ['help', 'heading', 'paragraph', 'bold', 'sort'],
+});
+```
+
+**Custom plugins**
+```js
+Editor.create(rte, {
+    lang: "en",
+    customPlugins: {
+    audio: {
+        browser: "browser/audio.html",
+    },
+    block: {
+        api: "api/{id}.html",
+        browser: "browser/block.html",
+        css: "css/app.css",
+    },
+    iframe: {
+        browser: "browser/iframe.html",
+    },
+    image: {
+        browser: "browser/image.html",
+    },
+    video: {
+        browser: "browser/video.html",
+    },
+    },
+});
+
+```
+
+**More config**
+```js
 /**
  * Configuration options
  */
@@ -271,10 +318,4 @@ const config = {
         },
     }
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-    const rte = document.getElementById('rte');
-    const editor = Editor.create(rte, config);
-    console.log(editor);
-});
 ```
