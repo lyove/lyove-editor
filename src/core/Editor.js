@@ -418,7 +418,7 @@ export default class Editor {
         const maxPlugins = this.constructor.maxConfig?.plugins;
         const pluginsSet = new Set();
         const configured = Array.isArray(cfgPlugins) && cfgPlugins.length > 0 
-            ?  maxPlugins.filter((m) => cfgPlugins.includes(m)) 
+            ?  maxPlugins.filter((m) => cfgPlugins.includes(m.name)) 
             : builtinPlugins;
         configured.forEach((plugin) => {
             const flatPlugins = (item) => {
