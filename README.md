@@ -1,6 +1,6 @@
 # lyove editor
 
-A Html5 standards-compliant and dependency-free WYSIWYG rich text editor
+A HTML standards-compliant and dependency-free rich text editor.
 
 ## Demo
 
@@ -132,7 +132,6 @@ Editor.create(rte, {
 
 **Config plugins**
 ```js
-// Or config plugins
 Editor.create(rte, {
     lang: "en",
     plugins: ['help', 'heading', 'paragraph', 'bold', 'sort'],
