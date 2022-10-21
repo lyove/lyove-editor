@@ -726,7 +726,7 @@ lyove-editor editor-textarea a {
  */
 lyove-editor editor-textarea p {
   line-height: 1.5;
-  margin: 0;
+  margin: 0.5rem 0;
 }
 
 /**
