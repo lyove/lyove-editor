@@ -64,7 +64,7 @@ export default class Base extends Plugin {
             children: [
                 TagGroup.AUDIO,
                 TagGroup.BLOCK,
-                TagGroup.BREAK,
+                // TagGroup.BREAK,
                 TagGroup.CONTAINER,
                 TagGroup.FIGURE,
                 TagGroup.HEADING,
