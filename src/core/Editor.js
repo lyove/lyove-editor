@@ -534,7 +534,7 @@ export default class Editor {
         this.textareaDispatcher.dispatch('sethtml', textarea);
         this.filters.filter(textarea);
         this.textarea.innerHTML = textarea.innerHTML;
-        if (textarea.innerHTML === '') {
+        if (!textarea.innerHTML) {
             this.textarea.appendChild(this.dom.createElement(TagName.P));
         }
     }
