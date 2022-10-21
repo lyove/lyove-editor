@@ -422,7 +422,9 @@ export default class Editor {
             : builtinPlugins;
         configured.forEach((plugin) => {
             const flatPlugins = (item) => {
-                item.dependencies?.forEach(flatPlugins);
+                if (Array.isArray(item?.dependencies)) {
+                    item.dependencies.forEach(flatPlugins);
+                }
                 pluginsSet.add(item);
             };
             flatPlugins(plugin);
@@ -479,10 +481,9 @@ export default class Editor {
      */
     load() {
         if (this.orig instanceof HTMLTextAreaElement) {
-            this.orig.form.addEventListener('submit', () => this.save());
             this.setHtml(this.orig.value.replace('/&nbsp;/g', ' '));
         } else {
-            this.setHtml(this.orig.innerHTML || '<p>&nbsp;</p>');
+            this.setHtml(this.orig.innerHTML);
         }
 
         Array.from(this.element.children).forEach((item) => {
@@ -533,6 +534,9 @@ export default class Editor {
         this.textareaDispatcher.dispatch('sethtml', textarea);
         this.filters.filter(textarea);
         this.textarea.innerHTML = textarea.innerHTML;
+        if (textarea.innerHTML === '') {
+            this.textarea.appendChild(this.dom.createElement(TagName.P));
+        }
     }
 
     /**
