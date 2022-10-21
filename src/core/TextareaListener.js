@@ -59,6 +59,9 @@ export default class TextareaListener extends Listener {
         if (typeof onValueChange === 'function') {
             onValueChange(e?.currentTarget?.innerHTML, e);
         }
+        if (e?.currentTarget?.innerHTML === "") {
+            this.editor.textarea.appendChild(this.editor.dom.createElement(TagName.P));
+        }
     }
 
     /**
