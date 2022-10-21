@@ -32,5 +32,5 @@
 
 - https://editorjs.io/
 - https://tiptap.dev/
-- https://www.tiny.cloud/
+- https://www.tiny.cloud/ https://www.tiny.cloud/docs/tinymce/6/full-featured-premium-demo/
 - https://froala.com/wysiwyg-editor/
