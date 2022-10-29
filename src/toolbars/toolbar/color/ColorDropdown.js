@@ -69,7 +69,7 @@ export default class ColorDropdown extends Dropdown {
    * @return {void}
    */
   _onClick(e, execute, close) {
-    const { color } = e.target?.dataset;
+    const color = e.target?.dataset?.color;
     execute({ style: `color: ${color}` });
     close();
   }

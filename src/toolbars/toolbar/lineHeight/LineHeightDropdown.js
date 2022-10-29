@@ -54,7 +54,7 @@ export default class LineHeightDropdown extends Dropdown {
    * @return {void}
    */
   _onClick(e, execute, close) {
-    const { command } = e.target?.dataset;
+    const command = e.target?.dataset?.command;
     execute({ style: `line-height: ${command}` });
     close();
   }

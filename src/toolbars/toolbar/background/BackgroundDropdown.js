@@ -69,7 +69,7 @@ export default class BackgroundDropdown extends Dropdown {
    * @return {void}
    */
   _onClick(event, execute, close) {
-    const { color } = event.target?.dataset;
+    const color = event.target?.dataset?.color;
     execute({ style: `background: ${color}` });
     close();
   }
