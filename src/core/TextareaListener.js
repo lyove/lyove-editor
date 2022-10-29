@@ -11,9 +11,25 @@ export default class TextareaListener extends Listener {
     /**
      * @inheritDoc
      */
-     constructor(editor) {
+    constructor(editor) {
         super(editor);
         this.editor.dom.document.addEventListener('selectionchange', this);
+        this.editor.textarea.addEventListener('input', this.onInputChange.bind(this));
+        this.editor.textarea.addEventListener('delete', this);
+    }
+    
+    /**
+     * Input change event
+     *
+     * @param {CustomEvent} event
+     * @return {void}
+     */
+    onInputChange(e) {
+        console.log('onInputChange', e);
+        const { onValueChange } = this.editor.config;
+        if (typeof onValueChange === 'function') {
+            onValueChange(e?.currentTarget?.innerHTML, e);
+        }
     }
 
     /**
@@ -29,6 +45,22 @@ export default class TextareaListener extends Listener {
             selctedElement.parentElement.contentEditable === "true")
         ) {
             this.activeBarItem();
+        }
+    }
+
+    /**
+     * Remove nodes event
+     *
+     * @param {CustomEvent} event
+     * @return {void}
+     */
+    delete(e) {
+        const { onValueChange } = this.editor.config;
+        if (typeof onValueChange === 'function') {
+            onValueChange(e?.currentTarget?.innerHTML, e);
+        }
+        if (e?.currentTarget?.innerHTML === "") {
+            this.editor.textarea.appendChild(this.editor.dom.createElement(TagName.P));
         }
     }
 

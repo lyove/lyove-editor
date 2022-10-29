@@ -726,7 +726,7 @@ lyove-editor editor-textarea a {
  */
 lyove-editor editor-textarea p {
   line-height: 1.5;
-  margin: 0;
+  margin: 0.5rem 0;
 }
 
 /**
@@ -770,6 +770,7 @@ lyove-editor editor-textarea table[data-command="table"] {
   empty-cells: show;
   border-collapse: collapse;
   border-spacing: 0;
+  margin: 0.5rem 0;
 }
 
 lyove-editor editor-textarea table :is(th, td)[contenteditable] {
@@ -824,6 +825,7 @@ lyove-editor editor-textarea blockquote[data-command="blockquote"] {
   position: relative;
   margin: 0;
   padding-left: 0.75rem;
+  margin: 0.5rem 0;
 }
 lyove-editor editor-textarea blockquote::before,
 lyove-editor editor-textarea blockquote[data-command="blockquote"]::before {

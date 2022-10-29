@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                         browser: 'browser/video.html',
                     },
                 },
+                onValueChange: (value, event) => {
+                    console.log(value, event);
+                }
             });
         }
         if (rte2) {

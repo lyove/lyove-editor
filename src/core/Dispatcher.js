@@ -33,7 +33,7 @@ export default class Dispatcher {
      * @param {MutationObserverInit} [opts = {childList: true, subtree: true}]
      * @return {void}
      */
-    register(call, opts = { childList: true, subtree: true }) {
+    register(call, opts = { childList: true, subtree: true, attributes: true }) {
         if (!isFunction(call)) {
             throw new Error(ErrorMessage.INVALID_ARGUMENT);
         }
@@ -79,8 +79,8 @@ export default class Dispatcher {
      * @param {MutationRecord[]} records
      * @return {void}
      */
-    #observe(records) {
-        records.forEach(record => {
+    #observe(mutationRecords) {
+        mutationRecords.forEach(record => {
             record.addedNodes.forEach(element => {
                 if (element instanceof HTMLElement) {
                     this.#dispatch('insert', element, record.target);
@@ -89,9 +89,11 @@ export default class Dispatcher {
                     );
                 }
             });
-            record.removedNodes.forEach(
-                element => element instanceof HTMLElement && this.#dispatch('delete', element, record.target),
-            );
+            record.removedNodes.forEach((element) => {
+                if (element instanceof HTMLElement) { 
+                    this.#dispatch('delete', element, record.target);
+                }
+            });
         });
     }
 }
