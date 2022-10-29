@@ -4,7 +4,7 @@
  * @type {Object.<string, Object.<string, string>>}
  */
 export default {
-    'zh-cn': {
-        'Blockquote': '引用',
-    },
+  "zh-cn": {
+    Blockquote: "引用",
+  },
 };

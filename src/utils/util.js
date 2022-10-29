@@ -1,4 +1,4 @@
-import { DataType } from './Enum.js';
+import { DataType } from "./Enum.js";
 
 /**
  * Indicates if keyboard event was triggered for given key combination
@@ -10,11 +10,17 @@ import { DataType } from './Enum.js';
  * @param {boolean} shift
  * @return {boolean}
  */
-export function isKey(event, key, { alt = false, ctrl = false, shift = false } = {}) {
-    return (Array.isArray(key) && key.includes(event.key) || event.key === key)
-        && event.altKey === alt
-        && event.ctrlKey === ctrl
-        && event.shiftKey === shift;
+export function isKey(
+  event,
+  key,
+  { alt = false, ctrl = false, shift = false } = {}
+) {
+  return (
+    ((Array.isArray(key) && key.includes(event.key)) || event.key === key) &&
+    event.altKey === alt &&
+    event.ctrlKey === ctrl &&
+    event.shiftKey === shift
+  );
 }
 
 /**
@@ -24,7 +30,7 @@ export function isKey(event, key, { alt = false, ctrl = false, shift = false } =
  * @return {boolean}
  */
 export function not(val) {
-    return typeof val === DataType.UNDEFINED;
+  return typeof val === DataType.UNDEFINED;
 }
 
 /**
@@ -34,7 +40,7 @@ export function not(val) {
  * @return {boolean}
  */
 export function isFunction(val) {
-    return typeof val === DataType.FUNCTION;
+  return typeof val === DataType.FUNCTION;
 }
 
 /**
@@ -44,7 +50,7 @@ export function isFunction(val) {
  * @return {boolean}
  */
 export function isString(val) {
-    return val && typeof val === DataType.STRING;
+  return val && typeof val === DataType.STRING;
 }
 
 /**
@@ -54,7 +60,7 @@ export function isString(val) {
  * @return {boolean}
  */
 export function isArray(val) {
-    return val && Array.isArray(val);
+  return val && Array.isArray(val);
 }
 
 /**
@@ -63,8 +69,8 @@ export function isArray(val) {
  * @param {any} val
  * @return {boolean}
  */
- export function isObject(val) {
-    return val && Object.prototype.toString.call(val) === '[object Object]'
+export function isObject(val) {
+  return val && Object.prototype.toString.call(val) === "[object Object]";
 }
 
 /**
@@ -74,7 +80,7 @@ export function isArray(val) {
  * @return {boolean}
  */
 export function isOptString(val) {
-    return not(val) || isString(val);
+  return not(val) || isString(val);
 }
 
 /**
@@ -84,7 +90,7 @@ export function isOptString(val) {
  * @return {boolean}
  */
 export function isOptArray(val) {
-    return not(val) || Array.isArray(val) && val.length > 0;
+  return not(val) || (Array.isArray(val) && val.length > 0);
 }
 
 /**
@@ -94,18 +100,18 @@ export function isOptArray(val) {
  * @return {boolean}
  */
 export function isOptHtml(val) {
-    return not(val) || val instanceof HTMLElement;
+  return not(val) || val instanceof HTMLElement;
 }
 
 /**
  * Run a function asynchronously
- * @param {function} fn 
- * @param {number} t 
+ * @param {function} fn
+ * @param {number} t
  */
 export function asyncFn(fn = () => {}, t = 0) {
-    if(typeof fn === "function") {
-        setTimeout(fn, t);
-    }
+  if (typeof fn === "function") {
+    setTimeout(fn, t);
+  }
 }
 
 /**
@@ -113,9 +119,9 @@ export function asyncFn(fn = () => {}, t = 0) {
  * @returns {string}
  */
 export function guid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        const r = Math.random() * 16 | 0;
-        const v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
 }

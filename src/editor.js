@@ -71,111 +71,111 @@ import Delete from "./plugins/_focusbar/delete/Delete.js";
  * Editor
  */
 export default class Editor extends CoreEditor {
-    /**
-     * Min config
-     */
-    static get minConfig() {
-        return {
-            plugins: [
-                // toolbar
-                Paragraph,
-                Heading,
-                FontSize,
-                Color,
-                Background,
-                OrderedList,
-                UnorderedList,
-                Indent,
-                Align,
-                LineHeight,
-                Blockquote,
-                Image,
-                Video,
-                Audio,
-                Table,
-                // formatbar
-                Bold,
-                Italic,
-                Strong,
-                Link,
-                // focusbar
-                Sort,
-                Delete,
-            ]
-        }
-    }
+  /**
+   * Min config
+   */
+  static get minConfig() {
+    return {
+      plugins: [
+        // toolbar
+        Paragraph,
+        Heading,
+        FontSize,
+        Color,
+        Background,
+        OrderedList,
+        UnorderedList,
+        Indent,
+        Align,
+        LineHeight,
+        Blockquote,
+        Image,
+        Video,
+        Audio,
+        Table,
+        // formatbar
+        Bold,
+        Italic,
+        Strong,
+        Link,
+        // focusbar
+        Sort,
+        Delete,
+      ],
+    };
+  }
 
-    /**
-     * Default config
-     */
-    static get defaultConfig() {
-        return {
-            plugins: [
-                // toolbar
-                Paragraph,
-                Heading,
-                FontSize,
-                Color,
-                Background,
-                OrderedList,
-                UnorderedList,
-                Align,
-                Indent,
-                LineHeight,
-                Blockquote,
-                Image,
-                Video,
-                Audio,
-                Table,
-                Preformat,
-                HorizontalRule,
-                // formatbar
-                Bold,
-                Italic,
-                Underline,
-                Link,
-                Subscript,
-                Superscript,
-                Quote,
-                // focusbar
-                Sort,
-                Delete,
-            ],
-        };
-    }
+  /**
+   * Default config
+   */
+  static get defaultConfig() {
+    return {
+      plugins: [
+        // toolbar
+        Paragraph,
+        Heading,
+        FontSize,
+        Color,
+        Background,
+        OrderedList,
+        UnorderedList,
+        Align,
+        Indent,
+        LineHeight,
+        Blockquote,
+        Image,
+        Video,
+        Audio,
+        Table,
+        Preformat,
+        HorizontalRule,
+        // formatbar
+        Bold,
+        Italic,
+        Underline,
+        Link,
+        Subscript,
+        Superscript,
+        Quote,
+        // focusbar
+        Sort,
+        Delete,
+      ],
+    };
+  }
 
-    /**
-     * Max config
-     */
-    static get maxConfig() {
-        return {
-            plugins: this.defaultConfig.plugins.concat([
-                // menubar
-                Help,
-                // toolbar
-                Details,
-                Division,
-                Section,
-                Block,
-                Iframe,
-                // formatbar
-                Strong,
-                Strikethrough,
-                Insertion,
-                Deletion,
-                Small,
-                Emphasis,
-                Code,
-                Cite,
-                Mark,
-                Keyboard,
-                Sample,
-                Variable,
-                Time,
-                Abbreviation,
-                Data,
-                Definition,
-            ])
-        }
-    }
+  /**
+   * Max config
+   */
+  static get maxConfig() {
+    return {
+      plugins: this.defaultConfig.plugins.concat([
+        // menubar
+        Help,
+        // toolbar
+        Details,
+        Division,
+        Section,
+        Block,
+        Iframe,
+        // formatbar
+        Strong,
+        Strikethrough,
+        Insertion,
+        Deletion,
+        Small,
+        Emphasis,
+        Code,
+        Cite,
+        Mark,
+        Keyboard,
+        Sample,
+        Variable,
+        Time,
+        Abbreviation,
+        Data,
+        Definition,
+      ]),
+    };
+  }
 }

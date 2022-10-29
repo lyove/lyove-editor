@@ -18,14 +18,18 @@ export default class HelpDropdown extends Dropdown {
    * @inheritDoc
    */
   _prepareContent() {
-    ['<a href="https://github.com/lyove">Lyove-editor</a>', "List1", "List3"].forEach((item) => {
+    [
+      '<a href="https://github.com/lyove">Lyove-editor</a>',
+      "List1",
+      "List3",
+    ].forEach((item) => {
       this.dropdownContent.addMenuItem(item, this._onClick);
     });
   }
 
   /**
    * Click event
-   * @param {*} event 
+   * @param {*} event
    */
   _onClick(event) {
     console.log(event);

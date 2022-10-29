@@ -1,139 +1,140 @@
-import { ErrorMessage } from '../utils/Enum.js';
-import { isString, isOptArray, isOptString } from '../utils/util.js';
+import { ErrorMessage } from "../utils/Enum.js";
+import { isString, isOptArray, isOptString } from "../utils/util.js";
 
 /**
  * Tag
  */
 export default class Tag {
-    /**
-     * Name
-     *
-     * @type {string}
-     */
-    name;
+  /**
+   * Name
+   *
+   * @type {string}
+   */
+  name;
 
-    /**
-     * Name of the tag group
-     *
-     * @type {string}
-     */
-    group;
+  /**
+   * Name of the tag group
+   *
+   * @type {string}
+   */
+  group;
 
-    /**
-     * Allowed groups of child elements
-     *
-     * @type {string[]}
-     */
-    children;
+  /**
+   * Allowed groups of child elements
+   *
+   * @type {string[]}
+   */
+  children;
 
-    /**
-     * Allowed attributes
-     *
-     * @type {string[]}
-     */
-    attributes;
+  /**
+   * Allowed attributes
+   *
+   * @type {string[]}
+   */
+  attributes;
 
-    /**
-     * Is element alignable
-     *
-     * @type {boolean}
-     */
-    alignable;
+  /**
+   * Is element alignable
+   *
+   * @type {boolean}
+   */
+  alignable;
 
-    /**
-     * Does element allow arbitrary amount of child elements
-     *
-     * @type {boolean}
-     */
-    arbitrary;
+  /**
+   * Does element allow arbitrary amount of child elements
+   *
+   * @type {boolean}
+   */
+  arbitrary;
 
-    /**
-     * Is element deletable
-     *
-     * @type {boolean}
-     */
-    deletable;
+  /**
+   * Is element deletable
+   *
+   * @type {boolean}
+   */
+  deletable;
 
-    /**
-     * Is element editable
-     *
-     * @type {boolean}
-     */
-    editable;
+  /**
+   * Is element editable
+   *
+   * @type {boolean}
+   */
+  editable;
 
-    /**
-     * Is element empty or allowed to be empty
-     *
-     * @type {boolean}
-     */
-    empty;
+  /**
+   * Is element empty or allowed to be empty
+   *
+   * @type {boolean}
+   */
+  empty;
 
-    /**
-     * Should element be focused on insert
-     *
-     * @type {boolean}
-     */
-    focusable;
+  /**
+   * Should element be focused on insert
+   *
+   * @type {boolean}
+   */
+  focusable;
 
-    /**
-     * Is element navigable
-     *
-     * @type {boolean}
-     */
-    navigable;
+  /**
+   * Is element navigable
+   *
+   * @type {boolean}
+   */
+  navigable;
 
-    /**
-     * Does element define a slot
-     *
-     * @type {boolean}
-     */
-    slotable;
+  /**
+   * Does element define a slot
+   *
+   * @type {boolean}
+   */
+  slotable;
 
-    /**
-     * Is element sortable
-     *
-     * @type {boolean}
-     */
-    sortable;
+  /**
+   * Is element sortable
+   *
+   * @type {boolean}
+   */
+  sortable;
 
-    /**
-     * Element to insert when ENTER-key is pressed
-     *
-     * @type {string|undefined}
-     */
-    enter;
+  /**
+   * Element to insert when ENTER-key is pressed
+   *
+   * @type {string|undefined}
+   */
+  enter;
 
-    /**
-     * Defines a new tag
-     *
-     * @param {string} name
-     * @param {string} group
-     * @param {Object.<string, any>} [opts = {}]
-     */
-    constructor({ name, group, command, ...opts } = {}) {
-        if (!isString(name)
-            || !isString(group)
-            || !isOptArray(opts.children)
-            || !isOptArray(opts.attributes)
-            || !isOptString(opts.enter)
-        ) {
-            throw new Error(ErrorMessage.INVALID_ARGUMENT);
-        }
-
-        this.name = name;
-        this.group = group;
-        this.command = command;
-        this.children = opts.children || [];
-        this.attributes = opts.attributes || [];
-        this.arbitrary = opts.arbitrary === true;
-        this.alignable = opts.alignable === true;
-        this.editable = opts.editable === true;
-        this.focusable = opts.focusable === true;
-        this.navigable = opts.navigable === true;
-        this.slotable = opts.slotable === true;
-        this.sortable = opts.sortable === true;
-        this.deletable = opts.deletable === true;
-        this.empty = opts.empty === true;
-        this.enter = opts.enter;
+  /**
+   * Defines a new tag
+   *
+   * @param {string} name
+   * @param {string} group
+   * @param {Object.<string, any>} [opts = {}]
+   */
+  constructor({ name, group, command, ...opts } = {}) {
+    if (
+      !isString(name) ||
+      !isString(group) ||
+      !isOptArray(opts.children) ||
+      !isOptArray(opts.attributes) ||
+      !isOptString(opts.enter)
+    ) {
+      throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
+
+    this.name = name;
+    this.group = group;
+    this.command = command;
+    this.children = opts.children || [];
+    this.attributes = opts.attributes || [];
+    this.arbitrary = opts.arbitrary === true;
+    this.alignable = opts.alignable === true;
+    this.editable = opts.editable === true;
+    this.focusable = opts.focusable === true;
+    this.navigable = opts.navigable === true;
+    this.slotable = opts.slotable === true;
+    this.sortable = opts.sortable === true;
+    this.deletable = opts.deletable === true;
+    this.empty = opts.empty === true;
+    this.enter = opts.enter;
+  }
 }

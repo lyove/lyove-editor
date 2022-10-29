@@ -1,0 +1,958 @@
+/**
+ * Variable
+ */
+:root {
+  --editor-block-background: #191919;
+  --editor-block-color: #fff;
+  --editor-border-color: #19191933;
+  --editor-button-color: #fff;
+  --editor-button-width: 24px;
+  --editor-button-height: 24px;
+  --editor-button-hover-background: #f4f5f5;
+  --editor-trigger-width: 12px;
+  --editor-trigger-height: 20px;
+  --editor-dialog-backdrop: #000000a3;
+  --editor-dialog-background: #fff;
+  --editor-dialog-color: #191919;
+  --editor-error: #dd0400;
+  --editor-focus: #1672f3;
+  --editor-hover: #1672f3;
+  --editor-placeholder: #19191933;
+  --editor-slot: #1672f3;
+  --editor-sortover: #1672f3;
+  --editor-submit-background: #1672f3;
+  --editor-cancel-background: #191919;
+  --editor-toolbar-background: #fff;
+  --editor-toolbar-color: #191919;
+  --editor-text-block: "Block: " attr(id);
+  --editor-text-editable: "Input some text!";
+  --editor-textarea: "Input some widgets!";
+  --editor-text-slot: "Focus this slot and insert some widgets!";
+}
+
+/**
+ * Placeholder
+ */
+lyove-editor[lang="zh-cn"] {
+  --editor-text-editable: "Input some Text!";
+  --editor-textarea: "Insert some Widgets!";
+  --editor-text-slot: "Focus this slot and insert widgets!";
+}
+
+/**
+ * Editor
+ */
+lyove-editor {
+  border: 1px solid var(--editor-border-color);
+  border-radius: 6px;
+  display: block;
+  position: relative;
+
+  [disabled] {
+    opacity: 0.5;
+  }
+}
+
+/**
+ * Toolbar
+ */
+lyove-editor {
+  [role="toolbar"] {
+    box-sizing: border-box;
+  }
+
+  editor-menubar,
+  editor-toolbar {
+    border-bottom: 1px solid var(--editor-border-color);
+    color: var(--editor-toolbar-color);
+    display: block;
+    /* background: var(--editor-toolbar-background); */
+    padding: 4px;
+    position: relative;
+  }
+
+  editor-formatbar,
+  editor-focusbar {
+    color: var(--editor-toolbar-color);
+    display: flex;
+    flex-wrap: wrap;
+    left: 0;
+    position: absolute;
+    z-index: 100;
+  }
+
+  editor-formatbar {
+    background: var(--editor-toolbar-background);
+    border: 1px solid var(--editor-border-color);
+    padding: 4px;
+  }
+
+  editor-formatbar:empty,
+  editor-focusbar:empty {
+    display: none;
+  }
+
+}
+
+// Command button
+lyove-editor {
+  editor-menubar button[data-command],
+  editor-toolbar button[data-command],
+  editor-formatbar button[data-command],
+  editor-focusbar button[data-command],
+  editor-dropdown button[data-command] {
+    align-items: center;
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    display: inline-flex;
+    outline: 0 none;
+    padding: 4px 6px;
+  }
+  
+  editor-focusbar[data-alignable] button[data-command^="align-"],
+  editor-focusbar[data-deletable] button[data-command="delete"],
+  editor-focusbar[data-sortable] button[data-command^="sort-"] {
+    display: inline-flex;
+  }
+  
+  editor-menubar button[data-command]:hover,
+  editor-toolbar button[data-command]:hover,
+  editor-formatbar button[data-command]:hover,
+  editor-hoverbar button[data-command]:hover,
+  editor-dropdown button[data-command]:hover {
+    background-color: var(--editor-button-hover-background);
+    border-radius: 4px;
+  }
+  
+  editor-menubar button[data-command]:focus,
+  editor-toolbar button[data-command]:focus,
+  editor-formatbar button[data-command]:focus,
+  editor-focusbar button[data-command]:focus,
+  editor-dropdown button[data-command]:focus {
+    color: var(--editor-focus);
+  }
+  
+  editor-menubar button[data-command] .btn-icon,
+  editor-toolbar button[data-command] .btn-icon,
+  editor-formatbar button[data-command] .btn-icon,
+  editor-focusbar button[data-command] .btn-icon,
+  editor-dropdown button[data-command] .btn-icon {
+    align-items: center;
+    display: inline-flex;
+    height: var(--editor-button-height);
+    justify-content: center;
+    width: var(--editor-button-width);
+  }
+  
+  editor-menubar button[data-command] .separator,
+  editor-toolbar button[data-command] .separator,
+  editor-formatbar button[data-command] .separator,
+  editor-focusbar button[data-command] .separator,
+  editor-dropdown button[data-command] .separator {
+    background: transparent;
+    height: var(--editor-button-height);
+    margin: 0 1px 0 2px;
+    width: 1px;
+  }
+  
+  editor-menubar button[data-command]:hover .separator,
+  editor-toolbar button[data-command]:hover .separator,
+  editor-formatbar button[data-command]:hover .separator,
+  editor-focusbar button[data-command]:hover .separator,
+  editor-dropdown button[data-command]:hover .separator,
+  editor-menubar button[data-command]:active .separator,
+  editor-toolbar button[data-command]:active .separator,
+  editor-formatbar button[data-command]:active .separator,
+  editor-focusbar button[data-command]:active .separator,
+  editor-dropdown button[data-command]:active .separator {
+    background: #e8e8e8;
+  }
+  
+  editor-menubar button[data-command] .btn-label,
+  editor-toolbar button[data-command] .btn-label,
+  editor-formatbar button[data-command] .btn-label,
+  editor-focusbar button[data-command] .btn-label,
+  editor-dropdown button[data-command] .btn-label {
+    font-size: 0;
+  }
+  
+  editor-menubar button[data-command] .btn-arrow,
+  editor-toolbar button[data-command] .btn-arrow,
+  editor-formatbar button[data-command] .btn-arrow,
+  editor-focusbar button[data-active] .btn-arrow,
+  editor-dropdown button[data-command] .btn-arrow {
+    align-items: center;
+    display: flex;
+    margin-right: -2px;
+  }
+  
+  editor-menubar button[data-command] .btn-arrow.up,
+  editor-toolbar button[data-command] .btn-arrow.up,
+  editor-formatbar button[data-command] .btn-arrow.up,
+  editor-focusbar button[data-active] .btn-arrow.up,
+  editor-dropdown button[data-command] .btn-arrow.up {
+    animation: arrowFadeup 200ms ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  
+  editor-menubar button[data-command] .btn-arrow.down,
+  editor-toolbar button[data-command] .btn-arrow.down,
+  editor-formatbar button[data-command] .btn-arrow.down,
+  editor-focusbar button[data-active] .btn-arrow.down,
+  editor-dropdown button[data-command] .btn-arrow.down {
+    animation: arrowFadedown 200ms ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  
+  editor-menubar button[data-active],
+  editor-toolbar button[data-active],
+  lyove-editor
+    editor-formatbar
+    button[data-active]
+    lyove-editor
+    editor-focusbar
+    button[data-active],
+  editor-dropdown button[data-active] {
+    color: var(--editor-focus);
+  }
+  
+  editor-menubar button[data-active] .btn-icon > svg,
+  editor-toolbar button[data-active] .btn-icon > svg,
+  editor-formatbar button[data-active] .btn-icon > svg,
+  editor-focusbar button[data-active] .btn-icon > svg,
+  editor-dropdown button[data-active] .btn-icon > svg {
+    fill: var(--editor-focus);
+  }
+  
+  editor-menubar button[data-active] .btn-label,
+  editor-toolbar button[data-active] .btn-label,
+  editor-formatbar button[data-active] .btn-label,
+  editor-focusbar button[data-active] .btn-label,
+  editor-dropdown button[data-active] .btn-label {
+    color: var(--editor-focus);
+  }
+}
+
+/* Focusbar */
+lyove-editor {
+  editor-focusbar > .trigger {
+    background: var(--editor-toolbar-background);
+    border-radius: 2px;
+    cursor: pointer;
+    display: inline-flex;
+    height: var(--editor-trigger-height);
+    padding: 0 2px;
+    text-align: center;
+    width: var(--editor-trigger-width);
+  }
+
+  editor-focusbar > .trigger:hover {
+    background-color: #eff2f5;
+    border-radius: 4px;
+    box-shadow: 0 3px 15px -3px rgb(13 20 33 / 13%);
+  }
+
+  editor-focusbar > .trigger-content {
+    align-items: center;
+    background: var(--editor-toolbar-background);
+    border: 1px solid var(--editor-border-color);
+    border-radius: 3px;
+    box-shadow: 0 3px 15px -3px rgb(13 20 33 / 13%);
+    display: flex;
+    margin-left: 2px;
+  }
+
+  editor-focusbar > .trigger-content[hidden] {
+    display: none;
+  }
+
+  editor-focusbar > .trigger button[data-command] {
+    padding: 0;
+  }
+
+  editor-focusbar > .trigger button[data-command] .btn-icon {
+    height: var(--editor-trigger-height);
+    width: var(--editor-trigger-width);
+  }
+
+  editor-focusbar > .trigger-content button[data-command] {
+    padding: 2px;
+  }
+}
+
+/**
+ * Dialog
+ */
+lyove-editor {
+  editor-dialog {
+    display: none;
+  }
+
+  editor-dialog[open] {
+    align-items: center;
+    background: var(--editor-dialog-backdrop);
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
+
+  editor-dialog form {
+    background: var(--editor-dialog-background);
+    border-radius: 6px;
+    color: var(--editor-dialog-color);
+    min-width: 360px;
+    padding: 0.75rem;
+  }
+
+  editor-dialog :is(form, fieldset) > :not(:first-child) {
+    margin-top: 1.5rem;
+  }
+
+  editor-dialog legend {
+    font-size: 1.25rem;
+  }
+
+  editor-dialog label {
+    display: block;
+  }
+
+  editor-dialog [data-required] label::after {
+    color: var(--editor-error);
+    content: " *";
+  }
+
+  editor-dialog button {
+    background: var(--editor-cancel-background);
+    border-width: 0;
+    color: var(--editor-button-color);
+    outline: none;
+    padding: 0.375rem 0.75rem;
+  }
+
+  editor-dialog button + button {
+    margin-left: 1.5rem;
+  }
+
+  editor-dialog button[type="submit"] {
+    background: var(--editor-submit-background);
+    color: var(--editor-button-color);
+  }
+
+  editor-dialog button.cancel {
+    color: var(--editor-button-color);
+  }
+
+  editor-dialog fieldset,
+  editor-dialog input {
+    border: 0 none;
+    outline: 0 none;
+  }
+
+  editor-dialog input:is([type="email"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="text"], [type="url"]),
+  editor-dialog select {
+    border-bottom: 1px solid var(--editor-border-color);
+    padding: 0.5rem 0;
+    width: 100%;
+  }
+
+  editor-dialog input:is([type="email"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="text"], [type="url"]):invalid,
+  editor-dialog select:invalid {
+    border-color: var(--editor-error);
+  }
+}
+
+/**
+ * Dropdown
+ */
+lyove-editor {
+  editor-dropdown {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px 4px rgba(0, 0, 0, 0.04);
+    display: inline-block;
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+  }
+
+  editor-dropdown[open="false"] {
+    visibility: hidden;
+  }
+
+  editor-dropdown.dropdown-animate-in {
+    animation: 200ms cubic-bezier(0.33, 1, 0.68, 1) 0s 1 normal none running
+      appear-in;
+  }
+
+  editor-dropdown.dropdown-animate-out {
+    animation: 200ms cubic-bezier(0.33, 1, 0.68, 1) 0s 1 normal none running
+      appear-out;
+  }
+
+  editor-dropdown .arrow {
+    display: inline-block;
+    height: 0;
+    overflow: visible;
+    position: relative;
+    width: 100%;
+    z-index: -1;
+  }
+
+  editor-dropdown .arrow::before {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-bottom: transparent;
+    border-left: transparent;
+    content: "";
+    height: 8px;
+    left: calc(50% - 6.4px);
+    margin: auto;
+    position: absolute;
+    top: -20px;
+    transform: rotate(-45deg);
+    width: 8px;
+    z-index: 0;
+  }
+
+  editor-dropdown .dropdown-content {
+    margin-top: -1rem;
+  }
+
+  editor-dropdown ul.dropdown-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+
+  editor-dropdown ul.dropdown-menu li {
+    padding: 4px 12px;
+  }
+
+  editor-dropdown ul.dropdown-menu li:hover {
+    background-color: #f3f3f3;
+    color: #2d8cf0;
+  }
+
+  /* heading dropdown */
+  editor-dropdown.heading ul.dropdown-menu {
+    min-width: 100px;
+    text-align: center;
+  }
+
+  /* font size dropdown */
+  editor-dropdown.fontSize ul.dropdown-menu {
+    min-width: 100px;
+    text-align: center;
+  }
+
+  /* align dropdown */
+  editor-dropdown.align ul.dropdown-menu {
+    text-align: center;
+  }
+
+  /* color picker */
+  editor-dropdown .dropdown-content .colorboard {
+    padding: 0.5rem 0;
+  }
+
+  editor-dropdown .dropdown-content .colorboard-group {
+    display: flex;
+    height: auto;
+    padding: 0 8px;
+    position: relative;
+    width: 100%;
+  }
+
+  editor-dropdown .dropdown-content .colorboard-group-item {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    flex: 0 0 auto;
+    height: 24px;
+    padding: 2px;
+    width: 24px;
+  }
+
+  editor-dropdown .dropdown-content .colorboard-group-item:hover {
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  editor-dropdown .dropdown-content .colorboard-group-item > span {
+    border: 1px solid transparent;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: block;
+    height: 18px;
+    position: relative;
+    width: 18px;
+  }
+
+  editor-dropdown
+    .dropdown-content
+    .colorboard-group-item.border
+    > span {
+    border: 1px solid #e7e9e8;
+  }
+}
+
+/**
+ * Tooltip
+ */
+lyove-editor {
+  *[data-tip] {
+    position: relative;
+  }
+
+  *[data-tip]::before,
+  *[data-tip]::after {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: 0.3s ease;
+    z-index: 200;
+  }
+
+  *[data-tip]:hover::before,
+  *[data-tip]:hover::after {
+    opacity: 1;
+  }
+
+  *[data-tip]::before {
+    background: transparent;
+    border: 6px solid transparent;
+    content: "";
+  }
+
+  *[data-tip]::after {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    content: attr(data-title);
+    font-size: 12px;
+    padding: 8px 10px;
+    white-space: nowrap;
+  }
+  /* top */
+  *[data-tip-placement="top"]::before {
+    border-top-color: rgba(0, 0, 0, 0.8);
+    bottom: 100%;
+    left: 30%;
+    margin: 0 0 -18px;
+  }
+
+  *[data-tip-placement="top"]::after {
+    bottom: 100%;
+    left: 30%;
+    margin: 0 0 -6px -10px;
+  }
+
+  *[data-tip-placement="top"]:hover::before {
+    margin-bottom: -10px;
+  }
+
+  *[data-tip-placement="top"]:hover::after {
+    margin-bottom: 2px;
+  }
+  /* bottom */
+  *[data-tip-placement="bottom"]::before {
+    border-bottom-color: rgba(0, 0, 0, 0.8);
+    left: 30%;
+    margin: -14px 0 0;
+    top: 100%;
+  }
+
+  *[data-tip-placement="bottom"]::after {
+    left: 30%;
+    margin: -2px 0 0 -10px;
+    top: 100%;
+  }
+
+  *[data-tip-placement="bottom"]:hover::before {
+    margin-top: -6px;
+  }
+
+  *[data-tip-placement="bottom"]:hover::after {
+    margin-top: 6px;
+  }
+  /* right */
+  *[data-tip-placement="right"]::before {
+    border-right-color: rgba(0, 0, 0, 0.8);
+    bottom: 30%;
+    left: 100%;
+    margin: 0 0 -4px -8px;
+  }
+
+  *[data-tip-placement="right"]::after {
+    bottom: 30%;
+    left: 100%;
+    margin: 0 0 -13px 4px;
+  }
+
+  *[data-tip-placement="right"]:hover::before {
+    margin: 0 0 -4px -0;
+  }
+
+  *[data-tip-placement="right"]:hover::after {
+    margin: 0 0 -13px 12px;
+  }
+  /* left */
+  *[data-tip-placement="left"]::before {
+    border-left-color: rgba(0, 0, 0, 0.8);
+    bottom: 30%;
+    margin: 0 -8px -4px 0;
+    right: 100%;
+  }
+
+  *[data-tip-placement="left"]::after {
+    bottom: 30%;
+    margin: 0 4px -13px 0;
+    right: 100%;
+  }
+
+  *[data-tip-placement="left"]:hover::before {
+    margin: 0 0 -4px;
+  }
+
+  *[data-tip-placement="left"]:hover::after {
+    margin: 0 12px -13px 0;
+  }
+}
+
+/**
+ * Editor textarea
+ * ==============
+ */
+lyove-editor {
+  editor-textarea {
+    display: block;
+    padding: 1rem 1.5rem;
+    position: relative;
+  }
+
+  editor-textarea::before {
+    content: " ";
+    display: table;
+  }
+
+  editor-textarea::after {
+    clear: both;
+    content: " ";
+    display: table;
+  }
+
+  editor-textarea:empty::after {
+    color: var(--editor-placeholder);
+    content: var(--editor-textarea);
+  }
+
+  editor-textarea :hover,
+  editor-textarea :focus {
+    outline: none;
+  }
+
+  /**
+  * Editable
+  */
+
+  editor-textarea [contenteditable] {
+    cursor: auto;
+  }
+
+  editor-textarea [contenteditable="true"]:hover {
+    background-color: #f9f9f9;
+    outline: none;
+  }
+
+  editor-textarea [contenteditable="true"]:empty::after {
+    color: var(--editor-placeholder);
+    /* content: var(--editor-text-editable); */
+  }
+
+  /**
+  * Slot
+  */
+
+   editor-textarea slot[contenteditable] {
+    display: block;
+    outline: none;
+    padding: 0.25rem;
+  }
+
+  editor-textarea slot[contenteditable="true"]:empty::after {
+    color: var(--editor-slot);
+    content: var(--editor-text-slot);
+  }
+
+  editor-textarea [contenteditable="true"] :hover {
+    cursor: auto;
+  }
+
+  /**
+  * Sortable
+  */
+
+  editor-textarea [data-sortable][data-sort]:hover {
+    cursor: grab;
+  }
+  editor-textarea :is([data-sortover], [contenteditable][data-sortover]) {
+    outline: 1px dashed var(--editor-sortover);
+    /* cursor: move; */
+  }
+
+  /**
+  * A
+  */
+  editor-textarea a {
+    border-bottom: 1px var(--editor-focus) dotted;
+  }
+
+  /**
+  * P
+  */
+  editor-textarea p {
+    line-height: 1.5;
+    margin: 0.5rem 0;
+  }
+
+  /**
+  * Media
+  */
+  editor-textarea :is(audio, iframe, img, video) {
+    pointer-events: none;
+  }
+
+  /**
+  * Figure
+  */
+  editor-textarea figure {
+    margin: 0;
+  }
+
+  editor-textarea figure.left {
+    float: left;
+    margin-right: 0.75rem;
+    max-width: 50%;
+  }
+
+  editor-textarea figure.center {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50%;
+  }
+
+  editor-textarea figure.right {
+    float: right;
+    margin-left: 0.75rem;
+    max-width: 50%;
+  }
+
+  /**
+  * Table
+  */
+  editor-textarea table,
+  editor-textarea table[data-command="table"] {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    margin: 0.5rem 0;
+    width: 100%;
+  }
+
+  editor-textarea table :is(th, td)[contenteditable] {
+    line-height: 1.5rem;
+    padding: 4px 6px;
+  }
+
+  editor-textarea table :is(thead, tbody) tr:last-child :is(td, th) {
+    border-bottom-style: solid;
+  }
+
+  editor-textarea tbody tr {
+    border-left: dotted 1px var(--editor-toolbar-color);
+    border-top: dotted 1px var(--editor-toolbar-color);
+  }
+
+  editor-textarea thead th,
+  editor-textarea tbody td {
+    border-bottom: dotted 1px var(--editor-toolbar-color);
+    white-space: nowrap;
+  }
+
+  editor-textarea tbody td {
+    border-right: dotted 1px var(--editor-toolbar-color);
+  }
+
+  editor-textarea tfoot {
+    display: none;
+  }
+
+  /**
+  * Form
+  */
+  editor-textarea select[multiple],
+  editor-textarea textarea {
+    resize: both;
+  }
+
+  /**
+  * Imgage
+  */
+  editor-textarea img {
+    user-select: none;
+  }
+
+  /**
+  * Blockquote
+  */
+  editor-textarea blockquote,
+  editor-textarea blockquote[data-command="blockquote"] {
+    margin: 0;
+    margin: 0.5rem 0;
+    padding-left: 0.75rem;
+    position: relative;
+  }
+
+  editor-textarea blockquote::before,
+  editor-textarea blockquote[data-command="blockquote"]::before {
+    background-color: #d8dad9;
+    border-radius: 2px;
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 2px;
+  }
+
+  /**
+  * Preformat
+  */
+  editor-textarea pre,
+  editor-textarea pre[data-command="preformat"] {
+    margin: 0;
+    padding: 0.75rem;
+  }
+
+  editor-textarea pre figcaption {
+    display: none;
+  }
+
+  /**
+  * Details
+  */
+  editor-textarea details {
+    padding: 0.6875rem 0.3125rem;
+  }
+
+  editor-textarea details[open] summary {
+    padding-bottom: 0.6875rem;
+  }
+
+  /**
+  * summary
+  */
+  editor-textarea summary {
+    white-space: pre-wrap;
+  }
+
+  /**
+  * app block
+  */
+  editor-textarea app-block {
+    border: 1px solid var(--editor-block-background);
+    display: block;
+    padding: 0.25rem;
+  }
+
+  editor-textarea app-block::before {
+    background: var(--editor-block-background);
+    color: var(--editor-block-color);
+    content: var(--editor-text-block);
+    display: block;
+    margin: -0.25rem -0.25rem 0.5rem;
+    padding: 0.125rem 0.25rem;
+  }
+}
+
+/**
+ * Style common
+ * ==========================================================
+ */
+lyove-editor a,
+lyove-editor button,
+lyove-editor input:is([type="button"], [type="reset"], [type="submit"], [type="checkbox"], [type="radio"]),
+lyove-editor label,
+lyove-editor select,
+lyove-editor summary {
+  cursor: pointer;
+}
+
+lyove-editor :invalid {
+  box-shadow: none;
+}
+
+lyove-editor [draggable="true"] {
+  cursor: move;
+}
+
+lyove-editor [hidden] {
+  display: none;
+}
+
+/**
+ * Transaction
+ */
+ @keyframes appear-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes appear-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes arrowFadeup {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
+}
+@keyframes arrowFadedown {
+  0% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}

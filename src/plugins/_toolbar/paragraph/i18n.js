@@ -4,7 +4,7 @@
  * @type {Object.<string, Object.<string, string>>}
  */
 export default {
-    'zh-cn': {
-        'Paragraph': '正文',
-    },
+  "zh-cn": {
+    Paragraph: "正文",
+  },
 };

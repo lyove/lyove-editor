@@ -4,7 +4,7 @@
  * @type {Object.<string, Object.<string, string>>}
  */
 export default {
-    'zh-cn': {
-        'LineHeight': '行高',
-    },
+  "zh-cn": {
+    LineHeight: "行高",
+  },
 };

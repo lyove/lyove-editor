@@ -4,7 +4,7 @@
  * @type {Object.<string, Object.<string, string>>}
  */
 export default {
-    'zh-cn': {
-        'mark': 'mark',
-    },
+  "zh-cn": {
+    mark: "mark",
+  },
 };
