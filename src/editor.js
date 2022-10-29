@@ -6,66 +6,66 @@ import CoreEditor from "./core/Editor.js";
 /**
  * Menus plugins
  */
-import Help from "./plugins/_menubar/help/Help.js";
+import Help from "./toolbars/menubar/help/Help.js";
 
 /**
  * Toolbar plugins
  */
-import Paragraph from "./plugins/_toolbar/paragraph/Paragraph.js";
-import Heading from "./plugins/_toolbar/heading/Heading.js";
-import FontSize from "./plugins/_toolbar/fontSize/FontSize.js";
-import UnorderedList from "./plugins/_toolbar/unorderedList/UnorderedList.js";
-import OrderedList from "./plugins/_toolbar/orderedList/OrderedList.js";
-import Indent from "./plugins/_toolbar/indent/Indent.js";
-import Align from "./plugins/_toolbar/align/Align.js";
-import LineHeight from "./plugins/_toolbar/lineHeight/LineHeight.js";
-import Blockquote from "./plugins/_toolbar/blockquote/Blockquote.js";
-import Color from "./plugins/_toolbar/color/Color.js";
-import Background from "./plugins/_toolbar/background/Background.js";
-import Image from "./plugins/_toolbar/image/Image.js";
-import Video from "./plugins/_toolbar/video/Video.js";
-import Audio from "./plugins/_toolbar/audio/Audio.js";
-import Table from "./plugins/_toolbar/table/Table.js";
-import Preformat from "./plugins/_toolbar/preformat/Preformat.js";
-import HorizontalRule from "./plugins/_toolbar/horizontalRule/HorizontalRule.js";
-import Details from "./plugins/_toolbar/details/Details.js";
-import Division from "./plugins/_toolbar/division/Division.js";
-import Section from "./plugins/_toolbar/section/Section.js";
-import Block from "./plugins/_toolbar/block/Block.js";
-import Iframe from "./plugins/_toolbar/iframe/Iframe.js";
+import Paragraph from "./toolbars/toolbar/paragraph/Paragraph.js";
+import Heading from "./toolbars/toolbar/heading/Heading.js";
+import FontSize from "./toolbars/toolbar/fontSize/FontSize.js";
+import UnorderedList from "./toolbars/toolbar/unorderedList/UnorderedList.js";
+import OrderedList from "./toolbars/toolbar/orderedList/OrderedList.js";
+import Indent from "./toolbars/toolbar/indent/Indent.js";
+import Align from "./toolbars/toolbar/align/Align.js";
+import LineHeight from "./toolbars/toolbar/lineHeight/LineHeight.js";
+import Blockquote from "./toolbars/toolbar/blockquote/Blockquote.js";
+import Color from "./toolbars/toolbar/color/Color.js";
+import Background from "./toolbars/toolbar/background/Background.js";
+import Image from "./toolbars/toolbar/image/Image.js";
+import Video from "./toolbars/toolbar/video/Video.js";
+import Audio from "./toolbars/toolbar/audio/Audio.js";
+import Table from "./toolbars/toolbar/table/Table.js";
+import Preformat from "./toolbars/toolbar/preformat/Preformat.js";
+import HorizontalRule from "./toolbars/toolbar/horizontalRule/HorizontalRule.js";
+import Details from "./toolbars/toolbar/details/Details.js";
+import Division from "./toolbars/toolbar/division/Division.js";
+import Section from "./toolbars/toolbar/section/Section.js";
+import Block from "./toolbars/toolbar/block/Block.js";
+import Iframe from "./toolbars/toolbar/iframe/Iframe.js";
 
 /**
  * Formatbar plugins
  */
-import Bold from "./plugins/_formatbar/bold/Bold.js";
-import Italic from "./plugins/_formatbar/italic/Italic.js";
-import Underline from "./plugins/_formatbar/underline/Underline.js";
-import Link from "./plugins/_formatbar/link/Link.js";
-import Subscript from "./plugins/_formatbar/subscript/Subscript.js";
-import Superscript from "./plugins/_formatbar/superscript/Superscript.js";
-import Strong from "./plugins/_formatbar/strong/Strong.js";
-import Strikethrough from "./plugins/_formatbar/strikethrough/Strikethrough.js";
-import Insertion from "./plugins/_formatbar/insertion/Insertion.js";
-import Deletion from "./plugins/_formatbar/deletion/Deletion.js";
-import Small from "./plugins/_formatbar/small/Small.js";
-import Emphasis from "./plugins/_formatbar/emphasis/Emphasis.js";
-import Code from "./plugins/_formatbar/code/Code.js";
-import Quote from "./plugins/_formatbar/quote/Quote.js";
-import Cite from "./plugins/_formatbar/cite/Cite.js";
-import Abbreviation from "./plugins/_formatbar/abbreviation/Abbreviation.js";
-import Mark from "./plugins/_formatbar/mark/Mark.js";
-import Keyboard from "./plugins/_formatbar/keyboard/Keyboard.js";
-import Sample from "./plugins/_formatbar/sample/Sample.js";
-import Variable from "./plugins/_formatbar/variable/Variable.js";
-import Time from "./plugins/_formatbar/time/Time.js";
-import Data from "./plugins/_formatbar/data/Data.js";
-import Definition from "./plugins/_formatbar/definition/Definition.js";
+import Bold from "./toolbars/formatbar/bold/Bold.js";
+import Italic from "./toolbars/formatbar/italic/Italic.js";
+import Underline from "./toolbars/formatbar/underline/Underline.js";
+import Link from "./toolbars/formatbar/link/Link.js";
+import Subscript from "./toolbars/formatbar/subscript/Subscript.js";
+import Superscript from "./toolbars/formatbar/superscript/Superscript.js";
+import Strong from "./toolbars/formatbar/strong/Strong.js";
+import Strikethrough from "./toolbars/formatbar/strikethrough/Strikethrough.js";
+import Insertion from "./toolbars/formatbar/insertion/Insertion.js";
+import Deletion from "./toolbars/formatbar/deletion/Deletion.js";
+import Small from "./toolbars/formatbar/small/Small.js";
+import Emphasis from "./toolbars/formatbar/emphasis/Emphasis.js";
+import Code from "./toolbars/formatbar/code/Code.js";
+import Quote from "./toolbars/formatbar/quote/Quote.js";
+import Cite from "./toolbars/formatbar/cite/Cite.js";
+import Abbreviation from "./toolbars/formatbar/abbreviation/Abbreviation.js";
+import Mark from "./toolbars/formatbar/mark/Mark.js";
+import Keyboard from "./toolbars/formatbar/keyboard/Keyboard.js";
+import Sample from "./toolbars/formatbar/sample/Sample.js";
+import Variable from "./toolbars/formatbar/variable/Variable.js";
+import Time from "./toolbars/formatbar/time/Time.js";
+import Data from "./toolbars/formatbar/data/Data.js";
+import Definition from "./toolbars/formatbar/definition/Definition.js";
 
 /**
  * Focusbar plugins
  */
-import Sort from "./plugins/_focusbar/sort/Sort.js";
-import Delete from "./plugins/_focusbar/delete/Delete.js";
+import Sort from "./toolbars/focusbar/sort/Sort.js";
+import Delete from "./toolbars/focusbar/delete/Delete.js";
 
 /**
  * Editor
