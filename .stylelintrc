@@ -1,13 +1,6 @@
 {
   "extends": [
-    "stylelint-config-recommended",
-    "stylelint-config-sass-guidelines"
-  ],
-  "overrides": [
-    {
-      "files": ["**/*.scss"],
-      "customSyntax": "postcss-scss"
-    }
+    "stylelint-config-recommended"
   ],
   "rules": {
     "function-parentheses-space-inside": null,
