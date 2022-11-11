@@ -1,28 +1,3 @@
-// Dynamic import module
-try {
-  import("../src/editor.js")
-    .then((module) => {
-      loadEditor(module.default);
-    })
-    .catch(async () => {
-      loadEditor(window.lyoveEditor);
-    });
-} catch (err) {
-  //
-}
-
-try {
-  import("../src/editor.less")
-    .then((module) => {
-      //console.log(module.default);
-    })
-    .catch((err) => {
-      // console.log(err);
-    });
-} catch (err) {
-  // console.log(err);
-}
-
 const loadEditor = (Editor) => {
   const header = document.getElementById("header");
   const lang = document.getElementById("lang");
@@ -95,3 +70,31 @@ const loadEditor = (Editor) => {
   init();
   save.textContent = rte?.hidden ? "Save" : "Edit";
 };
+
+// Dynamic import module
+try {
+  // development
+  import("../src/editor.js")
+    .then((module) => {
+      // production
+      loadEditor(module.default);
+    })
+    .catch(() => {
+      loadEditor(window.lyoveEditor);
+    });
+} catch (err) {
+  //
+}
+
+try {
+  // development
+  import("../src/editor.less")
+    .then((module) => {
+      //console.log(module.default);
+    })
+    .catch((err) => {
+      // console.log(err);
+    });
+} catch (err) {
+  // console.log(err);
+}
