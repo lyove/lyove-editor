@@ -6,7 +6,7 @@
   <br />
 </div>
 
-# lyove editor
+# <center>lyove editor
 
 A HTML standards-compliant and dependency-free rich text editor.
 
