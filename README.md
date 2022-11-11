@@ -1,3 +1,11 @@
+<div align="center">
+  <br />
+  <a href="https://github.com/lyove/editor">
+    <img width="100" src="./public/logo.svg" alt="Logo of Lyove-Editor">
+  </a>
+  <br />
+</div>
+
 # lyove editor
 
 A HTML standards-compliant and dependency-free rich text editor.
