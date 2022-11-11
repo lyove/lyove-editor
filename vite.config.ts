@@ -43,9 +43,6 @@ module.exports = defineConfig({
       fileName: (format) => fileName[format],
     },
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-      },
       output:{
         assetFileNames: `${getPackageName()}.[ext]`
       }
