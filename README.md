@@ -8,8 +8,8 @@
 
 # lyove editor
   
-<a href="https://github.com/lyove/editor/actions?query=workflow%3Atests">
-  <img alt="Status" src="https://github.com/lyove/editor/workflows/tests/badge.svg">
+<a href="https://github.com/lyove/editor/actions">
+  <img alt="Status" src="https://github.com/lyove/editor/workflows/build-test/badge.svg">
 </a>
 <span>&nbsp;</span>
 <a href="https://github.com/lyove/editor/releases">
