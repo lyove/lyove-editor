@@ -37,11 +37,11 @@ npm run build
 To start the demo locally run either
 
 ```
-npm start
+npm run dev
 ```
 
 In both cases the demo is accessible at
-http://localhost:2000/demo/index.html
+http://localhost:3000/index.html
 
 ## Info
 
