@@ -6,7 +6,19 @@
   <br />
 </div>
 
-# <center> lyove editor
+# lyove editor
+  
+<a href="https://github.com/lyove/editor/actions?query=workflow%3Atests">
+  <img alt="Status" src="https://github.com/lyove/editor/workflows/tests/badge.svg">
+</a>
+<span>&nbsp;</span>
+<a href="https://github.com/lyove/editor/releases">
+  <img alt="version" src="https://img.shields.io/github/v/release/lyove/editor?include_prereleases&label=version&logo=github&logoColor=white">
+</a>
+<span>&nbsp;</span>
+<a href="https://lyove.github.io/editor">
+  <img alt="docs" src="https://img.shields.io/badge/documentation-online-blue?logo=readthedocs&logoColor=white">
+</a>
 
 A HTML standards-compliant and dependency-free rich text editor.
 
