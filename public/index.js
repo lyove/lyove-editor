@@ -1,7 +1,21 @@
-import SrcEditor from "../src/editor.js";
-import "../src/editor.less";
+// Dynamic import module
+import("../src/editor.js")
+  .then((module) => {
+    loadEditor(module.default);
+  })
+  .catch(async () => {
+    loadEditor(window.lyoveEditor);
+  });
 
-document.addEventListener("DOMContentLoaded", async () => {
+import("../src/editor.less")
+  .then((module) => {
+    //console.log(module.default);
+  })
+  .catch((err) => {
+    // console.log(err);
+  });
+
+const loadEditor = (Editor) => {
   const header = document.getElementById("header");
   const lang = document.getElementById("lang");
   const rte = document.getElementById("rte");
@@ -17,7 +31,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
   const init = () => {
     editor?.destroy();
-    const Editor = SrcEditor;
     if (rte) {
       editor = Editor.create(rte, {
         lang: lang.value,
@@ -73,4 +86,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   init();
   save.textContent = rte?.hidden ? "Save" : "Edit";
-});
+};
