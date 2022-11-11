@@ -21,17 +21,15 @@
   },
   "scripts": {
     "dev": "vite --host",
-    "build": "npm run clean && npm run build:css && npm run build:js",
-    "build:css": "esbuild src/editor.css --minify --outfile=dist/editor.css",
-    "build:js": "esbuild src/editor.js --minify --bundle --outfile=dist/editor.js --target=es2020 --format=esm",
+    "build": "tsc && vite build",
     "clean": "rm -rf dist",
     "test": "jest --runInBand",
     "test:coverage": "jest --runInBand --coverage",
     "lint": "lint-staged",
     "lint:scripts": "eslint . --ext .js, .ts",
-    "lint:styles": "stylelint ./**/*.{css,scss}",
+    "lint:styles": "stylelint ./**/*.{css,less,scss}",
     "format:scripts": "prettier . --write",
-    "format:styles": "stylelint ./**/*.{css,scss} --fix",
+    "format:styles": "stylelint ./**/*.{css,less,scss} --fix",
     "format": "npm run format:scripts && npm run format:styles"
   },
   "devDependencies": {
@@ -41,7 +39,6 @@
     "@types/node": "^18.7.16",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
-    "esbuild": "^0.14.49",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
