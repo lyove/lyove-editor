@@ -1,19 +1,27 @@
 // Dynamic import module
-import("../src/editor.js")
-  .then((module) => {
-    loadEditor(module.default);
-  })
-  .catch(async () => {
-    loadEditor(window.lyoveEditor);
-  });
+try {
+  import("../src/editor.js")
+    .then((module) => {
+      loadEditor(module.default);
+    })
+    .catch(async () => {
+      loadEditor(window.lyoveEditor);
+    });
+} catch (err) {
+  //
+}
 
-import("../src/editor.less")
-  .then((module) => {
-    //console.log(module.default);
-  })
-  .catch((err) => {
-    // console.log(err);
-  });
+try {
+  import("../src/editor.less")
+    .then((module) => {
+      //console.log(module.default);
+    })
+    .catch((err) => {
+      // console.log(err);
+    });
+} catch (err) {
+  // console.log(err);
+}
 
 const loadEditor = (Editor) => {
   const header = document.getElementById("header");
