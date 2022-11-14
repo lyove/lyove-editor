@@ -1,3 +1,8 @@
+/**
+ * Load editor
+ * @param {*} Editor
+ */
+
 const loadEditor = (Editor) => {
   const header = document.getElementById("header");
   const lang = document.getElementById("lang");
@@ -5,11 +10,9 @@ const loadEditor = (Editor) => {
   const rte2 = document.getElementById("rte2");
   const clear = document.getElementById("clear");
   const save = document.getElementById("save");
-  let editor, editor2;
+  let editor;
   const toggle = (flag) => {
-    Array.from(header.getElementsByTagName("select")).forEach(
-      (item) => (item.disabled = flag)
-    );
+    Array.from(header.getElementsByTagName("select")).forEach((item) => (item.disabled = flag));
     clear.disabled = flag;
   };
   const init = () => {
@@ -42,13 +45,6 @@ const loadEditor = (Editor) => {
         },
       });
     }
-    if (rte2) {
-      editor2?.destroy();
-      editor2 = Editor.create(rte2, {
-        lang: lang.value,
-        mode: "default",
-      });
-    }
   };
   lang.addEventListener("change", init);
   clear.addEventListener("click", () => {
@@ -72,29 +68,14 @@ const loadEditor = (Editor) => {
 };
 
 // Dynamic import module
-try {
-  // development
-  import("../src/editor.js")
-    .then((module) => {
-      // production
-      loadEditor(module.default);
-    })
-    .catch(() => {
-      loadEditor(window.lyoveEditor);
-    });
-} catch (err) {
-  //
-}
-
-try {
-  // development
-  import("../src/editor.less")
-    .then((module) => {
-      //console.log(module.default);
-    })
-    .catch((err) => {
-      // console.log(err);
-    });
-} catch (err) {
-  // console.log(err);
+const { hostname } = window.location;
+// development
+if (hostname === "localhost" || hostname === "127.0.0.1") {
+  import("../src/editor.js").then((module) => {
+    loadEditor(module.default);
+  });
+  import("../src/editor.less").then(() => {});
+} else {
+  // production
+  loadEditor(window.lyoveEditor);
 }
