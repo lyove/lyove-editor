@@ -5,10 +5,10 @@
   --editor-block-background: #191919;
   --editor-block-color: #fff;
   --editor-border-color: #19191933;
-  --editor-button-color: #fff;
-  --editor-button-width: 24px;
-  --editor-button-height: 24px;
-  --editor-button-hover-background: #f4f5f5;
+  --editor-toolbar-button-color: #353535;
+  --editor-toolbar-button-width: 24px;
+  --editor-toolbar-button-height: 24px;
+  --editor-toolbar-button-hover-background: #f4f5f5;
   --editor-trigger-width: 12px;
   --editor-trigger-height: 20px;
   --editor-dialog-backdrop: #000000a3;
@@ -20,20 +20,24 @@
   --editor-placeholder: #19191933;
   --editor-slot: #1672f3;
   --editor-sortover: #1672f3;
-  --editor-submit-background: #1672f3;
-  --editor-cancel-background: #191919;
+  --editor-form-button-bg: rgba(46, 50, 56, 0.05);
+  --editor-form-button-bg-hover: rgba(46, 50, 56, 0.08);
+  --editor-form-button-color: rgba(28, 31, 35, 0.8);
+  --editor-form-button-primary-bg: rgba(0, 100, 250, 0.8);
+  --editor-form-button-primary-bg-hover: rgba(0, 100, 250, 1);
+  --editor-form-button-primary-color: rgb(255, 255, 255);
   --editor-toolbar-background: #fff;
   --editor-toolbar-color: #191919;
-  --editor-text-block: 'Block: ' attr(id);
-  --editor-text-editable: 'Input some text!';
-  --editor-textarea: 'Input some widgets!';
-  --editor-text-slot: 'Focus this slot and insert some widgets!';
+  --editor-text-block: "Block: " attr(id);
+  --editor-text-editable: "Input some text!";
+  --editor-textarea: "Input some widgets!";
+  --editor-text-slot: "Focus this slot and insert some widgets!";
 }
 
-lyove-editor[lang='zh-cn'] {
-  --editor-text-editable: 'Input some Text!';
-  --editor-textarea: 'Insert some Widgets!';
-  --editor-text-slot: 'Focus this slot and insert widgets!';
+lyove-editor[lang="zh-cn"] {
+  --editor-text-editable: "Input some Text!";
+  --editor-textarea: "Insert some Widgets!";
+  --editor-text-slot: "Focus this slot and insert widgets!";
 }
 
 /**
@@ -45,7 +49,7 @@ lyove-editor {
   border: 1px solid var(--editor-border-color);
   border-radius: 6px;
 
-  [draggable='true'] {
+  [draggable="true"] {
     cursor: move;
   }
 
@@ -57,11 +61,10 @@ lyove-editor {
     display: none;
   }
 
-
   /**
    * Toolbar
    */
-  [role='toolbar'] {
+  [role="toolbar"] {
     box-sizing: border-box;
   }
 
@@ -112,22 +115,22 @@ lyove-editor {
     outline: 0 none;
     padding: 4px 6px;
   }
-  
-  editor-focusbar[data-alignable] button[data-command^='align-'],
-  editor-focusbar[data-deletable] button[data-command='delete'],
-  editor-focusbar[data-sortable] button[data-command^='sort-'] {
+
+  editor-focusbar[data-alignable] button[data-command^="align-"],
+  editor-focusbar[data-deletable] button[data-command="delete"],
+  editor-focusbar[data-sortable] button[data-command^="sort-"] {
     display: inline-flex;
   }
-  
+
   editor-menubar button[data-command]:hover,
   editor-toolbar button[data-command]:hover,
   editor-formatbar button[data-command]:hover,
   editor-hoverbar button[data-command]:hover,
   editor-dropdown button[data-command]:hover {
-    background-color: var(--editor-button-hover-background);
+    background-color: var(--editor-toolbar-button-hover-background);
     border-radius: 4px;
   }
-  
+
   editor-menubar button[data-command]:focus,
   editor-toolbar button[data-command]:focus,
   editor-formatbar button[data-command]:focus,
@@ -135,7 +138,7 @@ lyove-editor {
   editor-dropdown button[data-command]:focus {
     color: var(--editor-focus);
   }
-  
+
   editor-menubar button[data-command] .btn-icon,
   editor-toolbar button[data-command] .btn-icon,
   editor-formatbar button[data-command] .btn-icon,
@@ -143,22 +146,22 @@ lyove-editor {
   editor-dropdown button[data-command] .btn-icon {
     align-items: center;
     display: inline-flex;
-    height: var(--editor-button-height);
+    height: var(--editor-toolbar-button-height);
     justify-content: center;
-    width: var(--editor-button-width);
+    width: var(--editor-toolbar-button-width);
   }
-  
+
   editor-menubar button[data-command] .separator,
   editor-toolbar button[data-command] .separator,
   editor-formatbar button[data-command] .separator,
   editor-focusbar button[data-command] .separator,
   editor-dropdown button[data-command] .separator {
     background: transparent;
-    height: var(--editor-button-height);
+    height: var(--editor-toolbar-button-height);
     margin: 0 1px 0 2px;
     width: 1px;
   }
-  
+
   editor-menubar button[data-command]:hover .separator,
   editor-toolbar button[data-command]:hover .separator,
   editor-formatbar button[data-command]:hover .separator,
@@ -171,7 +174,7 @@ lyove-editor {
   editor-dropdown button[data-command]:active .separator {
     background: #e8e8e8;
   }
-  
+
   editor-menubar button[data-command] .btn-label,
   editor-toolbar button[data-command] .btn-label,
   editor-formatbar button[data-command] .btn-label,
@@ -179,7 +182,7 @@ lyove-editor {
   editor-dropdown button[data-command] .btn-label {
     font-size: 0;
   }
-  
+
   editor-menubar button[data-command] .btn-arrow,
   editor-toolbar button[data-command] .btn-arrow,
   editor-formatbar button[data-command] .btn-arrow,
@@ -189,7 +192,7 @@ lyove-editor {
     display: flex;
     margin-right: -2px;
   }
-  
+
   editor-menubar button[data-command] .btn-arrow.up,
   editor-toolbar button[data-command] .btn-arrow.up,
   editor-formatbar button[data-command] .btn-arrow.up,
@@ -198,7 +201,7 @@ lyove-editor {
     animation: arrowFadeup 200ms ease-in-out;
     animation-fill-mode: forwards;
   }
-  
+
   editor-menubar button[data-command] .btn-arrow.down,
   editor-toolbar button[data-command] .btn-arrow.down,
   editor-formatbar button[data-command] .btn-arrow.down,
@@ -207,15 +210,14 @@ lyove-editor {
     animation: arrowFadedown 200ms ease-in-out;
     animation-fill-mode: forwards;
   }
-  
+
   editor-menubar button[data-active],
   editor-toolbar button[data-active],
-  editor-formatbar button[data-active]
-  editor-focusbar button[data-active],
+  editor-formatbar button[data-active] editor-focusbar button[data-active],
   editor-dropdown button[data-active] {
     color: var(--editor-focus);
   }
-  
+
   editor-menubar button[data-active] .btn-icon > svg,
   editor-toolbar button[data-active] .btn-icon > svg,
   editor-formatbar button[data-active] .btn-icon > svg,
@@ -223,7 +225,7 @@ lyove-editor {
   editor-dropdown button[data-active] .btn-icon > svg {
     fill: var(--editor-focus);
   }
-  
+
   editor-menubar button[data-active] .btn-label,
   editor-toolbar button[data-active] .btn-label,
   editor-formatbar button[data-active] .btn-label,
@@ -231,7 +233,6 @@ lyove-editor {
   editor-dropdown button[data-active] .btn-label {
     color: var(--editor-focus);
   }
-
 
   /* Focusbar */
   editor-focusbar > .trigger {
@@ -279,7 +280,6 @@ lyove-editor {
     padding: 2px;
   }
 
-
   /**
    * Dialog
    */
@@ -313,14 +313,14 @@ lyove-editor {
     legend {
       font-size: 1.25rem;
     }
-  
+
     label {
       display: block;
     }
-  
+
     [data-required] label::after {
       color: var(--editor-error);
-      content: ' *';
+      content: " *";
     }
 
     fieldset,
@@ -329,14 +329,14 @@ lyove-editor {
       outline: 0 none;
     }
 
-    input:is([type='email'], [type='number'], [type='password'], [type='search'], [type='tel'], [type='text'], [type='url']),
+    input:is([type="email"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="text"], [type="url"]),
     select {
       border-bottom: 1px solid var(--editor-border-color);
       padding: 0.5rem 0;
       width: 100%;
     }
 
-    input:is([type='email'], [type='number'], [type='password'], [type='search'], [type='tel'], [type='text'], [type='url']):invalid,
+    input:is([type="email"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="text"], [type="url"]):invalid,
     select:invalid {
       border-color: var(--editor-error);
     }
@@ -347,11 +347,12 @@ lyove-editor {
   }
 
   editor-dialog button {
-    background: var(--editor-cancel-background);
+    background: var(--editor-form-button-bg);
     border-width: 0;
-    color: var(--editor-button-color);
+    color: var(--editor-form-button-color);
     outline: none;
     padding: 0.375rem 0.75rem;
+    border-radius: 4px;
     cursor: pointer;
   }
 
@@ -359,42 +360,46 @@ lyove-editor {
     margin-left: 1.5rem;
   }
 
-  editor-dialog button[type='submit'] {
-    background: var(--editor-submit-background);
-    color: var(--editor-button-color);
+  editor-dialog button[type="submit"] {
+    background: var(--editor-form-button-primary-bg);
+    color: var(--editor-form-button-primary-color);
+  }
+
+  editor-dialog button[type="submit"]:hover {
+    background: var(--editor-form-button-primary-bg-hover);
   }
 
   editor-dialog button.cancel {
-    color: var(--editor-button-color);
+    background: var(--editor-form-button-bg);
+    color: var(--editor-form-button-color);
+  }
+
+  editor-dialog button.cancel:hover {
+    background: var(--editor-form-button-bg-hover);
   }
 
   /**
    * Dropdown
    */
   editor-dropdown {
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 6px;
-    box-shadow: 0 8px 16px 4px rgba(0, 0, 0, 0.04);
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     left: 0;
     position: absolute;
     top: 0;
     z-index: 100;
   }
 
-  editor-dropdown[open='false'] {
+  editor-dropdown[open="false"] {
     visibility: hidden;
   }
 
   editor-dropdown.dropdown-animate-in {
-    animation: 200ms cubic-bezier(0.33, 1, 0.68, 1) 0s 1 normal none running
-      appear-in;
+    animation: 200ms cubic-bezier(0.33, 1, 0.68, 1) 0s 1 normal none running appear-in;
   }
 
   editor-dropdown.dropdown-animate-out {
-    animation: 200ms cubic-bezier(0.33, 1, 0.68, 1) 0s 1 normal none running
-      appear-out;
+    animation: 200ms cubic-bezier(0.33, 1, 0.68, 1) 0s 1 normal none running appear-out;
   }
 
   editor-dropdown .arrow {
@@ -403,7 +408,6 @@ lyove-editor {
     overflow: visible;
     position: relative;
     width: 100%;
-    z-index: -1;
   }
 
   editor-dropdown .arrow::before {
@@ -411,19 +415,21 @@ lyove-editor {
     border: 1px solid #e5e5e5;
     border-bottom: transparent;
     border-left: transparent;
-    content: '';
-    height: 8px;
-    left: calc(50% - 6.4px);
-    margin: auto;
+    content: "";
+    width: 10px;
+    height: 10px;
     position: absolute;
-    top: -22px;
+    top: -5px;
+    left: calc(50% - 6.4px);
     transform: rotate(-45deg);
-    width: 8px;
     z-index: 0;
   }
 
   editor-dropdown .dropdown-content {
-    margin-top: -1rem;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px 4px rgba(0, 0, 0, 0.05);
   }
 
   editor-dropdown ul.dropdown-menu {
@@ -513,13 +519,13 @@ lyove-editor {
   }
 
   editor-textarea::before {
-    content: ' ';
+    content: " ";
     display: table;
   }
 
   editor-textarea::after {
     clear: both;
-    content: ' ';
+    content: " ";
     display: table;
   }
 
@@ -541,12 +547,12 @@ lyove-editor {
     cursor: auto;
   }
 
-  editor-textarea [contenteditable='true']:hover {
+  editor-textarea [contenteditable="true"]:hover {
     background-color: #f9f9f9;
     outline: none;
   }
 
-  editor-textarea [contenteditable='true']:empty::after {
+  editor-textarea [contenteditable="true"]:empty::after {
     color: var(--editor-placeholder);
     /* content: var(--editor-text-editable); */
   }
@@ -561,12 +567,12 @@ lyove-editor {
     padding: 0.25rem;
   }
 
-  editor-textarea slot[contenteditable='true']:empty::after {
+  editor-textarea slot[contenteditable="true"]:empty::after {
     color: var(--editor-slot);
     content: var(--editor-text-slot);
   }
 
-  editor-textarea [contenteditable='true'] :hover {
+  editor-textarea [contenteditable="true"] :hover {
     cursor: auto;
   }
 
@@ -633,7 +639,7 @@ lyove-editor {
   * Table
   */
   editor-textarea table,
-  editor-textarea table[data-command='table'] {
+  editor-textarea table[data-command="table"] {
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
@@ -694,7 +700,7 @@ lyove-editor {
   * Blockquote
   */
   editor-textarea blockquote,
-  editor-textarea blockquote[data-command='blockquote'] {
+  editor-textarea blockquote[data-command="blockquote"] {
     margin: 0;
     margin: 0.5rem 0;
     padding-left: 0.75rem;
@@ -702,11 +708,11 @@ lyove-editor {
   }
 
   editor-textarea blockquote::before,
-  editor-textarea blockquote[data-command='blockquote']::before {
+  editor-textarea blockquote[data-command="blockquote"]::before {
     background-color: #d8dad9;
     border-radius: 2px;
     bottom: 0;
-    content: '';
+    content: "";
     display: block;
     left: 0;
     position: absolute;
@@ -718,7 +724,7 @@ lyove-editor {
   * Preformat
   */
   editor-textarea pre,
-  editor-textarea pre[data-command='preformat'] {
+  editor-textarea pre[data-command="preformat"] {
     margin: 0;
     padding: 0.75rem;
   }
@@ -763,7 +769,6 @@ lyove-editor {
     padding: 0.125rem 0.25rem;
   }
 
-
   /**
    * Tooltip
    */
@@ -788,7 +793,7 @@ lyove-editor {
   button[data-tip]::before {
     background: transparent;
     border: 6px solid transparent;
-    content: '';
+    content: "";
   }
 
   button[data-tip]::after {
@@ -803,89 +808,89 @@ lyove-editor {
   }
 
   /* top */
-  button[data-tip-placement='top']::before {
+  button[data-tip-placement="top"]::before {
     border-top-color: rgba(0, 0, 0, 0.8);
     bottom: 100%;
     left: 30%;
     margin: 0 0 -18px;
   }
 
-  button[data-tip-placement='top']::after {
+  button[data-tip-placement="top"]::after {
     bottom: 100%;
     left: 30%;
     margin: 0 0 -6px -10px;
   }
 
-  button[data-tip-placement='top']:hover::before {
+  button[data-tip-placement="top"]:hover::before {
     margin-bottom: -10px;
   }
 
-  button[data-tip-placement='top']:hover::after {
+  button[data-tip-placement="top"]:hover::after {
     margin-bottom: 2px;
   }
 
   /* bottom */
-  button[data-tip-placement='bottom']::before {
+  button[data-tip-placement="bottom"]::before {
     border-bottom-color: rgba(0, 0, 0, 0.8);
     left: 30%;
     margin: -14px 0 0;
     top: 100%;
   }
 
-  button[data-tip-placement='bottom']::after {
+  button[data-tip-placement="bottom"]::after {
     left: 30%;
     margin: -2px 0 0 -10px;
     top: 100%;
   }
 
-  button[data-tip-placement='bottom']:hover::before {
+  button[data-tip-placement="bottom"]:hover::before {
     margin-top: -6px;
   }
 
-  button[data-tip-placement='bottom']:hover::after {
+  button[data-tip-placement="bottom"]:hover::after {
     margin-top: 6px;
   }
 
   /* right */
-  button[data-tip-placement='right']::before {
+  button[data-tip-placement="right"]::before {
     border-right-color: rgba(0, 0, 0, 0.8);
     bottom: 30%;
     left: 100%;
     margin: 0 0 -4px -8px;
   }
 
-  button[data-tip-placement='right']::after {
+  button[data-tip-placement="right"]::after {
     bottom: 30%;
     left: 100%;
     margin: 0 0 -13px 4px;
   }
 
-  button[data-tip-placement='right']:hover::before {
+  button[data-tip-placement="right"]:hover::before {
     margin: 0 0 -4px -0;
   }
 
-  button[data-tip-placement='right']:hover::after {
+  button[data-tip-placement="right"]:hover::after {
     margin: 0 0 -13px 12px;
   }
   /* left */
-  button[data-tip-placement='left']::before {
+  button[data-tip-placement="left"]::before {
     border-left-color: rgba(0, 0, 0, 0.8);
     bottom: 30%;
     margin: 0 -8px -4px 0;
     right: 100%;
   }
 
-  button[data-tip-placement='left']::after {
+  button[data-tip-placement="left"]::after {
     bottom: 30%;
     margin: 0 4px -13px 0;
     right: 100%;
   }
 
-  button[data-tip-placement='left']:hover::before {
+  button[data-tip-placement="left"]:hover::before {
     margin: 0 0 -4px;
   }
 
-  button[data-tip-placement='left']:hover::after {
+  button[data-tip-placement="left"]:hover::after {
     margin: 0 12px -13px 0;
   }
 }
