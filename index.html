@@ -1,122 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Lyove Editor</title>
-    <link rel="shortcut icon" href="public/logo.svg" type="image/png">
-    <link rel="stylesheet" href="./index.css?v=1" />
-  </head>
 
-  <body>
-    <header id="header">
-      <div class="left"></div>
-      <div class="right">
-        <label for="lang">Lang</label>
-        <select id="lang">
-          <option value="en" selected>en</option>
-          <option value="zh-cn">zh-cn</option>
-        </select>
-      </div>
-    </header>
-    <main>
-      <!-- Editor1 ================== -->
-      <div id="rte">
-        <h1>Consetetur Sadipscing</h1>
-        <p>
-          Vel eum <var>velit</var> esse molestie consequat,
-          <em>vel illum</em> dolore eu feugiat
-          <strong>nulla facilisis</strong> at vero eros et accumsan et iusto
-          odio <small>dolor</small> dignissim qui blandit praesent luptatum
-          <sup>TM</sup> zzril delenit augue duis dolore <sub>42</sub> te feugait
-          nulla facilisi. Stet <kbd>clita</kbd> kasd gubergren. Lorem
-          <a href="http://www.example.com">ipsum</a> dolor sit amet,
-          consectetuer <del>adipiscing elit</del>, sed
-          <ins>diam nonummy</ins> nibh euismod tincidunt ut laoreet
-          <data value="10">dolore</data> magna aliquam
-          <time datetime="2022-12-12">12.12.2022</time> erat volutpat.
-          consetetur <cite>sadipscing</cite> elitr, sed diam nonumy eirmod
-          tempor sed diam nonumy eirmod tempor <code>invidunt</code> ut labore
-          et, Stet <dfn>clita kasd</dfn> gubergren, no sea takimata
-          <abbr title="Test">sanctus est</abbr>. Lorem ipsum dolor sit amet.
-        </p>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Lyove Editor</title>
+  <link rel="shortcut icon" href="/logo.svg" type="image/png">
+  <link rel="stylesheet" href="/index.css?v=1" />
+</head>
 
-        <h2>Ordered list</h2>
-        <ol>
-          <li>Nam liber tempor cum soluta nobis eleifend</li>
-          <li>At vero eos et accusam et justo</li>
-          <li>Ut wisi enim ad minim veniam</li>
-        </ol>
+<body>
+  <header id="header">
+    <div class="left"></div>
+    <div class="right">
+      <label for="lang">Lang</label>
+      <select id="lang">
+        <option value="en" selected>en</option>
+        <option value="zh-cn">zh-cn</option>
+      </select>
+    </div>
+  </header>
+  <main>
+    <!-- Editor ================== -->
+    <div id="rte">
+      <h1>Consetetur Sadipscing</h1>
+      <p>
+        Vel eum <var>velit</var> esse molestie consequat,
+        <em>vel illum</em> dolore eu feugiat
+        <strong>nulla facilisis</strong> at vero eros et accumsan et iusto
+        odio <small>dolor</small> dignissim qui blandit praesent luptatum
+        <sup>TM</sup> zzril delenit augue duis dolore <sub>42</sub> te feugait
+        nulla facilisi. Stet <kbd>clita</kbd> kasd gubergren. Lorem
+        <a href="http://www.example.com">ipsum</a> dolor sit amet,
+        consectetuer <del>adipiscing elit</del>, sed
+        <ins>diam nonummy</ins> nibh euismod tincidunt ut laoreet
+        <data value="10">dolore</data> magna aliquam
+        <time datetime="2022-12-12">12.12.2022</time> erat volutpat.
+        consetetur <cite>sadipscing</cite> elitr, sed diam nonumy eirmod
+        tempor sed diam nonumy eirmod tempor <code>invidunt</code> ut labore
+        et, Stet <dfn>clita kasd</dfn> gubergren, no sea takimata
+        <abbr title="Test">sanctus est</abbr>. Lorem ipsum dolor sit amet.
+      </p>
 
-        <h2>Unordered list</h2>
-        <ul>
-          <li>Nam liber tempor cum soluta nobis eleifend</li>
-          <li>At vero eos et accusam et justo</li>
-          <li>Ut wisi enim ad minim veniam</li>
-        </ul>
+      <h2>Ordered list</h2>
+      <ol>
+        <li>Nam liber tempor cum soluta nobis eleifend</li>
+        <li>At vero eos et accusam et justo</li>
+        <li>Ut wisi enim ad minim veniam</li>
+      </ol>
 
-        <h3>Table</h3>
-        <table style="width: 100%">
-          <thead>
-            <tr>
-              <th>Head A</th>
-              <th>Head B</th>
-              <th>Head C</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Cell A1</td>
-              <td>Cell B1</td>
-              <td>Cell C1</td>
-            </tr>
-            <tr>
-              <td>Cell A2</td>
-              <td>Cell B2</td>
-              <td>Cell C2</td>
-            </tr>
-            <tr>
-              <td>Cell A3</td>
-              <td>Cell B3</td>
-              <td>Cell C3</td>
-            </tr>
-            <tr>
-              <td>Cell A4</td>
-              <td>Cell B4</td>
-              <td>Cell C4</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>Foot A</td>
-              <td>Foot B</td>
-              <td>Foot C</td>
-            </tr>
-          </tfoot>
-        </table>
-        <br />
-        <blockquote>
-          <p>Ut wisi enim ad minim veniam, quis nostrud exerci</p>
-        </blockquote>
+      <h2>Unordered list</h2>
+      <ul>
+        <li>Nam liber tempor cum soluta nobis eleifend</li>
+        <li>At vero eos et accusam et justo</li>
+        <li>Ut wisi enim ad minim veniam</li>
+      </ul>
 
-        <h3>footer</h3>
-        <footer>footer footer footer footer</footer>
-      </div>
-      <!-- Editor2 ================== -->
+      <h3>Table</h3>
+      <table style="width: 100%">
+        <thead>
+          <tr>
+            <th>Head A</th>
+            <th>Head B</th>
+            <th>Head C</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cell A1</td>
+            <td>Cell B1</td>
+            <td>Cell C1</td>
+          </tr>
+          <tr>
+            <td>Cell A2</td>
+            <td>Cell B2</td>
+            <td>Cell C2</td>
+          </tr>
+          <tr>
+            <td>Cell A3</td>
+            <td>Cell B3</td>
+            <td>Cell C3</td>
+          </tr>
+          <tr>
+            <td>Cell A4</td>
+            <td>Cell B4</td>
+            <td>Cell C4</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Foot A</td>
+            <td>Foot B</td>
+            <td>Foot C</td>
+          </tr>
+        </tfoot>
+      </table>
       <br />
-      <div id="rte2">
-        Lorem ipsum dolor sit amet.
-        <br />
-        <blockquote>
-          <p>Ut wisi enim ad minim veniam, quis nostrud exerci</p>
-        </blockquote>
-      </div>
-    </main>
-    <footer id="footer">
-      <button id="clear" type="button">Clear</button>
-      <button id="save" type="button">Save</button>
-    </footer>
-    <script type="module" src="/index.js"></script>
-  </body>
+      <blockquote>
+        <p>Ut wisi enim ad minim veniam, quis nostrud exerci</p>
+      </blockquote>
+
+      <h3>footer</h3>
+      <footer>footer footer footer footer</footer>
+    </div>
+  </main>
+  <footer id="footer">
+    <button id="clear" type="button">Clear</button>
+    <button id="save" type="button">Save</button>
+  </footer>
+  <script type="module" src="/index.js"></script>
+</body>
+
 </html>
