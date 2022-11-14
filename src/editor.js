@@ -6,7 +6,7 @@ import CoreEditor from "./core/Editor.js";
 /**
  * Menus plugins
  */
-import Help from "./toolbars/menubar/help/Help.js";
+// import Help from "./toolbars/menubar/help/Help.js";
 
 /**
  * Toolbar plugins
@@ -151,7 +151,7 @@ export default class Editor extends CoreEditor {
     return {
       plugins: this.defaultConfig.plugins.concat([
         // menubar
-        Help,
+        // Help,
         // toolbar
         Details,
         Division,
