@@ -79,7 +79,7 @@ export default class DropdownElement extends HTMLElement {
       height: tHeight,
     } = triggerRect;
     this.style.left = `${tLeft - eLeft - tWidth / 2}px`;
-    this.style.top = `${tTop - eTop + tHeight + 6}px`;
+    this.style.top = `${tTop - eTop + tHeight}px`;
     thisEditor.appendChild(this);
 
     // Then calculate the position
