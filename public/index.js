@@ -2,12 +2,10 @@
  * Load editor
  * @param {*} Editor
  */
-
 const loadEditor = (Editor) => {
   const header = document.getElementById("header");
   const lang = document.getElementById("lang");
   const rte = document.getElementById("rte");
-  const rte2 = document.getElementById("rte2");
   const clear = document.getElementById("clear");
   const save = document.getElementById("save");
   let editor;
@@ -67,10 +65,16 @@ const loadEditor = (Editor) => {
   save.textContent = rte?.hidden ? "Save" : "Edit";
 };
 
-// Dynamic import module
+/**
+ * Dynamic import module
+ */
 const { hostname } = window.location;
+const isIP = (str) =>
+  str.match(
+    /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/g,
+  );
 // development
-if (hostname === "localhost" || hostname === "127.0.0.1") {
+if (hostname === "localhost" || hostname === "127.0.0.1" || isIP(hostname)) {
   import("../src/editor.js").then((module) => {
     loadEditor(module.default);
   });
