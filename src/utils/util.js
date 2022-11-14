@@ -10,11 +10,7 @@ import { DataType } from "./Enum.js";
  * @param {boolean} shift
  * @return {boolean}
  */
-export function isKey(
-  event,
-  key,
-  { alt = false, ctrl = false, shift = false } = {}
-) {
+export function isKey(event, key, { alt = false, ctrl = false, shift = false } = {}) {
   return (
     ((Array.isArray(key) && key.includes(event.key)) || event.key === key) &&
     event.altKey === alt &&
