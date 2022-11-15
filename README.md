@@ -227,7 +227,7 @@ const config = {
      * @see Editor.defaultConfig
      * @type {string[]}
      */
-    plugins: [],
+    pluginNames: [],
 
 
     /**
