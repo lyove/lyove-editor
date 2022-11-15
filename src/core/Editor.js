@@ -354,7 +354,7 @@ export default class Editor {
    *
    * @type {Object.<string, Object>}
    */
-  static get defaultConfig() {
+  static get defaultPlugins() {
     return {};
   }
 
@@ -370,7 +370,10 @@ export default class Editor {
     }
 
     this.#orig = orig;
-    this.#config = config;
+    this.#config = {
+      ...this.constructor.config,
+      ...config,
+    };
     this.#dom = new Dom(this, this.orig.ownerDocument);
     this.#element = this.dom.createElement(TagName.EDITOR);
 
@@ -401,12 +404,12 @@ export default class Editor {
       attributes: { role: "toolbar" },
     });
     this.focusbar.appendChild(
-      this.dom.createElement(TagName.SPAN, { attributes: { class: "trigger" } })
+      this.dom.createElement(TagName.SPAN, { attributes: { class: "trigger" } }),
     );
     this.focusbar.appendChild(
       this.dom.createElement(TagName.DIV, {
         attributes: { class: "trigger-content" },
-      })
+      }),
     );
     this.focusbar.hidden = true;
     this.element.appendChild(this.focusbar);
@@ -425,18 +428,16 @@ export default class Editor {
    */
   init() {
     const config = this.config;
-    const { mode, plugins: cfgPlugins } = config;
+    const { mode, pluginNames } = config;
 
     // Plugins
     const builtinPlugins =
-      this.constructor[EditorMode[mode]]?.plugins ||
-      this.constructor.defaultConfig?.plugins ||
-      [];
-    const maxPlugins = this.constructor.maxConfig?.plugins;
+      this.constructor[EditorMode[mode]]?.plugins || this.constructor.defaultPlugins?.plugins || [];
+    const maxPlugins = this.constructor.maxPlugins?.plugins;
     const pluginsSet = new Set();
     const configured =
-      Array.isArray(cfgPlugins) && cfgPlugins.length > 0
-        ? maxPlugins.filter((m) => cfgPlugins.includes(m.name))
+      Array.isArray(pluginNames) && pluginNames.length > 0
+        ? maxPlugins.filter((m) => pluginNames.includes(m.name))
         : builtinPlugins;
     configured.forEach((plugin) => {
       const flatPlugins = (item) => {
@@ -448,19 +449,6 @@ export default class Editor {
       flatPlugins(plugin);
     });
     pluginsSet.forEach((item) => {
-      Object.entries(item.config).forEach(([key, val]) => {
-        if (item.name === "base") {
-          this.config[key] =
-            config?.[key] || this.constructor.defaultConfig?.[key] || val;
-        } else {
-          this.config.customPlugins ??= {};
-          this.config.customPlugins[item.name] ??= {};
-          this.config.customPlugins[item.name][key] =
-            config.customPlugins[item.name]?.[key] ||
-            this.constructor.defaultConfig[item.name]?.[key] ||
-            val;
-        }
-      });
       this.plugins.set(new item(this));
     });
 
@@ -598,8 +586,8 @@ export default class Editor {
   static create(element, config = {}) {
     const editor = new this(element, config);
     editor.init();
-    editor.freeze();
     editor.load();
+    editor.freeze();
     return editor;
   }
 }
