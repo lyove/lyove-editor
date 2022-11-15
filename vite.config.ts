@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
   const envPrefix = ["VITE", "APP"];
 
   // Env var
-  const { APP_NAME, APP_BASE_URL, APP_BUILD_FOR } = loadEnv(mode, envDir, envPrefix);
+  const { APP_NAME, APP_BASE_URL } = loadEnv(mode, envDir, envPrefix);
 
   // Build files name
   const packageName = packageJson.name;
@@ -46,9 +46,8 @@ export default defineConfig(({ mode }) => {
         fileName: (format) => buildFileName[format],
       },
       rollupOptions: {
-        output: APP_BUILD_FOR === "doc" ? { assetFileNames: `${packageName}.[ext]` } : {},
+        output: { assetFileNames: `${packageName}.[ext]` },
       },
-      copyPublicDir: APP_BUILD_FOR === "doc",
       emptyOutDir: true,
       assetsDir: "assets",
     },
