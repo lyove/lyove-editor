@@ -34,21 +34,21 @@ const configs = {
   mode: "max",
   customPlugins: {
     audio: {
-      browser: "./doc/browser/audio.html",
+      browser: "./document/browser/audio.html",
     },
     block: {
-      api: "./doc/api/{id}.html",
-      browser: "./doc/browser/block.html",
-      css: "./doc/css/app.css",
+      api: "./document/api/{id}.html",
+      browser: "./document/browser/block.html",
+      css: "./document/css/base.css",
     },
     iframe: {
-      browser: "./doc/browser/iframe.html",
+      browser: "./document/browser/iframe.html",
     },
     image: {
-      browser: "./doc/browser/image.html",
+      browser: "./document/browser/image.html",
     },
     video: {
-      browser: "./doc/browser/video.html",
+      browser: "./document/browser/video.html",
     },
   },
   onValueChange: (value, event) => {
