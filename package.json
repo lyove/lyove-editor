@@ -22,6 +22,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
+    "build:doc": "tsc && vite build -m document",
     "clean": "rm -rf dist",
     "test": "jest --runInBand",
     "test:coverage": "jest --runInBand --coverage",
