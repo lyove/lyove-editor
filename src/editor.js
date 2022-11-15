@@ -28,9 +28,6 @@ import Audio from "./toolbars/toolbar/audio/Audio.js";
 import Table from "./toolbars/toolbar/table/Table.js";
 import Preformat from "./toolbars/toolbar/preformat/Preformat.js";
 import HorizontalRule from "./toolbars/toolbar/horizontalRule/HorizontalRule.js";
-import Details from "./toolbars/toolbar/details/Details.js";
-import Division from "./toolbars/toolbar/division/Division.js";
-import Section from "./toolbars/toolbar/section/Section.js";
 import Block from "./toolbars/toolbar/block/Block.js";
 import Iframe from "./toolbars/toolbar/iframe/Iframe.js";
 
@@ -153,9 +150,6 @@ export default class Editor extends CoreEditor {
         // menubar
         // Help,
         // toolbar
-        Details,
-        Division,
-        Section,
         Block,
         Iframe,
         // formatbar
