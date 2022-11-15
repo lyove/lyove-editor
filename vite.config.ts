@@ -1,51 +1,56 @@
+import { defineConfig, loadEnv } from "vite";
 import path from "path";
-import { defineConfig } from "vite";
 import packageJson from "./package.json";
 
 const { resolve } = path;
 
-const getPackageName = () => {
-  return packageJson.name;
-};
+/**
+ * https://vitejs.dev/config/
+ * @type { import('vite').UserConfig }
+ */
+export default defineConfig(({ mode }) => {
+  const envDir = './env';
+  const envPrefix = ["VITE", "APP"];
 
-const getPackageNameCamelCase = () => {
-  try {
-    return getPackageName().replace(/-./g, (char) => char[1].toUpperCase());
-  } catch (err) {
-    throw new Error("Name property in package.json is missing.");
-  }
-};
+  // Env var
+  const { APP_NAME, APP_BASE_URL, APP_BUILD_FOR } = loadEnv(mode, envDir, envPrefix);
 
-const fileName = {
-  es: `${getPackageName()}.mjs`,
-  cjs: `${getPackageName()}.cjs`,
-  umd: `${getPackageName()}.umd.js`,
-  iife: `${getPackageName()}.iife.js`,
-};
+  // Build files name
+  const packageName = packageJson.name;
+  const buildFileName = {
+    es: `${packageName}.mjs`,
+    cjs: `${packageName}.cjs`,
+    umd: `${packageName}.umd.js`,
+    iife: `${packageName}.iife.js`,
+  };
 
-module.exports = defineConfig({
-  base: "./",
-  resolve: {
-    alias: {
-      "@": resolve(__dirname, "src"),
+  return {
+    envDir,
+    envPrefix,
+    base: APP_BASE_URL,
+    resolve: {
+      alias: {
+        "@": resolve(__dirname, "src"),
+      },
     },
-  },
-  server: {
-    port: 3000,
-    https: false,
-    open: true
-  },
-  build: {
-    lib: {
-      entry: path.resolve(__dirname, "src/index.ts"),
-      name: getPackageNameCamelCase(),
-      formats: ["es", "cjs", "umd", "iife"],
-      fileName: (format) => fileName[format],
+    server: {
+      port: 3000,
+      https: false,
+      open: true
     },
-    rollupOptions: {
-      output:{
-        assetFileNames: `${getPackageName()}.[ext]`
-      }
+    build: {
+      lib: {
+        entry: path.resolve(__dirname, "src/index.ts"),
+        name: APP_NAME,
+        formats: ["es", "cjs", "umd", "iife"],
+        fileName: (format) => buildFileName[format],
+      },
+      rollupOptions: {
+        output: APP_BUILD_FOR === "doc" ? { assetFileNames: `${packageName}.[ext]` } : {},
+      },
+      copyPublicDir: APP_BUILD_FOR === "doc",
+      emptyOutDir: true,
+      assetsDir: "assets",
     },
-  },
+  };
 });
