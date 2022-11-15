@@ -69,9 +69,9 @@ import Delete from "./toolbars/focusbar/delete/Delete.js";
  */
 export default class Editor extends CoreEditor {
   /**
-   * Min config
+   * Min plugins
    */
-  static get minConfig() {
+  static get minPlugins() {
     return {
       plugins: [
         // toolbar
@@ -103,9 +103,9 @@ export default class Editor extends CoreEditor {
   }
 
   /**
-   * Default config
+   * Default plugins
    */
-  static get defaultConfig() {
+  static get defaultPlugins() {
     return {
       plugins: [
         // toolbar
@@ -142,11 +142,11 @@ export default class Editor extends CoreEditor {
   }
 
   /**
-   * Max config
+   * Max plugins
    */
-  static get maxConfig() {
+  static get maxPlugins() {
     return {
-      plugins: this.defaultConfig.plugins.concat([
+      plugins: this.defaultPlugins.plugins.concat([
         // menubar
         // Help,
         // toolbar
@@ -170,6 +170,18 @@ export default class Editor extends CoreEditor {
         Data,
         Definition,
       ]),
+    };
+  }
+
+  /**
+   * Config
+   */
+  static get config() {
+    return {
+      lang: "en",
+      plugins: [],
+      browser: {},
+      filter: {},
     };
   }
 }
