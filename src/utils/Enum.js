@@ -4,10 +4,11 @@
  * @enum {string}
  */
 export const EditorMode = Object.freeze({
-  default: "defaultConfig",
-  min: "minConfig",
-  max: "maxConfig",
+  default: "defaultPlugins",
+  min: "minPlugins",
+  max: "maxPlugins",
 });
+
 
 /**
  * Tag Groups
