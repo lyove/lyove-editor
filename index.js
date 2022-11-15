@@ -1,8 +1,8 @@
 /**
  * Load editor
  */
-import Editor from "./editor.js";
-import "./editor.less";
+import Editor from "./src/editor.js";
+import "./src/editor.less";
 
 /**
  * Create element and setting attribute
