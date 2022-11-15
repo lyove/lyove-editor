@@ -46,13 +46,6 @@ export default class Base extends Plugin {
   /**
    * @inheritDoc
    */
-  static get config() {
-    return { browser: {}, filter: {}, lang: "en", plugins: [] };
-  }
-
-  /**
-   * @inheritDoc
-   */
   init() {
     this._i18n(i18n);
     this.editor.dom.registerElement(TagName.DIALOG, DialogElement);
