@@ -35,10 +35,7 @@ export default class DeletableListener extends Listener {
    * @return {void}
    */
   keydown(event) {
-    if (
-      event.target === event.currentTarget &&
-      isKey(event, Key.DEL, { ctrl: true })
-    ) {
+    if (event.target === event.currentTarget && isKey(event, Key.DEL, { ctrl: true })) {
       this.editor.dom.delete(event.target);
       event.preventDefault();
       event.stopPropagation();

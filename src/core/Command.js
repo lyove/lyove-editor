@@ -94,11 +94,7 @@ export default class Command {
    * @param {string} tagName
    */
   constructor(editor, name, tagName) {
-    if (
-      !(editor instanceof Editor) ||
-      !isString(name) ||
-      !isOptString(tagName)
-    ) {
+    if (!(editor instanceof Editor) || !isString(name) || !isOptString(tagName)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 
@@ -123,9 +119,7 @@ export default class Command {
     }
 
     if (this.dropdown) {
-      const dropdowns = this.editor.element.getElementsByTagName(
-        TagName.DROPDOWN
-      );
+      const dropdowns = this.editor.element.getElementsByTagName(TagName.DROPDOWN);
       if (dropdowns.length > 0) {
         const dropdownCmd = dropdowns?.[0]?.dataset?.command;
         this.dropdown.cleanup();
@@ -157,17 +151,10 @@ export default class Command {
     this.#filterAttributes(attributes);
 
     if (this.tag.group === TagGroup.FORMAT) {
-      const sameTagNameElement = this.editor.dom.getSelectedElementByName(
-        this.tag.name
-      );
+      const sameTagNameElement = this.editor.dom.getSelectedElementByName(this.tag.name);
       if (sameTagNameElement) {
-        const copiedText = this.editor.dom.createText(
-          sameTagNameElement.textContent
-        );
-        sameTagNameElement.parentElement.replaceChild(
-          copiedText,
-          sameTagNameElement
-        );
+        const copiedText = this.editor.dom.createText(sameTagNameElement.textContent);
+        sameTagNameElement.parentElement.replaceChild(copiedText, sameTagNameElement);
       } else {
         const newTagNameElement = this.editor.dom.createElement(this.tag.name, {
           attributes,
@@ -175,9 +162,7 @@ export default class Command {
         this.editor.dom.format(newTagNameElement);
       }
     } else {
-      this.editor.dom.insert(
-        this.editor.dom.createElement(this.tag.name, { attributes })
-      );
+      this.editor.dom.insert(this.editor.dom.createElement(this.tag.name, { attributes }));
     }
   }
 
@@ -187,10 +172,7 @@ export default class Command {
    * @return {void}
    */
   openDialog(command) {
-    this.dialog?.open(
-      (attributes) => this.insert(attributes),
-      this.#selectedAttributes()
-    );
+    this.dialog?.open((attributes) => this.insert(attributes), this.#selectedAttributes());
   }
 
   /**
@@ -203,7 +185,7 @@ export default class Command {
     this.dropdown?.open(
       (attributes) => this.insert(attributes),
       this.#selectedAttributes(command),
-      triggerElement
+      triggerElement,
     );
   }
 
@@ -219,10 +201,7 @@ export default class Command {
       };
     }
 
-    const attributes = this.editor.dom.getSelectedAttributesByName(
-      this.tag.name,
-      command
-    );
+    const attributes = this.editor.dom.getSelectedAttributesByName(this.tag.name, command);
     this.#filterAttributes(attributes);
 
     return attributes;
@@ -236,9 +215,7 @@ export default class Command {
    */
   #filterAttributes(attributes) {
     Object.keys(attributes).forEach(
-      (item) =>
-        (this.tag.attributes.includes(item) && attributes[item]) ||
-        delete attributes[item]
+      (item) => (this.tag.attributes.includes(item) && attributes[item]) || delete attributes[item],
     );
   }
 
@@ -257,11 +234,9 @@ export default class Command {
         if (thisParent) {
           thisParent?.removeChild(item);
           const { command } = item.dataset;
-          const targetButton = thisParent.querySelector(
-            `button[data-command=${command}]`
-          );
+          const targetButton = thisParent.querySelector(`button[data-command=${command}]`);
           const arrowElement = Array.from(targetButton.children).find(
-            (item) => item.className.indexOf("btn-arrow") > -1
+            (item) => item.className.indexOf("btn-arrow") > -1,
           );
           if (arrowElement) {
             arrowElement.classList.remove("up");

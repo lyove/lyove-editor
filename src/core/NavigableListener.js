@@ -48,17 +48,9 @@ export default class NavigableListener extends Listener {
       const isFirst = event.target === first;
       const isLast = event.target === last;
 
-      if (
-        event.key === Key.UP &&
-        !isFirst &&
-        prev.hasAttribute("data-navigable")
-      ) {
+      if (event.key === Key.UP && !isFirst && prev.hasAttribute("data-navigable")) {
         prev.focus();
-      } else if (
-        event.key === Key.DOWN &&
-        !isLast &&
-        next.hasAttribute("data-navigable")
-      ) {
+      } else if (event.key === Key.DOWN && !isLast && next.hasAttribute("data-navigable")) {
         next.focus();
       } else if (
         (event.key === Key.HOME || (event.key === Key.DOWN && isLast)) &&
@@ -93,9 +85,7 @@ export default class NavigableListener extends Listener {
     const selected = this.editor.dom.getSelectedElement();
 
     return (
-      sel.isCollapsed &&
-      sel.anchorOffset === 0 &&
-      [editable, element.firstChild].includes(selected)
+      sel.isCollapsed && sel.anchorOffset === 0 && [editable, element.firstChild].includes(selected)
     );
   }
 }

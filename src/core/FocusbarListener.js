@@ -15,11 +15,9 @@ export default class FocusbarListener extends BarListener {
     textarea.addEventListener("focusout", this);
     this.editor.dom.document.addEventListener("selectionchange", this);
 
-    const focusbarTrigger = Array.from(focusbar.children).find(
-      (e) => e.className === "trigger"
-    );
+    const focusbarTrigger = Array.from(focusbar.children).find((e) => e.className === "trigger");
     const focusbarToolbox = Array.from(focusbar.children).find(
-      (e) => e.className === "trigger-content"
+      (e) => e.className === "trigger-content",
     );
     focusbarTrigger.addEventListener("click", (e) => {
       focusbarToolbox.hidden = !focusbarToolbox.hidden;
@@ -56,13 +54,10 @@ export default class FocusbarListener extends BarListener {
    * @return {void}
    */
   focusin(event) {
-    if (
-      event.target instanceof HTMLElement &&
-      event.target.hasAttribute("data-focusable")
-    ) {
+    if (event.target instanceof HTMLElement && event.target.hasAttribute("data-focusable")) {
       const focusElement = event.target;
       const focusbarToolbox = Array.from(this.editor.focusbar.children).find(
-        (e) => e.className === "trigger-content"
+        (e) => e.className === "trigger-content",
       );
       focusbarToolbox.hidden = true;
       this.#show(focusElement);
@@ -88,10 +83,7 @@ export default class FocusbarListener extends BarListener {
     const element = this.editor.dom.getActiveElement();
     if (!selection.isCollapsed || !element) {
       this.#hide();
-    } else if (
-      element instanceof HTMLElement &&
-      element.hasAttribute("data-focusable")
-    ) {
+    } else if (element instanceof HTMLElement && element.hasAttribute("data-focusable")) {
       this.#show(element);
     }
   }
@@ -109,7 +101,7 @@ export default class FocusbarListener extends BarListener {
     }
 
     Object.keys(focusElement.dataset).forEach(
-      (key) => (focusbar.dataset[key] = focusElement.dataset[key])
+      (key) => (focusbar.dataset[key] = focusElement.dataset[key]),
     );
     focusbar.dataset.tag = focusElement.localName;
 
@@ -141,8 +133,6 @@ export default class FocusbarListener extends BarListener {
     const { focusbar } = this.editor;
     focusbar.hidden = true;
     focusbar.removeAttribute("style");
-    Object.keys(focusbar.dataset).forEach(
-      (key) => delete focusbar.dataset[key]
-    );
+    Object.keys(focusbar.dataset).forEach((key) => delete focusbar.dataset[key]);
   }
 }

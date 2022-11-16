@@ -43,26 +43,16 @@ export default class FormatbarListener extends BarListener {
    * @return {void}
    */
   #show(toolbar, element) {
-    if (
-      !(toolbar instanceof HTMLElement) ||
-      !(element instanceof HTMLElement)
-    ) {
+    if (!(toolbar instanceof HTMLElement) || !(element instanceof HTMLElement)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 
     toolbar.hidden = false;
     const { x, y } = element.getBoundingClientRect();
     const { x: tx, y: ty } = this.editor.textarea.getBoundingClientRect();
-    const diff =
-      x - tx + toolbar.clientWidth - this.editor.textarea.clientWidth;
-    const top =
-      y -
-      ty -
-      element.scrollTop +
-      this.editor.textarea.offsetTop -
-      toolbar.clientHeight;
-    let left =
-      toolbar.clientWidth < this.editor.textarea.clientWidth ? x - tx : 0;
+    const diff = x - tx + toolbar.clientWidth - this.editor.textarea.clientWidth;
+    const top = y - ty - element.scrollTop + this.editor.textarea.offsetTop - toolbar.clientHeight;
+    let left = toolbar.clientWidth < this.editor.textarea.clientWidth ? x - tx : 0;
 
     if (left > 0 && diff > 0) {
       left = left > diff ? (left - diff) / 2 : 0;

@@ -56,7 +56,7 @@ export default class Dispatcher {
     }
 
     this.#element.dispatchEvent(
-      new CustomEvent(type, { detail: { element: element, target: target } })
+      new CustomEvent(type, { detail: { element: element, target: target } }),
     );
   }
 
@@ -71,11 +71,7 @@ export default class Dispatcher {
   #dispatch(type, element, target) {
     if (element instanceof HTMLElement && target instanceof HTMLElement) {
       this.dispatch(type, element, target);
-      this.dispatch(
-        `${type}${element.localName.replace("-", "")}`,
-        element,
-        target
-      );
+      this.dispatch(`${type}${element.localName.replace("-", "")}`, element, target);
     }
   }
 
@@ -90,8 +86,8 @@ export default class Dispatcher {
       record.addedNodes.forEach((element) => {
         if (element instanceof HTMLElement) {
           this.#dispatch("insert", element, record.target);
-          Array.from(element.getElementsByTagName(TagName.ALL)).forEach(
-            (item) => this.#dispatch("insert", item, record.target)
+          Array.from(element.getElementsByTagName(TagName.ALL)).forEach((item) =>
+            this.#dispatch("insert", item, record.target),
           );
         }
       });

@@ -15,10 +15,7 @@ export default class ContentFilter extends Filter {
     let p = [];
     const wrap = (ref = null) => {
       if (allowedParagraph && p.length > 0) {
-        element.insertBefore(
-          this.editor.dom.createElement(TagName.P, { html: p.join(" ") }),
-          ref
-        );
+        element.insertBefore(this.editor.dom.createElement(TagName.P, { html: p.join(" ") }), ref);
         p = [];
       }
     };
@@ -33,11 +30,7 @@ export default class ContentFilter extends Filter {
         if (childTag && this.editor.tags.allowed(element, realChild)) {
           wrap(realChild);
           this.#element(realChild, childTag);
-        } else if (
-          childTag &&
-          childTag.group === TagGroup.FORMAT &&
-          allowedParagraph
-        ) {
+        } else if (childTag && childTag.group === TagGroup.FORMAT && allowedParagraph) {
           const filteredChild = this.#element(realChild, childTag);
 
           if (filteredChild) {
@@ -98,9 +91,7 @@ export default class ContentFilter extends Filter {
    */
   #element(element, tag) {
     Array.from(element.attributes).forEach(
-      (item) =>
-        !tag.attributes.includes(item.name) &&
-        element.removeAttribute(item.name)
+      (item) => !tag.attributes.includes(item.name) && element.removeAttribute(item.name),
     );
 
     if (element.hasChildNodes()) {

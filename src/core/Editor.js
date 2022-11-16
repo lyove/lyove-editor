@@ -4,8 +4,8 @@ import CommandManager from "./CommandManager.js";
 import FilterManager from "./FilterManager.js";
 import PluginManager from "./PluginManager.js";
 import TagManager from "./TagManager.js";
-import DialogManager from "../plugins/dialog/DialogManager.js";
-import DropdownManager from "../plugins/dropdown/DropdownManager.js";
+import DialogManager from "../modules/dialog/DialogManager.js";
+import DropdownManager from "../modules/dropdown/DropdownManager.js";
 import { EditorMode, ErrorMessage, Position, TagName } from "../utils/Enum.js";
 import Translator from "./Translator.js";
 

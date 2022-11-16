@@ -27,8 +27,7 @@ export default class BarListener extends Listener {
    * @return {void}
    */
   click(event) {
-    const barItem =
-      event.target.localName === "button" ? event.target : event.currentTarget;
+    const barItem = event.target.localName === "button" ? event.target : event.currentTarget;
     const command = barItem?.getAttribute("data-command");
     if (command) {
       this.editor.commands.execute(command, barItem);
@@ -55,10 +54,7 @@ export default class BarListener extends Listener {
         prev.focus();
       } else if (event.key === Key.RIGHT && !isLast) {
         next.focus();
-      } else if (
-        event.key === Key.HOME ||
-        (event.key === Key.RIGHT && isLast)
-      ) {
+      } else if (event.key === Key.HOME || (event.key === Key.RIGHT && isLast)) {
         first.focus();
       } else if (event.key === Key.END || (event.key === Key.LEFT && isFirst)) {
         last.focus();

@@ -45,10 +45,7 @@ export default class SortableListener extends Listener {
       [Key.END]: Sorting.LAST,
     };
 
-    if (
-      event.target === event.currentTarget &&
-      isKey(event, Object.keys(map), { ctrl: true })
-    ) {
+    if (event.target === event.currentTarget && isKey(event, Object.keys(map), { ctrl: true })) {
       this.editor.dom.sort(event.target, map[event.key]);
       event.preventDefault();
       event.stopPropagation();
@@ -83,11 +80,7 @@ export default class SortableListener extends Listener {
     const element = this.editor.dom.document.elementFromPoint(event.x, event.y);
     this.#sortover();
 
-    if (
-      target &&
-      this.editor.dom.contains(target) &&
-      this.#droppable(target, element)
-    ) {
+    if (target && this.editor.dom.contains(target) && this.#droppable(target, element)) {
       element.setAttribute("data-sortover", "");
     }
   }
@@ -103,10 +96,7 @@ export default class SortableListener extends Listener {
     const target = event.target.closest("[data-sortable][data-sort]");
 
     if (target && this.editor.dom.contains(target)) {
-      const element = this.editor.dom.document.elementFromPoint(
-        event.x,
-        event.y
-      );
+      const element = this.editor.dom.document.elementFromPoint(event.x, event.y);
       this.#sortover();
       target.removeAttribute("data-sort");
       target.releasePointerCapture(event.pointerId);

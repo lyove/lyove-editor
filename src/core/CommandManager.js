@@ -52,9 +52,7 @@ export default class CommandManager {
    * @return {Command|undefined}
    */
   find(tagName) {
-    return Array.from(this.#items.values()).find(
-      (command) => command.tag?.name === tagName
-    );
+    return Array.from(this.#items.values()).find((command) => command.tag?.name === tagName);
   }
 
   /**

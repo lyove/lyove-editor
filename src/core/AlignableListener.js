@@ -42,15 +42,11 @@ export default class AlignableListener extends Listener {
       [Key.RIGHT]: Alignment.RIGHT,
     };
 
-    if (
-      event.target === event.currentTarget &&
-      isKey(event, Object.keys(map), { shift: true })
-    ) {
+    if (event.target === event.currentTarget && isKey(event, Object.keys(map), { shift: true })) {
       event.preventDefault();
       event.stopPropagation();
       event.target.classList.remove(...Object.values(map));
-      map[event.key] !== Alignment.NONE &&
-        event.target.classList.add(map[event.key]);
+      map[event.key] !== Alignment.NONE && event.target.classList.add(map[event.key]);
     }
   }
 }
