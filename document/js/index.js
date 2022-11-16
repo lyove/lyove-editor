@@ -97,23 +97,3 @@ save.addEventListener("click", () => {
 });
 
 save.textContent = rte?.hidden ? "Save" : "Edit";
-
-// /**
-//  * Dynamic import module
-//  */
-// const { hostname } = window.location;
-// const isIP = (str) => {
-//   const reg =
-//     /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/g;
-//   return reg.test(str);
-// };
-// // development
-// if (hostname === "localhost" || hostname === "127.0.0.1" || isIP(hostname)) {
-//   import("../src/editor.js").then((module) => {
-//     loadEditor(module.default);
-//   });
-//   import("../src/editor.less").then(() => {});
-// } else {
-//   // production
-//   loadEditor(window.lyoveEditor);
-// }
