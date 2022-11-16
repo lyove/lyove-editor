@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       lib: {
-        entry: path.resolve(__dirname, "src/index.ts"),
+        entry: path.resolve(__dirname, "src/app.ts"),
         name: APP_NAME,
         formats: ["es", "cjs", "umd", "iife"],
         fileName: (format) => buildFileName[format],
