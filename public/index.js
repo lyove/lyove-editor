@@ -31,25 +31,25 @@ const loadEditor = (Editor) => {
   const configs = {
     lang: lang.value,
     mode: "max",
-    customPlugins: {
-      audio: {
-        browser: "../document/browser/audio.html",
-      },
-      block: {
-        api: "../document/api/{id}.html",
-        browser: "../document/browser/block.html",
-        css: "../document/css/base.css",
-      },
-      iframe: {
-        browser: "../document/browser/iframe.html",
-      },
-      image: {
-        browser: "../document/browser/image.html",
-      },
-      video: {
-        browser: "../document/browser/video.html",
-      },
-    },
+    // customPlugins: {
+    //   audio: {
+    //     browser: "../document/browser/audio.html",
+    //   },
+    //   block: {
+    //     api: "../document/api/{id}.html",
+    //     browser: "../document/browser/block.html",
+    //     css: "../document/css/base.css",
+    //   },
+    //   iframe: {
+    //     browser: "../document/browser/iframe.html",
+    //   },
+    //   image: {
+    //     browser: "../document/browser/image.html",
+    //   },
+    //   video: {
+    //     browser: "../document/browser/video.html",
+    //   },
+    // },
     onValueChange: (value, event) => {
       console.log(value, event);
     },

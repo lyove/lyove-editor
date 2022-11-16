@@ -20,8 +20,7 @@ export default class MenubarListener extends BarListener {
   }
 
   click(event) {
-    const triggerElement =
-      event.target.localName === "button" ? event.target : event.currentTarget;
+    const triggerElement = event.target.localName === "button" ? event.target : event.currentTarget;
     const command = triggerElement?.getAttribute("data-command");
     if (command) {
       this.editor.commands.execute(command, triggerElement);

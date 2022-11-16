@@ -106,10 +106,7 @@ export default class Plugin {
    */
   _i18n(i18n) {
     if (i18n[this.editor.config.lang]) {
-      this.editor.translator.set(
-        this.constructor.name,
-        i18n[this.editor.config.lang]
-      );
+      this.editor.translator.set(this.constructor.name, i18n[this.editor.config.lang]);
     }
   }
 
@@ -132,9 +129,7 @@ export default class Plugin {
    * @return {void}
    */
   _command(tagName) {
-    this.editor.commands.set(
-      new Command(this.editor, this.constructor.name, tagName)
-    );
+    this.editor.commands.set(new Command(this.editor, this.constructor.name, tagName));
   }
 
   /**
@@ -152,7 +147,7 @@ export default class Plugin {
         command,
         arrowDown,
         uuid,
-      })
+      }),
     );
   }
 
@@ -171,7 +166,7 @@ export default class Plugin {
         command,
         arrowDown,
         uuid,
-      })
+      }),
     );
   }
 
@@ -196,7 +191,7 @@ export default class Plugin {
         key,
         arrowDown,
         uuid,
-      })
+      }),
     );
   }
 
@@ -217,7 +212,7 @@ export default class Plugin {
           command,
           title: label,
           key,
-        })
+        }),
       );
       return;
     }
@@ -230,7 +225,7 @@ export default class Plugin {
         command,
         key,
         uuid,
-      })
+      }),
     );
   }
 
@@ -247,9 +242,7 @@ export default class Plugin {
     if (!isString(label) || !isString(command)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
-    const icon = `<span class='btn-icon'>${
-      Icons[command] || Icons.default
-    }</span>`;
+    const icon = `<span class='btn-icon'>${Icons[command] || Icons.default}</span>`;
     const text = `<span class='btn-label'>${label}</span>`;
     const arrowIcon = arrowDown
       ? `<i class='separator'></i><span class='btn-arrow'>${arrowDown}</span>`

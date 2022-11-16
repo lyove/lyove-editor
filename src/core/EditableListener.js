@@ -24,9 +24,7 @@ export default class EditableListener extends Listener {
   insert(event) {
     if (event.detail.element?.contentEditable === "true") {
       event.detail.element.addEventListener("keydown", this);
-    } else if (
-      event.detail.element?.parentElement?.contentEditable === "true"
-    ) {
+    } else if (event.detail.element?.parentElement?.contentEditable === "true") {
       event.detail.element.addEventListener("dblclick", this);
     }
   }
@@ -51,23 +49,14 @@ export default class EditableListener extends Listener {
       const enter = this.editor.tags.get(event.target)?.enter;
 
       if (enter) {
-        if (
-          event.target.textContent.trim() ||
-          !event.target.hasAttribute("data-deletable")
-        ) {
+        if (event.target.textContent.trim() || !event.target.hasAttribute("data-deletable")) {
           this.editor.dom
             .closest(event.target, enter)
-            ?.insertAdjacentElement(
-              Position.AFTEREND,
-              this.editor.dom.createElement(enter)
-            );
+            ?.insertAdjacentElement(Position.AFTEREND, this.editor.dom.createElement(enter));
         } else if (!(event.target instanceof HTMLParagraphElement)) {
           this.editor.dom
             .closest(event.target, TagName.P)
-            ?.insertAdjacentElement(
-              Position.AFTEREND,
-              this.editor.dom.createElement(TagName.P)
-            );
+            ?.insertAdjacentElement(Position.AFTEREND, this.editor.dom.createElement(TagName.P));
           event.target.parentElement.removeChild(event.target);
         }
       }
@@ -79,10 +68,7 @@ export default class EditableListener extends Listener {
       this.editor.dom.delete(event.target);
       event.preventDefault();
       event.stopPropagation();
-    } else if (
-      /^[A-Z]$/.test(event.key) &&
-      isKey(event, event.key, { alt: true, shift: true })
-    ) {
+    } else if (/^[A-Z]$/.test(event.key) && isKey(event, event.key, { alt: true, shift: true })) {
       event.preventDefault();
       event.stopPropagation();
       this.editor.formatbar

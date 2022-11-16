@@ -9,7 +9,6 @@ export const EditorMode = Object.freeze({
   max: "maxPlugins",
 });
 
-
 /**
  * Tag Groups
  *

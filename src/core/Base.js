@@ -20,10 +20,10 @@ import MenubarListener from "./MenubarListener.js";
 import ContentFilter from "./ContentFilter.js";
 
 // Dialog
-import DialogElement from "../plugins/dialog/DialogElement.js";
+import DialogElement from "../modules/dialog/DialogElement.js";
 
 // Dropdown
-import DropdownElement from "../plugins/dropdown/DropdownElement.js";
+import DropdownElement from "../modules/dropdown/DropdownElement.js";
 
 // i18n
 import i18n from "./i18n.js";

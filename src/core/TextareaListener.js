@@ -14,10 +14,7 @@ export default class TextareaListener extends Listener {
   constructor(editor) {
     super(editor);
     this.editor.dom.document.addEventListener("selectionchange", this);
-    this.editor.textarea.addEventListener(
-      "input",
-      this.onInputChange.bind(this)
-    );
+    this.editor.textarea.addEventListener("input", this.onInputChange.bind(this));
     this.editor.textarea.addEventListener("delete", this);
   }
 
@@ -63,9 +60,7 @@ export default class TextareaListener extends Listener {
       onValueChange(e?.currentTarget?.innerHTML, e);
     }
     if (e?.currentTarget?.innerHTML === "") {
-      this.editor.textarea.appendChild(
-        this.editor.dom.createElement(TagName.P)
-      );
+      this.editor.textarea.appendChild(this.editor.dom.createElement(TagName.P));
     }
   }
 
@@ -89,10 +84,7 @@ export default class TextareaListener extends Listener {
         prev.focus();
       } else if (event.key === Key.RIGHT && !isLast) {
         next.focus();
-      } else if (
-        event.key === Key.HOME ||
-        (event.key === Key.RIGHT && isLast)
-      ) {
+      } else if (event.key === Key.HOME || (event.key === Key.RIGHT && isLast)) {
         first.focus();
       } else if (event.key === Key.END || (event.key === Key.LEFT && isFirst)) {
         last.focus();

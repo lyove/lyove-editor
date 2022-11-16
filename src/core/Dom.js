@@ -119,7 +119,7 @@ export default class Dom {
       this.window.customElements.define(
         name,
         constructor,
-        parentName ? { extends: parentName } : undefined
+        parentName ? { extends: parentName } : undefined,
       );
     }
   }
@@ -135,9 +135,7 @@ export default class Dom {
   createElement(name, { attributes = {}, html = "" } = {}) {
     const element = this.document.createElement(name);
     element.innerHTML = html;
-    Object.entries(attributes).forEach(
-      ([key, val]) => val && element.setAttribute(key, `${val}`)
-    );
+    Object.entries(attributes).forEach(([key, val]) => val && element.setAttribute(key, `${val}`));
     return element;
   }
 
@@ -160,15 +158,9 @@ export default class Dom {
     ) {
       editable.insertAdjacentElement(Position.BEFOREBEGIN, element);
     } else if (editable) {
-      this.closest(editable, element)?.insertAdjacentElement(
-        Position.AFTEREND,
-        element
-      );
+      this.closest(editable, element)?.insertAdjacentElement(Position.AFTEREND, element);
 
-      if (
-        editable.hasAttribute("data-deletable") &&
-        !editable.textContent.trim()
-      ) {
+      if (editable.hasAttribute("data-deletable") && !editable.textContent.trim()) {
         editable.parentElement.removeChild(editable);
       }
     } else if (this.editor.tags.allowed(this.editor.textarea, element)) {
@@ -220,17 +212,11 @@ export default class Dom {
       return;
     }
 
-    if (
-      range.startContainer instanceof Text &&
-      range.startContainer.parentElement !== editable
-    ) {
+    if (range.startContainer instanceof Text && range.startContainer.parentElement !== editable) {
       range.setStartBefore(range.startContainer.parentElement);
     }
 
-    if (
-      range.endContainer instanceof Text &&
-      range.endContainer.parentElement !== editable
-    ) {
+    if (range.endContainer instanceof Text && range.endContainer.parentElement !== editable) {
       range.setEndAfter(range.endContainer.parentElement);
     }
 
@@ -238,7 +224,7 @@ export default class Dom {
     const same = Array.from(range.cloneContents().childNodes).every(
       (item) =>
         (item instanceof Text && !item.textContent.trim()) ||
-        (item instanceof HTMLElement && item.localName === element.localName)
+        (item instanceof HTMLElement && item.localName === element.localName),
     );
     range.deleteContents();
 
@@ -269,10 +255,7 @@ export default class Dom {
    * @return {boolean}
    */
   arbitrary(element) {
-    return (
-      element === this.editor.textarea ||
-      element?.hasAttribute("data-arbitrary")
-    );
+    return element === this.editor.textarea || element?.hasAttribute("data-arbitrary");
   }
 
   /**
@@ -304,10 +287,7 @@ export default class Dom {
    * @return {HTMLElement|undefined}
    */
   closest(element, child) {
-    if (
-      !(element instanceof HTMLElement) ||
-      !this.contains(element.parentElement)
-    ) {
+    if (!(element instanceof HTMLElement) || !this.contains(element.parentElement)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 
@@ -318,11 +298,7 @@ export default class Dom {
       if (this.arbitrary(parent) && this.editor.tags.allowed(parent, child)) {
         return sibling;
       }
-    } while (
-      (sibling = parent) &&
-      (parent = parent.parentElement) &&
-      this.contains(parent)
-    );
+    } while ((sibling = parent) && (parent = parent.parentElement) && this.contains(parent));
 
     return undefined;
   }
@@ -368,14 +344,8 @@ export default class Dom {
    */
   getSelectedElement() {
     const sel = this.getSelection();
-    const anc =
-      sel.anchorNode instanceof Text
-        ? sel.anchorNode.parentElement
-        : sel.anchorNode;
-    const foc =
-      sel.focusNode instanceof Text
-        ? sel.focusNode.parentElement
-        : sel.focusNode;
+    const anc = sel.anchorNode instanceof Text ? sel.anchorNode.parentElement : sel.anchorNode;
+    const foc = sel.focusNode instanceof Text ? sel.focusNode.parentElement : sel.focusNode;
 
     if (
       anc instanceof HTMLElement &&
@@ -416,7 +386,7 @@ export default class Dom {
 
     if (element) {
       Array.from(element.attributes).forEach(
-        (item) => (attributes[item.nodeName] = item.nodeValue)
+        (item) => (attributes[item.nodeName] = item.nodeValue),
       );
     }
 
@@ -430,24 +400,14 @@ export default class Dom {
    */
   getSelectedEditable() {
     const sel = this.getSelection();
-    const anc =
-      sel.anchorNode instanceof Text
-        ? sel.anchorNode.parentElement
-        : sel.anchorNode;
-    const foc =
-      sel.focusNode instanceof Text
-        ? sel.focusNode.parentElement
-        : sel.focusNode;
+    const anc = sel.anchorNode instanceof Text ? sel.anchorNode.parentElement : sel.anchorNode;
+    const foc = sel.focusNode instanceof Text ? sel.focusNode.parentElement : sel.focusNode;
 
     if (anc instanceof HTMLElement && foc instanceof HTMLElement) {
       const ancEdit = anc.closest("[contenteditable=true]");
       const focEdit = foc.closest("[contenteditable=true]");
 
-      if (
-        ancEdit instanceof HTMLElement &&
-        ancEdit === focEdit &&
-        this.contains(ancEdit)
-      ) {
+      if (ancEdit instanceof HTMLElement && ancEdit === focEdit && this.contains(ancEdit)) {
         return ancEdit;
       }
     }
@@ -538,10 +498,7 @@ export default class Dom {
 
     if (prev instanceof HTMLElement && prev.hasAttribute("data-focusable")) {
       this.focusEnd(prev);
-    } else if (
-      next instanceof HTMLElement &&
-      next.hasAttribute("data-focusable")
-    ) {
+    } else if (next instanceof HTMLElement && next.hasAttribute("data-focusable")) {
       next.focus();
     }
   }
@@ -554,10 +511,7 @@ export default class Dom {
    * @return {void}
    */
   sort(element, sorting) {
-    if (
-      !(element instanceof HTMLElement) ||
-      !Object.values(Sorting).includes(sorting)
-    ) {
+    if (!(element instanceof HTMLElement) || !Object.values(Sorting).includes(sorting)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 
@@ -569,30 +523,20 @@ export default class Dom {
     const isFirst = element === first;
     const isLast = element === last;
 
-    if (
-      sorting === Sorting.PREV &&
-      !isFirst &&
-      prev.hasAttribute("data-sortable")
-    ) {
+    if (sorting === Sorting.PREV && !isFirst && prev.hasAttribute("data-sortable")) {
       prev.insertAdjacentHTML(Position.BEFOREBEGIN, element.outerHTML);
       parent.removeChild(element);
-    } else if (
-      sorting === Sorting.NEXT &&
-      !isLast &&
-      next.hasAttribute("data-sortable")
-    ) {
+    } else if (sorting === Sorting.NEXT && !isLast && next.hasAttribute("data-sortable")) {
       next.insertAdjacentHTML(Position.AFTEREND, element.outerHTML);
       parent.removeChild(element);
     } else if (
-      ((sorting === Sorting.FIRST && !isFirst) ||
-        (sorting === Sorting.NEXT && isLast)) &&
+      ((sorting === Sorting.FIRST && !isFirst) || (sorting === Sorting.NEXT && isLast)) &&
       first.hasAttribute("data-sortable")
     ) {
       first.insertAdjacentHTML(Position.BEFOREBEGIN, element.outerHTML);
       parent.removeChild(element);
     } else if (
-      ((sorting === Sorting.LAST && !isLast) ||
-        (sorting === Sorting.PREV && isFirst)) &&
+      ((sorting === Sorting.LAST && !isLast) || (sorting === Sorting.PREV && isFirst)) &&
       last.hasAttribute("data-sortable")
     ) {
       last.insertAdjacentHTML(Position.AFTEREND, element.outerHTML);
@@ -617,9 +561,7 @@ export default class Dom {
     /** @type {HTMLAnchorElement} */
     const a = this.createElement(TagName.A, { attributes: { href: url } });
     const urlObject = new URL(a.href);
-    Object.entries(params).forEach(([key, val]) =>
-      urlObject.searchParams.set(key, `${val}`)
-    );
+    Object.entries(params).forEach(([key, val]) => urlObject.searchParams.set(key, `${val}`));
     const win = this.window.open(urlObject.toString(), name, this.#features());
     this.window.addEventListener(
       "message",
@@ -629,7 +571,7 @@ export default class Dom {
           win.close();
         }
       },
-      false
+      false,
     );
   }
 
@@ -661,7 +603,7 @@ export default class Dom {
       {},
       this.#browser,
       { height: `${this.getHeight()}`, width: `${this.getWidth()}` },
-      this.editor.config.browser
+      this.editor.config.browser,
     );
 
     return Object.entries(features)
