@@ -138,7 +138,8 @@ remove the formatting text-level element.
 ## Usage
 
 ```js
-import Editor from './dist/editor.js';
+import Editor from './lyove-editor.js';
+import './lyove-editor.css'
 
 const rte = document.getElementById("rich_text_editor");
 ```
@@ -163,23 +164,23 @@ Editor.create(rte, {
 Editor.create(rte, {
     lang: "en",
     customPlugins: {
-    audio: {
-        browser: "browser/audio.html",
-    },
-    block: {
-        api: "api/{id}.html",
-        browser: "browser/block.html",
-        css: "css/app.css",
-    },
-    iframe: {
-        browser: "browser/iframe.html",
-    },
-    image: {
-        browser: "browser/image.html",
-    },
-    video: {
-        browser: "browser/video.html",
-    },
+        audio: {
+            browser: "browser/audio.html",
+        },
+        block: {
+            api: "api/{id}.html",
+            browser: "browser/block.html",
+            css: "css/app.css",
+        },
+        iframe: {
+            browser: "browser/iframe.html",
+        },
+        image: {
+            browser: "browser/image.html",
+        },
+        video: {
+            browser: "browser/video.html",
+        },
     },
 });
 
