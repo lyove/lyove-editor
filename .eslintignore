@@ -1,0 +1,8 @@
+.history
+.husky
+.vscode
+coverage
+dist
+test
+node_modules
+jest.config.ts

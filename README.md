@@ -1,4 +1,24 @@
+<div align="center">
+  <br />
+  <a href="https://github.com/lyove/editor">
+    <img width="100" src="./public/logo.svg" alt="Logo of Lyove-Editor">
+  </a>
+  <br />
+</div>
+
 # lyove editor
+  
+<a href="https://github.com/lyove/editor/actions">
+  <img alt="Status" src="https://github.com/lyove/editor/workflows/build-test/badge.svg">
+</a>
+<span>&nbsp;</span>
+<a href="https://github.com/lyove/editor/releases">
+  <img alt="version" src="https://img.shields.io/github/v/release/lyove/editor?include_prereleases&label=version&logo=github&logoColor=white">
+</a>
+<span>&nbsp;</span>
+<a href="https://lyove.github.io/editor">
+  <img alt="docs" src="https://img.shields.io/badge/documentation-online-blue?logo=readthedocs&logoColor=white">
+</a>
 
 A HTML standards-compliant and dependency-free rich text editor.
 
@@ -17,11 +37,11 @@ npm run build
 To start the demo locally run either
 
 ```
-npm start
+npm run dev
 ```
 
 In both cases the demo is accessible at
-http://localhost:2000/demo/index.html
+http://localhost:3000/index.html
 
 ## Info
 
@@ -118,7 +138,8 @@ remove the formatting text-level element.
 ## Usage
 
 ```js
-import Editor from './dist/editor.js';
+import Editor from './lyove-editor.js';
+import './lyove-editor.css'
 
 const rte = document.getElementById("rich_text_editor");
 ```
@@ -143,23 +164,23 @@ Editor.create(rte, {
 Editor.create(rte, {
     lang: "en",
     customPlugins: {
-    audio: {
-        browser: "browser/audio.html",
-    },
-    block: {
-        api: "api/{id}.html",
-        browser: "browser/block.html",
-        css: "css/app.css",
-    },
-    iframe: {
-        browser: "browser/iframe.html",
-    },
-    image: {
-        browser: "browser/image.html",
-    },
-    video: {
-        browser: "browser/video.html",
-    },
+        audio: {
+            browser: "browser/audio.html",
+        },
+        block: {
+            api: "api/{id}.html",
+            browser: "browser/block.html",
+            css: "css/app.css",
+        },
+        iframe: {
+            browser: "browser/iframe.html",
+        },
+        image: {
+            browser: "browser/image.html",
+        },
+        video: {
+            browser: "browser/video.html",
+        },
     },
 });
 
@@ -207,7 +228,7 @@ const config = {
      * @see Editor.defaultConfig
      * @type {string[]}
      */
-    plugins: [],
+    pluginNames: [],
 
 
     /**

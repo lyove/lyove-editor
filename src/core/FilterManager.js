@@ -1,54 +1,54 @@
-import Filter from './Filter.js';
-import { ErrorMessage } from '../utils/Enum.js';
+import Filter from "./Filter.js";
+import { ErrorMessage } from "../utils/Enum.js";
 
 /**
  * Filter Manager
  */
 export default class FilterManager {
-    /**
-     * Registered filters
-     *
-     * @type {Set<Filter>}
-     */
-    #items = new Set();
+  /**
+   * Registered filters
+   *
+   * @type {Set<Filter>}
+   */
+  #items = new Set();
 
-    /**
-     * Adds or updates a filter
-     *
-     * @param {Filter} filter
-     * @return {void}
-     */
-    add(filter) {
-        if (!(filter instanceof Filter)) {
-            throw new Error(ErrorMessage.INVALID_ARGUMENT);
-        }
-
-        this.#items.add(filter);
+  /**
+   * Adds or updates a filter
+   *
+   * @param {Filter} filter
+   * @return {void}
+   */
+  add(filter) {
+    if (!(filter instanceof Filter)) {
+      throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 
-    /**
-     * Filters element
-     *
-     * @param {HTMLElement} element
-     * @return {void}
-     */
-    filter(element) {
-        if (!(element instanceof HTMLElement)) {
-            throw new Error(ErrorMessage.INVALID_ARGUMENT);
-        }
+    this.#items.add(filter);
+  }
 
-        this.#items.forEach(filter => {
-            element.normalize();
-            filter.filter(element);
-        });
+  /**
+   * Filters element
+   *
+   * @param {HTMLElement} element
+   * @return {void}
+   */
+  filter(element) {
+    if (!(element instanceof HTMLElement)) {
+      throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 
-    /**
-     * Freezes itself and its items
-     */
-    freeze() {
-        this.#items.forEach(filter => Object.freeze(filter));
-        Object.freeze(this.#items);
-        Object.freeze(this);
-    }
+    this.#items.forEach((filter) => {
+      element.normalize();
+      filter.filter(element);
+    });
+  }
+
+  /**
+   * Freezes itself and its items
+   */
+  freeze() {
+    this.#items.forEach((filter) => Object.freeze(filter));
+    Object.freeze(this.#items);
+    Object.freeze(this);
+  }
 }
