@@ -56,94 +56,45 @@ import Delete from "./plugins/focusbar/delete/Delete.js";
  */
 export default class Editor extends CoreEditor {
   /**
-   * Min plugins
-   */
-  static get minPlugins() {
-    return {
-      plugins: [
-        // toolbar
-        Paragraph,
-        Heading,
-        FontSize,
-        Color,
-        Background,
-        OrderedList,
-        UnorderedList,
-        Indent,
-        Align,
-        LineHeight,
-        Blockquote,
-        Image,
-        Video,
-        Audio,
-        Table,
-        // formatbar
-        Bold,
-        Italic,
-        Link,
-        // focusbar
-        Sort,
-        Delete,
-      ],
-    };
-  }
-
-  /**
    * Default plugins
    */
   static get defaultPlugins() {
-    return {
-      plugins: [
-        // toolbar
-        Paragraph,
-        Heading,
-        FontSize,
-        Color,
-        Background,
-        OrderedList,
-        UnorderedList,
-        Align,
-        Indent,
-        LineHeight,
-        Blockquote,
-        Image,
-        Video,
-        Audio,
-        Table,
-        Preformat,
-        HorizontalRule,
-        // formatbar
-        Bold,
-        Italic,
-        Underline,
-        Strikethrough,
-        Link,
-        Subscript,
-        Superscript,
-        Quote,
-        // focusbar
-        Sort,
-        Delete,
-      ],
-    };
-  }
-
-  /**
-   * Max plugins
-   */
-  static get maxPlugins() {
-    return {
-      plugins: this.defaultPlugins.plugins.concat([
-        // menubar
-        // Help,
-        // toolbar
-        Iframe,
-        // formatbar
-        Small,
-        Code,
-        Mark,
-      ]),
-    };
+    return [
+      // toolbar
+      Paragraph,
+      Heading,
+      FontSize,
+      Color,
+      Background,
+      OrderedList,
+      UnorderedList,
+      Align,
+      Indent,
+      LineHeight,
+      Blockquote,
+      Image,
+      Video,
+      Audio,
+      Table,
+      Preformat,
+      HorizontalRule,
+      Iframe,
+      // formatbar
+      Bold,
+      Italic,
+      Underline,
+      Strikethrough,
+      Link,
+      Subscript,
+      Superscript,
+      Quote,
+      Small,
+      Code,
+      Mark,
+      // focusbar
+      Sort,
+      Delete,
+    ];
   }
 
   /**

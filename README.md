@@ -121,7 +121,6 @@ const rte = document.getElementById("rich_text_editor");
 ```js
 Editor.create(rte, {
     lang: "en",
-    mode: 'default', // default | max | min
 });
 ```
 

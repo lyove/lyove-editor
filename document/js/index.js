@@ -28,7 +28,6 @@ const save = document.getElementById("save");
 // Config
 const configs = {
   lang: lang.value,
-  mode: "max",
   customPlugins: {
     audio: {
       browser: "./browser/audio.html",

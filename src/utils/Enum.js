@@ -1,15 +1,4 @@
 /**
- * Editor Mode
- *
- * @enum {string}
- */
-export const EditorMode = Object.freeze({
-  default: "defaultPlugins",
-  min: "minPlugins",
-  max: "maxPlugins",
-});
-
-/**
  * Tag Groups
  *
  * @enum {string}

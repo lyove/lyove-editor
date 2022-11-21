@@ -6,7 +6,7 @@ import PluginManager from "./PluginManager.js";
 import TagManager from "./TagManager.js";
 import DialogManager from "../modules/dialog/DialogManager.js";
 import DropdownManager from "../modules/dropdown/DropdownManager.js";
-import { EditorMode, ErrorMessage, Position, TagName } from "../utils/Enum.js";
+import { ErrorMessage, Position, TagName } from "../utils/Enum.js";
 import Translator from "./Translator.js";
 
 /**
@@ -350,15 +350,6 @@ export default class Editor {
   }
 
   /**
-   * Default configuration
-   *
-   * @type {Object.<string, Object>}
-   */
-  static get defaultPlugins() {
-    return {};
-  }
-
-  /**
    * Creates a new instance of editor with given configuration
    *
    * @param {HTMLElement} orig
@@ -427,17 +418,14 @@ export default class Editor {
    * @return {void}
    */
   init() {
-    const config = this.config;
-    const { mode, pluginNames } = config;
+    const { pluginNames } = this.config;
 
     // Plugins
-    const builtinPlugins =
-      this.constructor[EditorMode[mode]]?.plugins || this.constructor.defaultPlugins?.plugins || [];
-    const maxPlugins = this.constructor.maxPlugins?.plugins;
+    const builtinPlugins = this.constructor.defaultPlugins || [];
     const pluginsSet = new Set();
     const configured =
       Array.isArray(pluginNames) && pluginNames.length > 0
-        ? maxPlugins.filter((m) => pluginNames.includes(m.name))
+        ? builtinPlugins.filter((m) => pluginNames.includes(m.name))
         : builtinPlugins;
     configured.forEach((plugin) => {
       const flatPlugins = (item) => {

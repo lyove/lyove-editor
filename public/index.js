@@ -30,7 +30,6 @@ const loadEditor = (Editor) => {
   // Config
   const configs = {
     lang: lang.value,
-    mode: "max",
     // customPlugins: {
     //   audio: {
     //     browser: "../document/browser/audio.html",
