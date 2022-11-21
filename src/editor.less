@@ -1,7 +1,7 @@
 /**
  * Variable
  */
-:root {
+ :root {
   --editor-block-background: #191919;
   --editor-block-color: #fff;
   --editor-border-color: #19191933;
@@ -18,7 +18,6 @@
   --editor-focus: #1672f3;
   --editor-hover: #1672f3;
   --editor-placeholder: #19191933;
-  --editor-slot: #1672f3;
   --editor-sortover: #1672f3;
   --editor-form-button-bg: rgba(46, 50, 56, 0.05);
   --editor-form-button-bg-hover: rgba(46, 50, 56, 0.08);
@@ -31,13 +30,11 @@
   --editor-text-block: "Block: " attr(id);
   --editor-text-editable: "Input some text!";
   --editor-textarea: "Input some widgets!";
-  --editor-text-slot: "Focus this slot and insert some widgets!";
 }
 
 lyove-editor[lang="zh-cn"] {
   --editor-text-editable: "Input some Text!";
   --editor-textarea: "Insert some Widgets!";
-  --editor-text-slot: "Focus this slot and insert widgets!";
 }
 
 /**
@@ -213,7 +210,8 @@ lyove-editor {
 
   editor-menubar button[data-active],
   editor-toolbar button[data-active],
-  editor-formatbar button[data-active] editor-focusbar button[data-active],
+  editor-formatbar button[data-active],
+  editor-focusbar button[data-active],
   editor-dropdown button[data-active] {
     color: var(--editor-focus);
   }
@@ -534,21 +532,22 @@ lyove-editor {
     content: var(--editor-textarea);
   }
 
-  editor-textarea :hover,
-  editor-textarea :focus {
+  editor-textarea:hover,
+  editor-textarea:focus {
     outline: none;
   }
 
   /**
   * Editable
   */
-
   editor-textarea [contenteditable] {
     line-height: 1.5;
     cursor: auto;
+    outline: none;
   }
 
-  editor-textarea [contenteditable="true"]:hover {
+  editor-textarea [contenteditable="true"]:hover,
+  editor-textarea [contenteditable="true"]:active {
     background-color: #f9f9f9;
     outline: none;
   }
@@ -556,37 +555,6 @@ lyove-editor {
   editor-textarea [contenteditable="true"]:empty::after {
     color: var(--editor-placeholder);
     /* content: var(--editor-text-editable); */
-  }
-
-  /**
-  * Slot
-  */
-
-  editor-textarea slot[contenteditable] {
-    display: block;
-    outline: none;
-    padding: 0.25rem;
-  }
-
-  editor-textarea slot[contenteditable="true"]:empty::after {
-    color: var(--editor-slot);
-    content: var(--editor-text-slot);
-  }
-
-  editor-textarea [contenteditable="true"] :hover {
-    cursor: auto;
-  }
-
-  /**
-  * Sortable
-  */
-  editor-textarea [data-sortable][data-sort]:hover {
-    cursor: grab;
-  }
-
-  editor-textarea :is([data-sortover], [contenteditable][data-sortover]) {
-    outline: 1px dashed var(--editor-sortover);
-    /* cursor: move; */
   }
 
   /**
@@ -731,42 +699,6 @@ lyove-editor {
 
   editor-textarea pre figcaption {
     display: none;
-  }
-
-  /**
-  * Details
-  */
-  editor-textarea details {
-    padding: 0.6875rem 0.3125rem;
-  }
-
-  editor-textarea details[open] summary {
-    padding-bottom: 0.6875rem;
-  }
-
-  /**
-  * summary
-  */
-  editor-textarea summary {
-    white-space: pre-wrap;
-  }
-
-  /**
-  * app block
-  */
-  editor-textarea app-block {
-    border: 1px solid var(--editor-block-background);
-    display: block;
-    padding: 0.25rem;
-  }
-
-  editor-textarea app-block::before {
-    background: var(--editor-block-background);
-    color: var(--editor-block-color);
-    content: var(--editor-text-block);
-    display: block;
-    margin: -0.25rem -0.25rem 0.5rem;
-    padding: 0.125rem 0.25rem;
   }
 
   /**

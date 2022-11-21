@@ -28,7 +28,6 @@ import Audio from "./plugins/toolbar/audio/Audio.js";
 import Table from "./plugins/toolbar/table/Table.js";
 import Preformat from "./plugins/toolbar/preformat/Preformat.js";
 import HorizontalRule from "./plugins/toolbar/horizontalRule/HorizontalRule.js";
-import Block from "./plugins/toolbar/block/Block.js";
 import Iframe from "./plugins/toolbar/iframe/Iframe.js";
 
 /**
@@ -40,23 +39,11 @@ import Underline from "./plugins/formatbar/underline/Underline.js";
 import Link from "./plugins/formatbar/link/Link.js";
 import Subscript from "./plugins/formatbar/subscript/Subscript.js";
 import Superscript from "./plugins/formatbar/superscript/Superscript.js";
-import Strong from "./plugins/formatbar/strong/Strong.js";
 import Strikethrough from "./plugins/formatbar/strikethrough/Strikethrough.js";
-import Insertion from "./plugins/formatbar/insertion/Insertion.js";
-import Deletion from "./plugins/formatbar/deletion/Deletion.js";
 import Small from "./plugins/formatbar/small/Small.js";
-import Emphasis from "./plugins/formatbar/emphasis/Emphasis.js";
 import Code from "./plugins/formatbar/code/Code.js";
 import Quote from "./plugins/formatbar/quote/Quote.js";
-import Cite from "./plugins/formatbar/cite/Cite.js";
-import Abbreviation from "./plugins/formatbar/abbreviation/Abbreviation.js";
 import Mark from "./plugins/formatbar/mark/Mark.js";
-import Keyboard from "./plugins/formatbar/keyboard/Keyboard.js";
-import Sample from "./plugins/formatbar/sample/Sample.js";
-import Variable from "./plugins/formatbar/variable/Variable.js";
-import Time from "./plugins/formatbar/time/Time.js";
-import Data from "./plugins/formatbar/data/Data.js";
-import Definition from "./plugins/formatbar/definition/Definition.js";
 
 /**
  * Focusbar plugins
@@ -93,7 +80,6 @@ export default class Editor extends CoreEditor {
         // formatbar
         Bold,
         Italic,
-        Strong,
         Link,
         // focusbar
         Sort,
@@ -130,6 +116,7 @@ export default class Editor extends CoreEditor {
         Bold,
         Italic,
         Underline,
+        Strikethrough,
         Link,
         Subscript,
         Superscript,
@@ -150,25 +137,11 @@ export default class Editor extends CoreEditor {
         // menubar
         // Help,
         // toolbar
-        Block,
         Iframe,
         // formatbar
-        Strong,
-        Strikethrough,
-        Insertion,
-        Deletion,
         Small,
-        Emphasis,
         Code,
-        Cite,
         Mark,
-        Keyboard,
-        Sample,
-        Variable,
-        Time,
-        Abbreviation,
-        Data,
-        Definition,
       ]),
     };
   }
