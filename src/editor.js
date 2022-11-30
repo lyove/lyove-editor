@@ -1,187 +1,307 @@
-/**
- * CoreEditor
- */
-import CoreEditor from "./core/Editor.js";
+import { createEditor, $getRoot, $createParagraphNode, $createTextNode } from "lexical";
+import {
+  $createHeadingNode,
+  $createQuoteNode,
+  registerRichText,
+  HeadingNode,
+  QuoteNode,
+} from "@lexical/rich-text";
+import { TableCellNode, TableNode, TableRowNode } from "@lexical/table";
+import { $createListItemNode, $createListNode, ListItemNode, ListNode } from "@lexical/list";
+import { CodeHighlightNode, CodeNode } from "@lexical/code";
+import { $createLinkNode, AutoLinkNode, LinkNode } from "@lexical/link";
+import { HashtagNode } from "@lexical/hashtag";
+
+import Dom from "./helper/Dom";
+import { TagName } from "./helper/Enum";
+import Dispatcher from "./constructor/Dispatcher";
+import plugins from "./plugins";
+import theme from "./theme";
+
+// Init content
+function initEditor(editor) {
+  // Init content
+  editor.update(() => {
+    // Get the RootNode from the EditorState
+    const root = $getRoot();
+    if (root.getFirstChild() === null) {
+      const heading = $createHeadingNode("h1");
+      heading.append($createTextNode("Welcome to the playground"));
+      root.append(heading);
+      const quote = $createQuoteNode();
+      quote.append(
+        $createTextNode(
+          "In case you were wondering what the black box at the bottom is – it's the debug view, showing the current state of editor. " +
+            "You can disable it by pressing on the settings control in the bottom-left of your screen and toggling the debug view setting.",
+        ),
+      );
+      root.append(quote);
+      const paragraph = $createParagraphNode();
+      paragraph.append(
+        $createTextNode("The playground is a demo environment built with "),
+        $createTextNode("@lexical/react").toggleFormat("code"),
+        $createTextNode("."),
+        $createTextNode(" Try typing in "),
+        $createTextNode("some text").toggleFormat("bold"),
+        $createTextNode(" with "),
+        $createTextNode("different").toggleFormat("italic"),
+        $createTextNode(" formats."),
+      );
+      root.append(paragraph);
+      const paragraph2 = $createParagraphNode();
+      paragraph2.append(
+        $createTextNode(
+          "Make sure to check out the various plugins in the toolbar. You can also use #hashtags or @-mentions too!",
+        ),
+      );
+      root.append(paragraph2);
+      const paragraph3 = $createParagraphNode();
+      paragraph3.append($createTextNode("If you'd like to find out more about Lexical, you can:"));
+      root.append(paragraph3);
+      const list = $createListNode("bullet");
+      list.append(
+        $createListItemNode().append(
+          $createTextNode("Visit the "),
+          $createLinkNode("https://lexical.dev/").append($createTextNode("Lexical website")),
+          $createTextNode(" for documentation and more information."),
+        ),
+        $createListItemNode().append(
+          $createTextNode("Check out the code on our "),
+          $createLinkNode("https://github.com/facebook/lexical").append(
+            $createTextNode("GitHub repository"),
+          ),
+          $createTextNode("."),
+        ),
+        $createListItemNode().append(
+          $createTextNode("Playground code can be found "),
+          $createLinkNode(
+            "https://github.com/facebook/lexical/tree/main/packages/lexical-playground",
+          ).append($createTextNode("here")),
+          $createTextNode("."),
+        ),
+        $createListItemNode().append(
+          $createTextNode("Join our "),
+          $createLinkNode("https://discord.com/invite/KmG4wQnnD9").append(
+            $createTextNode("Discord Server"),
+          ),
+          $createTextNode(" and chat with the team."),
+        ),
+      );
+      root.append(list);
+      const paragraph4 = $createParagraphNode();
+      paragraph4.append(
+        $createTextNode(
+          "Lastly, we're constantly adding cool new features to this playground. So make sure you check back here when you next get a chance :).",
+        ),
+      );
+      root.append(paragraph4);
+    }
+  });
+}
 
 /**
- * Menus plugins
+ * Core Editor
  */
-// import Help from "./plugins/menubar/help/Help.js";
-
-/**
- * Toolbar plugins
- */
-import Paragraph from "./plugins/toolbar/paragraph/Paragraph.js";
-import Heading from "./plugins/toolbar/heading/Heading.js";
-import FontSize from "./plugins/toolbar/fontSize/FontSize.js";
-import UnorderedList from "./plugins/toolbar/unorderedList/UnorderedList.js";
-import OrderedList from "./plugins/toolbar/orderedList/OrderedList.js";
-import Indent from "./plugins/toolbar/indent/Indent.js";
-import Align from "./plugins/toolbar/align/Align.js";
-import LineHeight from "./plugins/toolbar/lineHeight/LineHeight.js";
-import Blockquote from "./plugins/toolbar/blockquote/Blockquote.js";
-import Color from "./plugins/toolbar/color/Color.js";
-import Background from "./plugins/toolbar/background/Background.js";
-import Image from "./plugins/toolbar/image/Image.js";
-import Video from "./plugins/toolbar/video/Video.js";
-import Audio from "./plugins/toolbar/audio/Audio.js";
-import Table from "./plugins/toolbar/table/Table.js";
-import Preformat from "./plugins/toolbar/preformat/Preformat.js";
-import HorizontalRule from "./plugins/toolbar/horizontalRule/HorizontalRule.js";
-import Block from "./plugins/toolbar/block/Block.js";
-import Iframe from "./plugins/toolbar/iframe/Iframe.js";
-
-/**
- * Formatbar plugins
- */
-import Bold from "./plugins/formatbar/bold/Bold.js";
-import Italic from "./plugins/formatbar/italic/Italic.js";
-import Underline from "./plugins/formatbar/underline/Underline.js";
-import Link from "./plugins/formatbar/link/Link.js";
-import Subscript from "./plugins/formatbar/subscript/Subscript.js";
-import Superscript from "./plugins/formatbar/superscript/Superscript.js";
-import Strong from "./plugins/formatbar/strong/Strong.js";
-import Strikethrough from "./plugins/formatbar/strikethrough/Strikethrough.js";
-import Insertion from "./plugins/formatbar/insertion/Insertion.js";
-import Deletion from "./plugins/formatbar/deletion/Deletion.js";
-import Small from "./plugins/formatbar/small/Small.js";
-import Emphasis from "./plugins/formatbar/emphasis/Emphasis.js";
-import Code from "./plugins/formatbar/code/Code.js";
-import Quote from "./plugins/formatbar/quote/Quote.js";
-import Cite from "./plugins/formatbar/cite/Cite.js";
-import Abbreviation from "./plugins/formatbar/abbreviation/Abbreviation.js";
-import Mark from "./plugins/formatbar/mark/Mark.js";
-import Keyboard from "./plugins/formatbar/keyboard/Keyboard.js";
-import Sample from "./plugins/formatbar/sample/Sample.js";
-import Variable from "./plugins/formatbar/variable/Variable.js";
-import Time from "./plugins/formatbar/time/Time.js";
-import Data from "./plugins/formatbar/data/Data.js";
-import Definition from "./plugins/formatbar/definition/Definition.js";
-
-/**
- * Focusbar plugins
- */
-import Sort from "./plugins/focusbar/sort/Sort.js";
-import Delete from "./plugins/focusbar/delete/Delete.js";
-
-/**
- * Editor
- */
-export default class Editor extends CoreEditor {
+export default class Editor {
   /**
-   * Min plugins
+   * DOM manager
+   *
+   * @type {Dom}
    */
-  static get minPlugins() {
-    return {
-      plugins: [
-        // toolbar
-        Paragraph,
-        Heading,
-        FontSize,
-        Color,
-        Background,
-        OrderedList,
-        UnorderedList,
-        Indent,
-        Align,
-        LineHeight,
-        Blockquote,
-        Image,
-        Video,
-        Audio,
-        Table,
-        // formatbar
-        Bold,
-        Italic,
-        Strong,
-        Link,
-        // focusbar
-        Sort,
-        Delete,
+  #dom;
+
+  /**
+   * Allows read access to DOM manager
+   *
+   * @return {Dom}
+   */
+  get dom() {
+    return this.#dom;
+  }
+
+  /**
+   * Event dispatcher of the editor
+   *
+   * @type {Dispatcher}
+   */
+  #editorDispatcher;
+
+  /**
+   * Allows read access to event dispatcher of the editor
+   *
+   * @return {Dispatcher}
+   */
+  get editorDispatcher() {
+    return this.#editorDispatcher;
+  }
+
+  /**
+   * Corresponding DOM element of the editor wrapper
+   *
+   * @type {HTMLElement}
+   */
+  #container;
+
+  /**
+   * Allows read access to corresponding DOM element of the editor wrapper
+   *
+   * @return {HTMLElement}
+   */
+  get container() {
+    return this.#container;
+  }
+
+  /**
+   * Corresponding DOM element of the main toolbar
+   *
+   * @type {HTMLElement}
+   */
+  #toolbar;
+
+  /**
+   * Allows read access to corresponding DOM element of the main toolbar
+   *
+   * @return {HTMLElement}
+   */
+  get toolbar() {
+    return this.#toolbar;
+  }
+
+  /**
+   * Corresponding DOM element of the editor content textarea
+   *
+   * @type {HTMLElement}
+   */
+  #textarea;
+
+  /**
+   * Allows read access to corresponding DOM element of the editor content textarea
+   *
+   * @return {HTMLElement}
+   */
+  get textarea() {
+    return this.#textarea;
+  }
+
+  /**
+   * Registered plugins
+   *
+   * @type {Map<string, Plugin>}
+   */
+  #plugins = new Set();
+
+  /**
+   * Allows read access to plugin manager
+   *
+   * @return {Plugin}
+   */
+  get plugins() {
+    return this.#plugins;
+  }
+
+  /**
+   * Configuration
+   *
+   * @type {Object}
+   */
+  config = {};
+
+  /**
+   * Editor engine
+   *
+   * @type {Object}
+   */
+  engine = null;
+
+  /**
+   * Create a new instance of editor with given configuration
+   *
+   * @param {HTMLElement} orig
+   * @param {Object} [config = {}]
+   */
+  constructor(orig, config = {}) {
+    this.#dom = new Dom(orig.ownerDocument);
+
+    // Container
+    this.#container = this.dom.createElement(TagName.EDITOR);
+    orig.appendChild(this.container);
+    // this.#editorDispatcher = new Dispatcher(this.container);
+
+    // Toolbar
+    this.#toolbar = this.dom.createElement(TagName.TOOLBAR, { attributes: { role: "toolbar" } });
+    this.container.appendChild(this.toolbar);
+
+    // Textarea
+    this.#textarea = this.dom.createElement(TagName.TEXTAREA);
+    this.textarea.appendChild(
+      this.dom.createElement(TagName.DIV, {
+        attributes: {
+          contentEditable: true,
+          class: "textarea-inner",
+        },
+      }),
+    );
+    this.container.appendChild(this.textarea);
+
+    // Plugins
+    (plugins || []).forEach((plugin) => {
+      this.plugins.add(plugin);
+    });
+
+    // Config
+    const { editable: initEditable, inittheme: initTheme, initNameSpace, editorState } = config;
+    this.config = {
+      ...config,
+      editable: initEditable !== undefined ? initEditable : true,
+      theme: {
+        ...theme,
+        ...initTheme,
+      },
+      namespace: initNameSpace || "VanleEditor",
+      nodes: [
+        HeadingNode,
+        ListNode,
+        ListItemNode,
+        QuoteNode,
+        CodeNode,
+        CodeHighlightNode,
+        TableNode,
+        TableCellNode,
+        TableRowNode,
+        AutoLinkNode,
+        LinkNode,
+        HashtagNode,
       ],
+      // editorState: editorState,
     };
+
+    // Engine
+    this.engine = createEditor(this.config);
+
+    // Set rootElement
+    this.engine.setRootElement(this.textarea.firstChild);
+
+    // Register richTex
+    registerRichText(this.engine);
   }
 
-  /**
-   * Default plugins
-   */
-  static get defaultPlugins() {
-    return {
-      plugins: [
-        // toolbar
-        Paragraph,
-        Heading,
-        FontSize,
-        Color,
-        Background,
-        OrderedList,
-        UnorderedList,
-        Align,
-        Indent,
-        LineHeight,
-        Blockquote,
-        Image,
-        Video,
-        Audio,
-        Table,
-        Preformat,
-        HorizontalRule,
-        // formatbar
-        Bold,
-        Italic,
-        Underline,
-        Link,
-        Subscript,
-        Superscript,
-        Quote,
-        // focusbar
-        Sort,
-        Delete,
-      ],
-    };
+  // Init
+  init() {
+    // Init plugins
+    this.plugins.forEach((plugin) => {
+      const pluginInst = new plugin(this);
+      pluginInst.init();
+    });
+
+    // Init content
+    initEditor(this.engine);
   }
 
-  /**
-   * Max plugins
-   */
-  static get maxPlugins() {
-    return {
-      plugins: this.defaultPlugins.plugins.concat([
-        // menubar
-        // Help,
-        // toolbar
-        Block,
-        Iframe,
-        // formatbar
-        Strong,
-        Strikethrough,
-        Insertion,
-        Deletion,
-        Small,
-        Emphasis,
-        Code,
-        Cite,
-        Mark,
-        Keyboard,
-        Sample,
-        Variable,
-        Time,
-        Abbreviation,
-        Data,
-        Definition,
-      ]),
-    };
-  }
+  // Create
+  static create(element, config = {}) {
+    const editor = new this(element, config);
+    editor.init();
 
-  /**
-   * Config
-   */
-  static get config() {
-    return {
-      lang: "en",
-      plugins: [],
-      browser: {},
-      filter: {},
-    };
+    return editor;
   }
 }
