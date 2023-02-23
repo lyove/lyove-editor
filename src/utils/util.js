@@ -112,6 +112,7 @@ export function asyncFn(fn = () => {}, t = 0) {
 
 /**
  * Generate uuid
+ * Globally Unique Identifier
  * @returns {string}
  */
 export function guid() {
