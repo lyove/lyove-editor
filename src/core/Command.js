@@ -1,4 +1,3 @@
-import Editor from "./Editor.js";
 import { ErrorMessage, TagGroup, TagName } from "../utils/Enum.js";
 import { isOptString, isString } from "../utils/util.js";
 
@@ -9,7 +8,6 @@ export default class Command {
   /**
    * Editor
    *
-   * @type {Editor}
    */
   #editor;
 
@@ -94,7 +92,7 @@ export default class Command {
    * @param {string} tagName
    */
   constructor(editor, name, tagName) {
-    if (!(editor instanceof Editor) || !isString(name) || !isOptString(tagName)) {
+    if (!isString(name) || !isOptString(tagName)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 

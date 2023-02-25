@@ -1,4 +1,3 @@
-import Base from "../../../core/Base.js";
 import Plugin from "../../../core/Plugin.js";
 import BackgroundDropdown from "./BackgroundDropdown.js";
 import BackgroundCommand from "./BackgroundCommand.js";
@@ -22,7 +21,7 @@ export default class Background extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base];
+    return [];
   }
 
   /**

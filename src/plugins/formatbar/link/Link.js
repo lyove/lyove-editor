@@ -1,4 +1,3 @@
-import Base from "../../../core/Base.js";
 import Plugin from "../../../core/Plugin.js";
 import LinkDialog from "./LinkDialog.js";
 import LinkListener from "./LinkListener.js";
@@ -20,7 +19,7 @@ export default class Link extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base];
+    return [];
   }
 
   /**

@@ -1,5 +1,4 @@
-// Plugin
-import Plugin from "./Plugin.js";
+import Plugin from "./Plugin";
 
 // Listener
 import AlignableListener from "./AlignableListener.js";

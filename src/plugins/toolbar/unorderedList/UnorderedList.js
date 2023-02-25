@@ -1,5 +1,4 @@
 import Plugin from "../../../core/Plugin.js";
-import Base from "../../../core/Base.js";
 import List from "../../common/list/List.js";
 import { TagGroup, TagName } from "../../../utils/Enum.js";
 import i18n from "./i18n.js";
@@ -19,7 +18,7 @@ export default class UnorderedList extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base, List];
+    return [List];
   }
 
   /**

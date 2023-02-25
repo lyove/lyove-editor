@@ -1,4 +1,3 @@
-import Base from "../../../core/Base.js";
 import Plugin from "../../../core/Plugin.js";
 import HelpDropdown from "./HelpDropdown.js";
 import Icons from "../../../icons/Icons.js";
@@ -21,7 +20,7 @@ export default class Help extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base];
+    return [];
   }
 
   /**

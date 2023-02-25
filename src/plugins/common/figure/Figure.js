@@ -1,5 +1,4 @@
 import Plugin from "../../../core/Plugin.js";
-import Base from "../../../core/Base.js";
 import FigureFilter from "./FigureFilter.js";
 import FigureListener from "./FigureListener.js";
 import { TagGroup, TagName } from "../../../utils/Enum.js";
@@ -19,7 +18,7 @@ export default class Figure extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base];
+    return [];
   }
 
   /**

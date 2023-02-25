@@ -1,5 +1,4 @@
 import Plugin from "../../../core/Plugin.js";
-import Base from "../../../core/Base.js";
 import Break from "../../common/break/Break.js";
 import PreformatFilter from "./PreformatFilter.js";
 import PreformatListener from "./PreformatListener.js";
@@ -21,7 +20,7 @@ export default class Preformat extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base, Break];
+    return [Break];
   }
 
   /**

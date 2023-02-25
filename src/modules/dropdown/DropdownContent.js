@@ -9,7 +9,6 @@ export default class DropdownContent {
   /**
    * Editor
    *
-   * @type {Editor}
    */
   #editor;
 

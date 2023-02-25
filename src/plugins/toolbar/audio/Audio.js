@@ -1,4 +1,3 @@
-import Base from "../../../core/Base.js";
 import Plugin from "../../../core/Plugin.js";
 import Figure from "../../common/figure/Figure.js";
 import AudioDialog from "./AudioDialog.js";
@@ -21,14 +20,14 @@ export default class Audio extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base, Figure];
+    return [Figure];
   }
 
   /**
    * @inheritDoc
    */
   static get config() {
-    return { browser: undefined };
+    return {};
   }
 
   /**

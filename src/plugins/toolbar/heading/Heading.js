@@ -1,5 +1,4 @@
 import Plugin from "../../../core/Plugin.js";
-import Base from "../../../core/Base.js";
 import HeadingDropdown from "./HeadingDropdown.js";
 import HeadingCommand from "./HeadingCommand.js";
 import Icons from "../../../icons/Icons.js";
@@ -22,7 +21,7 @@ export default class Heading extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base];
+    return [];
   }
 
   /**

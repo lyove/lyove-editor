@@ -1,5 +1,4 @@
 import Plugin from "../../../core/Plugin.js";
-import Base from "../../../core/Base.js";
 import Break from "../../common/break/Break.js";
 import ParagraphListener from "./ParagraphListener.js";
 import { TagGroup, TagName } from "../../../utils/Enum.js";
@@ -20,7 +19,7 @@ export default class Paragraph extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base, Break];
+    return [Break];
   }
 
   /**

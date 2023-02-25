@@ -1,4 +1,3 @@
-import Editor from "../../core/Editor.js";
 import DropdownContent from "./DropdownContent.js";
 import { ErrorMessage, Position, TagName } from "../../utils/Enum.js";
 import { isString } from "../../utils/util.js";
@@ -10,7 +9,6 @@ export default class Dropdown {
   /**
    * Editor
    *
-   * @type {Editor}
    */
   #editor;
 
@@ -62,7 +60,7 @@ export default class Dropdown {
    * @param {string} name
    */
   constructor(editor, name) {
-    if (!(editor instanceof Editor) || !isString(name)) {
+    if (!isString(name)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 

@@ -1,5 +1,4 @@
 import Plugin from "../../../core/Plugin.js";
-import Base from "../../../core/Base.js";
 import ImageDialog from "./ImageDialog.js";
 import ImageListener from "./ImageListener.js";
 import Figure from "../../common/figure/Figure.js";
@@ -21,14 +20,14 @@ export default class Image extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base, Figure];
+    return [Figure];
   }
 
   /**
    * @inheritDoc
    */
   static get config() {
-    return { browser: undefined };
+    return {};
   }
 
   /**

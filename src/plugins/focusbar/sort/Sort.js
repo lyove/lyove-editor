@@ -1,4 +1,3 @@
-import Base from "../../../core/Base.js";
 import Plugin from "../../../core/Plugin.js";
 import SortCommand from "./SortCommand.js";
 import { Key, Sorting } from "../../../utils/Enum.js";
@@ -19,7 +18,7 @@ export default class Sort extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base];
+    return [];
   }
 
   /**

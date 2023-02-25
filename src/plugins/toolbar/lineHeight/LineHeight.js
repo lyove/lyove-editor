@@ -1,5 +1,4 @@
 import Plugin from "../../../core/Plugin.js";
-import Base from "../../../core/Base.js";
 import LineHeightDropdown from "./LineHeightDropdown.js";
 import LineHeightCommand from "./LineHeightCommand.js";
 import Icons from "../../../icons/Icons.js";
@@ -22,7 +21,7 @@ export default class LineHeight extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base];
+    return [];
   }
 
   /**

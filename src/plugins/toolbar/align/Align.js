@@ -1,5 +1,4 @@
 import Plugin from "../../../core/Plugin.js";
-import Base from "../../../core/Base.js";
 import AlignCommand from "./AlignCommand.js";
 import AlignDropdown from "./AlignDropdown.js";
 import Icons from "../../../icons/Icons.js";
@@ -22,7 +21,7 @@ export default class Align extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base];
+    return [];
   }
 
   /**

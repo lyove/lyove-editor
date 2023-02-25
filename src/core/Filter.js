@@ -1,4 +1,3 @@
-import Editor from "./Editor.js";
 import { ErrorMessage } from "../utils/Enum.js";
 
 /**
@@ -8,7 +7,6 @@ export default class Filter {
   /**
    * Editor
    *
-   * @type {Editor}
    */
   #editor;
 
@@ -27,10 +25,6 @@ export default class Filter {
    * @param {Editor} editor
    */
   constructor(editor) {
-    if (!(editor instanceof Editor)) {
-      throw new Error(ErrorMessage.INVALID_ARGUMENT);
-    }
-
     this.#editor = editor;
   }
 

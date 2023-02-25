@@ -1,4 +1,3 @@
-import Base from "../../../core/Base.js";
 import DeleteCommand from "./DeleteCommand.js";
 import Plugin from "../../../core/Plugin.js";
 import { Key } from "../../../utils/Enum.js";
@@ -19,7 +18,7 @@ export default class Delete extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base];
+    return [];
   }
 
   /**

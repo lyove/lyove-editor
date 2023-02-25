@@ -1,5 +1,4 @@
 import Plugin from "../../../core/Plugin.js";
-import Base from "../../../core/Base.js";
 import Figure from "../../common/figure/Figure.js";
 import IframeDialog from "./IframeDialog.js";
 import IframeListener from "./IframeListener.js";
@@ -21,14 +20,14 @@ export default class Iframe extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base, Figure];
+    return [Figure];
   }
 
   /**
    * @inheritDoc
    */
   static get config() {
-    return { browser: undefined };
+    return {};
   }
 
   /**

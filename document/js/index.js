@@ -28,6 +28,7 @@ const save = document.getElementById("save");
 // Config
 const configs = {
   lang: lang.value,
+  pluginNames: [], // ['help', 'heading', 'paragraph', 'bold', 'sort']
   customPlugins: {
     audio: {
       browser: "./browser/audio.html",

@@ -1,3 +1,4 @@
+import Base from "./Base.js";
 import Dom from "./Dom.js";
 import Dispatcher from "./Dispatcher.js";
 import CommandManager from "./CommandManager.js";
@@ -10,9 +11,9 @@ import { ErrorMessage, Position, TagName } from "../utils/Enum.js";
 import Translator from "./Translator.js";
 
 /**
- * Core Editor
+ * Core
  */
-export default class Editor {
+export default class Core {
   /**
    * Corresponding DOM element of the source
    *
@@ -361,10 +362,7 @@ export default class Editor {
     }
 
     this.#orig = orig;
-    this.#config = {
-      ...this.constructor.config,
-      ...config,
-    };
+    this.#config = config;
     this.#dom = new Dom(this, this.orig.ownerDocument);
     this.#element = this.dom.createElement(TagName.EDITOR);
 
@@ -418,33 +416,29 @@ export default class Editor {
    * @return {void}
    */
   init() {
-    const { pluginNames } = this.config;
-
     // Plugins
-    const builtinPlugins = this.constructor.defaultPlugins || [];
-    const pluginsSet = new Set();
-    const configured =
-      Array.isArray(pluginNames) && pluginNames.length > 0
-        ? builtinPlugins.filter((m) => pluginNames.includes(m.name))
-        : builtinPlugins;
-    configured.forEach((plugin) => {
-      const flatPlugins = (item) => {
+    const { builtinPlugins, pluginNames } = this.config;
+    const pluginSets = new Set();
+    (Array.isArray(pluginNames) && pluginNames.length > 0
+      ? builtinPlugins.filter((m) => pluginNames.includes(m.name))
+      : builtinPlugins
+    ).forEach((plugin) => {
+      const iterator = (item) => {
         if (Array.isArray(item?.dependencies)) {
-          item.dependencies.forEach(flatPlugins);
+          item.dependencies.forEach(iterator);
         }
-        pluginsSet.add(item);
+        pluginSets.add(item);
       };
-      flatPlugins(plugin);
+      iterator(plugin);
     });
-    pluginsSet.forEach((item) => {
+    pluginSets.forEach((item) => {
       this.plugins.set(new item(this));
     });
 
-    // Lang
-    if (this.config.lang) {
-      this.element.lang = this.config.lang;
-    }
+    // Base
+    this.plugins.set(new Base(this));
 
+    // init
     this.plugins.init();
     this.toolbarDispatcher.dispatch("init");
     this.formatbarDispatcher.dispatch("init");
@@ -569,7 +563,7 @@ export default class Editor {
    *
    * @param {HTMLElement} element
    * @param {Object} [config = {}]
-   * @return {Editor}
+   * @return {Core}
    */
   static create(element, config = {}) {
     const editor = new this(element, config);

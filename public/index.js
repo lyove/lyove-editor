@@ -30,25 +30,26 @@ const loadEditor = (Editor) => {
   // Config
   const configs = {
     lang: lang.value,
-    // customPlugins: {
-    //   audio: {
-    //     browser: "../document/browser/audio.html",
-    //   },
-    //   block: {
-    //     api: "../document/api/{id}.html",
-    //     browser: "../document/browser/block.html",
-    //     css: "../document/css/base.css",
-    //   },
-    //   iframe: {
-    //     browser: "../document/browser/iframe.html",
-    //   },
-    //   image: {
-    //     browser: "../document/browser/image.html",
-    //   },
-    //   video: {
-    //     browser: "../document/browser/video.html",
-    //   },
-    // },
+    pluginNames: [], // ['help', 'heading', 'paragraph', 'bold', 'sort']
+    customPlugins: {
+      audio: {
+        browser: "../document/browser/audio.html",
+      },
+      // block: {
+      //   api: "../document/api/{id}.html",
+      //   browser: "../document/browser/block.html",
+      //   css: "../document/css/base.css",
+      // },
+      // iframe: {
+      //   browser: "../document/browser/iframe.html",
+      // },
+      // image: {
+      //   browser: "../document/browser/image.html",
+      // },
+      // video: {
+      //   browser: "../document/browser/video.html",
+      // },
+    },
     onValueChange: (value, event) => {
       console.log(value, event);
     },

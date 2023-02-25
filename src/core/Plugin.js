@@ -1,5 +1,4 @@
 import Command from "./Command.js";
-import Editor from "./Editor.js";
 import Tag from "./Tag.js";
 import Icons from "../icons/Icons.js";
 import { ErrorMessage, TagName } from "../utils/Enum.js";
@@ -12,7 +11,6 @@ export default class Plugin {
   /**
    * Editor
    *
-   * @type {Editor}
    */
   #editor;
 
@@ -58,10 +56,6 @@ export default class Plugin {
    * @param {Editor} editor
    */
   constructor(editor) {
-    if (!(editor instanceof Editor)) {
-      throw new Error(ErrorMessage.INVALID_ARGUMENT);
-    }
-
     this.#editor = editor;
   }
 

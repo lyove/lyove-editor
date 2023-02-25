@@ -1,4 +1,3 @@
-import Base from "../../../core/Base.js";
 import Plugin from "../../../core/Plugin.js";
 import ColorDropdown from "./ColorDropdown.js";
 import ColorCommand from "./ColorCommand.js";
@@ -22,7 +21,7 @@ export default class Color extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base];
+    return [];
   }
 
   /**

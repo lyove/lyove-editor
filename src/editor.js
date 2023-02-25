@@ -1,7 +1,7 @@
 /**
- * CoreEditor
+ * Core
  */
-import CoreEditor from "./core/Editor.js";
+import Core from "./core";
 
 /**
  * Menus plugins
@@ -54,58 +54,47 @@ import Delete from "./plugins/focusbar/delete/Delete.js";
 /**
  * Editor
  */
-export default class Editor extends CoreEditor {
-  /**
-   * Default plugins
-   */
-  static get defaultPlugins() {
-    return [
-      // toolbar
-      Paragraph,
-      Heading,
-      FontSize,
-      Color,
-      Background,
-      OrderedList,
-      UnorderedList,
-      Align,
-      Indent,
-      LineHeight,
-      Blockquote,
-      Image,
-      Video,
-      Audio,
-      Table,
-      Preformat,
-      HorizontalRule,
-      Iframe,
-      // formatbar
-      Bold,
-      Italic,
-      Underline,
-      Strikethrough,
-      Link,
-      Subscript,
-      Superscript,
-      Quote,
-      Small,
-      Code,
-      Mark,
-      // focusbar
-      Sort,
-      Delete,
-    ];
-  }
-
-  /**
-   * Config
-   */
-  static get config() {
-    return {
-      lang: "en",
-      plugins: [],
-      browser: {},
-      filter: {},
+export default class Editor extends Core {
+  constructor(element, options = {}) {
+    const config = {
+      ...options,
+      builtinPlugins: [
+        // toolbar
+        Paragraph,
+        Heading,
+        FontSize,
+        Color,
+        Background,
+        OrderedList,
+        UnorderedList,
+        Align,
+        Indent,
+        LineHeight,
+        Blockquote,
+        Image,
+        Video,
+        Audio,
+        Table,
+        Preformat,
+        HorizontalRule,
+        Iframe,
+        // formatbar
+        Bold,
+        Italic,
+        Underline,
+        Strikethrough,
+        Link,
+        Subscript,
+        Superscript,
+        Quote,
+        Small,
+        Code,
+        Mark,
+        // focusbar
+        Sort,
+        Delete,
+      ],
     };
+    super(element, config);
   }
 }

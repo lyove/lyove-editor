@@ -1,5 +1,4 @@
 import Plugin from "../../../core/Plugin.js";
-import Base from "../../../core/Base.js";
 import Break from "../../common/break/Break.js";
 import TableCommand from "./TableCommand.js";
 import TableDialog from "./TableDialog.js";
@@ -23,7 +22,7 @@ export default class Table extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base, Break];
+    return [Break];
   }
 
   /**

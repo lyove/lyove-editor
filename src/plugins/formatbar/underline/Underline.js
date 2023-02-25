@@ -1,4 +1,3 @@
-import Base from "../../../core/Base.js";
 import Plugin from "../../../core/Plugin.js";
 import { Key, TagGroup, TagName } from "../../../utils/Enum.js";
 import i18n from "./i18n.js";
@@ -18,7 +17,7 @@ export default class Underline extends Plugin {
    * @inheritDoc
    */
   static get dependencies() {
-    return [Base];
+    return [];
   }
 
   /**

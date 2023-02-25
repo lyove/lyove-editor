@@ -68,7 +68,7 @@ export default class ContentFilter extends Filter {
    * @return {HTMLElement}
    */
   #convert(element) {
-    const name = this.editor.config.filter[element.localName];
+    const name = element.localName;
 
     if (!name) {
       return element;

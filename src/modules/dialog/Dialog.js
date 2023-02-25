@@ -1,4 +1,3 @@
-import Editor from "../../core/Editor.js";
 import DialogFormCreator from "./DialogFormCreator.js";
 import { ErrorMessage, TagName } from "../../utils/Enum.js";
 import { isOptString, isString } from "../../utils/util.js";
@@ -10,7 +9,6 @@ export default class Dialog {
   /**
    * Editor
    *
-   * @type {Editor}
    */
   #editor;
 
@@ -79,7 +77,7 @@ export default class Dialog {
    * @param {string|undefined} url
    */
   constructor(editor, name, url = undefined) {
-    if (!(editor instanceof Editor) || !isString(name) || !isOptString(url)) {
+    if (!isString(name) || !isOptString(url)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 

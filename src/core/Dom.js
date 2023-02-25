@@ -1,4 +1,3 @@
-import Editor from "./Editor.js";
 import { ErrorMessage, Position, Sorting, TagName } from "../utils/Enum.js";
 import { isFunction, isString, not } from "../utils/util.js";
 
@@ -9,7 +8,6 @@ export default class Dom {
   /**
    * Editor
    *
-   * @type {Editor}
    */
   #editor;
 
@@ -96,7 +94,7 @@ export default class Dom {
    * @param {Document} document
    */
   constructor(editor, document) {
-    if (!(editor instanceof Editor) || !(document instanceof Document)) {
+    if (!(document instanceof Document)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 
@@ -599,12 +597,10 @@ export default class Dom {
    * @return {string}
    */
   #features() {
-    const features = Object.assign(
-      {},
-      this.#browser,
-      { height: `${this.getHeight()}`, width: `${this.getWidth()}` },
-      this.editor.config.browser,
-    );
+    const features = Object.assign({}, this.#browser, {
+      height: `${this.getHeight()}`,
+      width: `${this.getWidth()}`,
+    });
 
     return Object.entries(features)
       .filter(([, val]) => !!val)
