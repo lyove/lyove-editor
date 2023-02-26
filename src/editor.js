@@ -6,44 +6,44 @@ import Core from "./core";
 /**
  * Menus plugins
  */
-// import Help from "./plugins/menubar/help/Help.js";
+import Help from "./plugins/menubar/help/Help.js";
+
+/**
+ * Toolbox plugins
+ */
+import Paragraph from "./plugins/toolbox/paragraph/Paragraph.js";
+import Heading from "./plugins/toolbox/heading/Heading.js";
+import UnorderedList from "./plugins/toolbox/unorderedList/UnorderedList.js";
+import OrderedList from "./plugins/toolbox/orderedList/OrderedList.js";
+import Blockquote from "./plugins/toolbox/blockquote/Blockquote.js";
+import Image from "./plugins/toolbox/image/Image.js";
+import Video from "./plugins/toolbox/video/Video.js";
+import Audio from "./plugins/toolbox/audio/Audio.js";
+import Table from "./plugins/toolbox/table/Table.js";
+import Preformat from "./plugins/toolbox/preformat/Preformat.js";
+import HorizontalRule from "./plugins/toolbox/horizontalRule/HorizontalRule.js";
+import Iframe from "./plugins/toolbox/iframe/Iframe.js";
 
 /**
  * Toolbar plugins
  */
-import Paragraph from "./plugins/toolbar/paragraph/Paragraph.js";
-import Heading from "./plugins/toolbar/heading/Heading.js";
 import FontSize from "./plugins/toolbar/fontSize/FontSize.js";
-import UnorderedList from "./plugins/toolbar/unorderedList/UnorderedList.js";
-import OrderedList from "./plugins/toolbar/orderedList/OrderedList.js";
+import Color from "./plugins/toolbar/color/Color.js";
+import Background from "./plugins/toolbar/background/Background.js";
 import Indent from "./plugins/toolbar/indent/Indent.js";
 import Align from "./plugins/toolbar/align/Align.js";
 import LineHeight from "./plugins/toolbar/lineHeight/LineHeight.js";
-import Blockquote from "./plugins/toolbar/blockquote/Blockquote.js";
-import Color from "./plugins/toolbar/color/Color.js";
-import Background from "./plugins/toolbar/background/Background.js";
-import Image from "./plugins/toolbar/image/Image.js";
-import Video from "./plugins/toolbar/video/Video.js";
-import Audio from "./plugins/toolbar/audio/Audio.js";
-import Table from "./plugins/toolbar/table/Table.js";
-import Preformat from "./plugins/toolbar/preformat/Preformat.js";
-import HorizontalRule from "./plugins/toolbar/horizontalRule/HorizontalRule.js";
-import Iframe from "./plugins/toolbar/iframe/Iframe.js";
-
-/**
- * Formatbar plugins
- */
-import Bold from "./plugins/formatbar/bold/Bold.js";
-import Italic from "./plugins/formatbar/italic/Italic.js";
-import Underline from "./plugins/formatbar/underline/Underline.js";
-import Link from "./plugins/formatbar/link/Link.js";
-import Subscript from "./plugins/formatbar/subscript/Subscript.js";
-import Superscript from "./plugins/formatbar/superscript/Superscript.js";
-import Strikethrough from "./plugins/formatbar/strikethrough/Strikethrough.js";
-import Small from "./plugins/formatbar/small/Small.js";
-import Code from "./plugins/formatbar/code/Code.js";
-import Quote from "./plugins/formatbar/quote/Quote.js";
-import Mark from "./plugins/formatbar/mark/Mark.js";
+import Bold from "./plugins/toolbar/bold/Bold.js";
+import Italic from "./plugins/toolbar/italic/Italic.js";
+import Underline from "./plugins/toolbar/underline/Underline.js";
+import Link from "./plugins/toolbar/link/Link.js";
+import Subscript from "./plugins/toolbar/subscript/Subscript.js";
+import Superscript from "./plugins/toolbar/superscript/Superscript.js";
+import Strikethrough from "./plugins/toolbar/strikethrough/Strikethrough.js";
+import Small from "./plugins/toolbar/small/Small.js";
+import Code from "./plugins/toolbar/code/Code.js";
+import Quote from "./plugins/toolbar/quote/Quote.js";
+import Mark from "./plugins/toolbar/mark/Mark.js";
 
 /**
  * Focusbar plugins
@@ -59,17 +59,13 @@ export default class Editor extends Core {
     const config = {
       ...options,
       builtinPlugins: [
-        // toolbar
+        // menubar
+        Help,
+        // toolbox
         Paragraph,
         Heading,
-        FontSize,
-        Color,
-        Background,
         OrderedList,
         UnorderedList,
-        Align,
-        Indent,
-        LineHeight,
         Blockquote,
         Image,
         Video,
@@ -78,7 +74,13 @@ export default class Editor extends Core {
         Preformat,
         HorizontalRule,
         Iframe,
-        // formatbar
+        // toolbar
+        FontSize,
+        Color,
+        Background,
+        Align,
+        Indent,
+        LineHeight,
         Bold,
         Italic,
         Underline,
@@ -96,5 +98,77 @@ export default class Editor extends Core {
       ],
     };
     super(element, config);
+  }
+
+  /**
+   * Returns editor content textarea element's innerHTML
+   *
+   * @return {string}
+   */
+  getHtml() {
+    const textarea = this.dom.createElement(this.textarea.localName, {
+      html: this.textarea.innerHTML,
+    });
+    this.filters.filter(textarea);
+    this.textareaDispatcher.dispatch("gethtml", textarea);
+
+    return textarea.innerHTML;
+  }
+
+  /**
+   * Sets editor content textarea element's innerHTML
+   *
+   * @param {string} html
+   * @return {void}
+   */
+  setHtml(html) {
+    const textarea = this.dom.createElement(this.textarea.localName, { html });
+    this.textareaDispatcher.dispatch("sethtml", textarea);
+    this.filters.filter(textarea);
+    this.textarea.innerHTML = textarea.innerHTML;
+    if (!textarea.innerHTML) {
+      this.textarea.appendChild(this.dom.createElement("p"));
+    }
+  }
+
+  /**
+   * Returns relative or absolute URL depending on its origin
+   *
+   * @param {string} url
+   * @return {string}
+   */
+  setUrl(url) {
+    const origin = this.dom.window.origin || this.dom.window.location.origin;
+    /** @type {HTMLAnchorElement} */
+    const a = this.dom.createElement("a", { attributes: { href: url } });
+
+    return origin === a.origin ? a.pathname : a.href;
+  }
+
+  focus() {
+    //
+  }
+
+  focusToEnd() {
+    //
+  }
+
+  blur() {
+    //
+  }
+
+  /**
+   * Saves editor data to source element
+   *
+   * @return {void}
+   */
+  save() {
+    if (this.originElement instanceof HTMLTextAreaElement) {
+      this.originElement.value = this.getHtml();
+    } else {
+      this.originElement.innerHTML = this.getHtml();
+    }
+
+    this.textareaDispatcher.dispatch("save");
   }
 }

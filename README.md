@@ -100,7 +100,7 @@ the **arrow keys**.
 
 ### Text-level elements
 
-Each formatting command registers a keyboard shortcut in the form `Alt` + `Shift` + a letter. If you hover a formatbar
+Each formatting command registers a keyboard shortcut in the form `Alt` + `Shift` + a letter. If you hover a toolbar
 button for such a text-level element, the actual keyboard shortcut will be shown. Using such a shortcut will execute the
 corresponding command. 
 

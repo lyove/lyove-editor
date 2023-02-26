@@ -6,14 +6,14 @@ import DeletableListener from "./DeletableListener.js";
 import EditableListener from "./EditableListener.js";
 import FocusableListener from "./FocusableListener.js";
 import FocusbarListener from "./FocusbarListener.js";
-import FormatbarListener from "./FormatbarListener.js";
+import MenubarListener from "./MenubarListener.js";
 import NavigableListener from "./NavigableListener.js";
 import SlotableListener from "./SlotableListener.js";
 import SortableListener from "./SortableListener.js";
 import TagListener from "./TagListener.js";
 import TextareaListener from "./TextareaListener.js";
 import ToolbarListener from "./ToolbarListener.js";
-import MenubarListener from "./MenubarListener.js";
+import ToolboxListener from "./ToolboxListener.js";
 
 // ContentFilter
 import ContentFilter from "./ContentFilter.js";
@@ -55,7 +55,7 @@ export default class Base extends Plugin {
       children: [
         TagGroup.AUDIO,
         TagGroup.BLOCK,
-        // TagGroup.BREAK,
+        TagGroup.BREAK,
         TagGroup.CONTAINER,
         TagGroup.FIGURE,
         TagGroup.HEADING,
@@ -78,18 +78,18 @@ export default class Base extends Plugin {
       navigable: true,
       sortable: true,
     });
-    new TagListener(this.editor);
-    new MenubarListener(this.editor);
-    new ToolbarListener(this.editor);
-    new FormatbarListener(this.editor);
-    new FocusbarListener(this.editor);
-    new EditableListener(this.editor);
+    new AlignableListener(this.editor);
     new DeletableListener(this.editor);
+    new EditableListener(this.editor);
+    new FocusbarListener(this.editor);
+    new MenubarListener(this.editor);
     new NavigableListener(this.editor);
     new SortableListener(this.editor);
-    new AlignableListener(this.editor);
     new SlotableListener(this.editor);
+    new TagListener(this.editor);
     new TextareaListener(this.editor);
+    new ToolbarListener(this.editor);
+    new ToolboxListener(this.editor);
     this.editor.filters.add(new ContentFilter(this.editor));
     asyncFn(() => new FocusableListener(this.editor));
   }

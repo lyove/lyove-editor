@@ -146,15 +146,15 @@ export default class Plugin {
   }
 
   /**
-   * Adds a toolbar button
+   * Adds a toolbox button
    *
    * @protected
    * @param {string} label
    * @param {string} command
    * @return {void}
    */
-  _toolbar({ label, command, arrowDown, uuid }) {
-    this.editor.toolbar.appendChild(
+  _toolbox({ label, command, arrowDown, uuid }) {
+    this.editor.toolbox.appendChild(
       this.#button({
         label,
         command,
@@ -165,7 +165,7 @@ export default class Plugin {
   }
 
   /**
-   * Adds a formatbar button
+   * Adds a toolbar button
    *
    * @protected
    * @param {string} label
@@ -173,11 +173,11 @@ export default class Plugin {
    * @param {string} command
    * @return {void}
    */
-  _formatbar({ label, command, key, arrowDown, uuid }) {
+  _toolbar({ label, command, key, arrowDown, uuid }) {
     const alt = this._base("Alt");
     const shift = this._base("Shift");
     const title = label + (key ? ` [${alt} + ${shift} + ${key}]` : "");
-    this.editor.formatbar.appendChild(
+    this.editor.toolbar.appendChild(
       this.#button({
         label,
         command,

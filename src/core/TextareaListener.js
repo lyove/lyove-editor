@@ -118,7 +118,7 @@ export default class TextareaListener extends Listener {
       if (elem.nodeType != 1) {
         elem = elem.parentNode;
       }
-      const barItems = this.editor.formatbar.children;
+      const barItems = this.editor.toolbar.children;
       const commandName = this.getCommandNameByTagName(elem.localName);
       Array.prototype.forEach.call(barItems, (item) => {
         const itemDataKey = item.dataset.command;

@@ -121,7 +121,7 @@ export default class Dropdown {
     const { content } = this.dropdownContent;
     dropdown.appendChild(content);
     this._readyContent?.(dropdown, content, execute, () => this.cleanup());
-    dropdown.show(triggerElement, this.#editor.element);
+    dropdown.show(triggerElement, this.#editor.editorElement);
     this.#setArrowIcon(triggerElement, true);
   }
 
@@ -146,7 +146,7 @@ export default class Dropdown {
    * @return {void}
    */
   cleanup() {
-    const thisEditorElement = this.#editor.element;
+    const thisEditorElement = this.#editor.editorElement;
     const dropdowns = thisEditorElement.getElementsByTagName(TagName.DROPDOWN);
     Array.from(dropdowns).forEach((item) => {
       item.classList.remove("dropdown-animate-in");

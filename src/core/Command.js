@@ -111,13 +111,13 @@ export default class Command {
    */
   execute(command, triggerElement) {
     if (this.dialog) {
-      const dialogs = this.editor.element.getElementsByTagName(TagName.DIALOG);
+      const dialogs = this.editor.editorElement.getElementsByTagName(TagName.DIALOG);
       dialogs.length > 0 ? this.dialog.cleanup() : this.openDialog(command);
       return;
     }
 
     if (this.dropdown) {
-      const dropdowns = this.editor.element.getElementsByTagName(TagName.DROPDOWN);
+      const dropdowns = this.editor.editorElement.getElementsByTagName(TagName.DROPDOWN);
       if (dropdowns.length > 0) {
         const dropdownCmd = dropdowns?.[0]?.dataset?.command;
         this.dropdown.cleanup();

@@ -19,15 +19,15 @@ export default class Core {
    *
    * @type {HTMLElement}
    */
-  #orig;
+  #originElement;
 
   /**
    * Allows read access to corresponding DOM element of the source
    *
    * @return {HTMLElement}
    */
-  get orig() {
-    return this.#orig;
+  get originElement() {
+    return this.#originElement;
   }
 
   /**
@@ -67,15 +67,15 @@ export default class Core {
    *
    * @type {HTMLElement}
    */
-  #element;
+  #editorElement;
 
   /**
    * Allows read access to corresponding DOM element of the editor
    *
    * @return {HTMLElement}
    */
-  get element() {
-    return this.#element;
+  get editorElement() {
+    return this.#editorElement;
   }
 
   /**
@@ -111,6 +111,38 @@ export default class Core {
   }
 
   /**
+   * Corresponding DOM element of the main toolbox
+   *
+   * @type {HTMLElement}
+   */
+  #toolbox;
+
+  /**
+   * Allows read access to corresponding DOM element of the main toolbox
+   *
+   * @return {HTMLElement}
+   */
+  get toolbox() {
+    return this.#toolbox;
+  }
+
+  /**
+   * Event dispatcher of the editor main toolbox
+   *
+   * @type {Dispatcher}
+   */
+  #toolboxDispatcher;
+
+  /**
+   * Allows read access to event dispatcher of the editor main toolbox
+   *
+   * @return {Dispatcher}
+   */
+  get toolboxDispatcher() {
+    return this.#toolboxDispatcher;
+  }
+
+  /**
    * Corresponding DOM element of the main toolbar
    *
    * @type {HTMLElement}
@@ -140,38 +172,6 @@ export default class Core {
    */
   get toolbarDispatcher() {
     return this.#toolbarDispatcher;
-  }
-
-  /**
-   * Corresponding DOM element of the formatbar
-   *
-   * @type {HTMLElement}
-   */
-  #formatbar;
-
-  /**
-   * Allows read access to corresponding DOM element of the formatbar
-   *
-   * @return {HTMLElement}
-   */
-  get formatbar() {
-    return this.#formatbar;
-  }
-
-  /**
-   * Event dispatcher of the editor formatbar
-   *
-   * @type {Dispatcher}
-   */
-  #formatbarDispatcher;
-
-  /**
-   * Allows read access to event dispatcher of the editor formatbar
-   *
-   * @return {Dispatcher}
-   */
-  get formatbarDispatcher() {
-    return this.#formatbarDispatcher;
   }
 
   /**
@@ -353,40 +353,39 @@ export default class Core {
   /**
    * Creates a new instance of editor with given configuration
    *
-   * @param {HTMLElement} orig
+   * @param {HTMLElement} element
    * @param {Object} [config = {}]
    */
-  constructor(orig, config = {}) {
-    if (!(orig instanceof HTMLElement) || !(config instanceof Object)) {
+  constructor(element, config = {}) {
+    if (!(element instanceof HTMLElement) || !(config instanceof Object)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 
-    this.#orig = orig;
+    this.#originElement = element;
     this.#config = config;
-    this.#dom = new Dom(this, this.orig.ownerDocument);
-    this.#element = this.dom.createElement(TagName.EDITOR);
+    this.#dom = new Dom(this, this.originElement.ownerDocument);
+    this.#editorElement = this.dom.createElement(TagName.EDITOR);
 
     // Menubar
     this.#menubar = this.dom.createElement(TagName.MENUBAR, {
       attributes: { role: "toolbar" },
     });
-    this.element.appendChild(this.menubar);
+    this.editorElement.appendChild(this.menubar);
     this.#menubarDispatcher = new Dispatcher(this.menubar);
+
+    // Toolbox
+    this.#toolbox = this.dom.createElement(TagName.TOOLBOX, {
+      attributes: { role: "toolbar" },
+    });
+    this.editorElement.appendChild(this.toolbox);
+    this.#toolboxDispatcher = new Dispatcher(this.toolbox);
 
     // Toolbar
     this.#toolbar = this.dom.createElement(TagName.TOOLBAR, {
       attributes: { role: "toolbar" },
     });
-    this.element.appendChild(this.toolbar);
+    this.editorElement.appendChild(this.toolbar);
     this.#toolbarDispatcher = new Dispatcher(this.toolbar);
-
-    // Formatbar
-    this.#formatbar = this.dom.createElement(TagName.FORMATBAR, {
-      attributes: { role: "toolbar" },
-    });
-    this.formatbar.hidden = true;
-    this.element.appendChild(this.formatbar);
-    this.#formatbarDispatcher = new Dispatcher(this.formatbar);
 
     // Focusbar
     this.#focusbar = this.dom.createElement(TagName.FOCUSBAR, {
@@ -401,12 +400,12 @@ export default class Core {
       }),
     );
     this.focusbar.hidden = true;
-    this.element.appendChild(this.focusbar);
+    this.editorElement.appendChild(this.focusbar);
     this.#focusbarDispatcher = new Dispatcher(this.focusbar);
 
     // Textarea
     this.#textarea = this.dom.createElement(TagName.TEXTAREA);
-    this.element.appendChild(this.textarea);
+    this.editorElement.appendChild(this.textarea);
     this.#textareaDispatcher = new Dispatcher(this.textarea);
   }
 
@@ -440,8 +439,9 @@ export default class Core {
 
     // init
     this.plugins.init();
+    this.menubarDispatcher.dispatch("init");
+    this.toolboxDispatcher.dispatch("init");
     this.toolbarDispatcher.dispatch("init");
-    this.formatbarDispatcher.dispatch("init");
     this.focusbarDispatcher.dispatch("init");
     this.textareaDispatcher.dispatch("init");
   }
@@ -468,13 +468,13 @@ export default class Core {
    * @return {void}
    */
   load() {
-    if (this.orig instanceof HTMLTextAreaElement) {
-      this.setHtml(this.orig.value.replace("/&nbsp;/g", " "));
+    if (this.originElement instanceof HTMLTextAreaElement) {
+      this.setHtml(this.originElement.value.replace("/&nbsp;/g", " "));
     } else {
-      this.setHtml(this.orig.innerHTML);
+      this.setHtml(this.originElement.innerHTML);
     }
 
-    Array.from(this.element.children).forEach((item) => {
+    Array.from(this.editorElement.children).forEach((item) => {
       if (item.children.length === 0) {
         if (item.localName === TagName.MENUBAR) {
           item.parentElement.removeChild(item);
@@ -482,8 +482,8 @@ export default class Core {
       }
     });
 
-    this.orig.insertAdjacentElement(Position.AFTEREND, this.element);
-    this.orig.hidden = true;
+    this.originElement.insertAdjacentElement(Position.AFTEREND, this.editorElement);
+    this.originElement.hidden = true;
     this.textareaDispatcher.dispatch("load");
   }
 
@@ -493,69 +493,9 @@ export default class Core {
    * @return {void}
    */
   destroy() {
-    this.element.parentElement?.removeChild(this.element);
-    this.orig.hidden = false;
+    this.editorElement.parentElement?.removeChild(this.editorElement);
+    this.originElement.hidden = false;
     this.textareaDispatcher.dispatch("destroy");
-  }
-
-  /**
-   * Returns editor content textarea element's innerHTML
-   *
-   * @return {string}
-   */
-  getHtml() {
-    const textarea = this.dom.createElement(this.textarea.localName, {
-      html: this.textarea.innerHTML,
-    });
-    this.filters.filter(textarea);
-    this.textareaDispatcher.dispatch("gethtml", textarea);
-
-    return textarea.innerHTML;
-  }
-
-  /**
-   * Sets editor content textarea element's innerHTML
-   *
-   * @param {string} html
-   * @return {void}
-   */
-  setHtml(html) {
-    const textarea = this.dom.createElement(this.textarea.localName, { html });
-    this.textareaDispatcher.dispatch("sethtml", textarea);
-    this.filters.filter(textarea);
-    this.textarea.innerHTML = textarea.innerHTML;
-    if (!textarea.innerHTML) {
-      this.textarea.appendChild(this.dom.createElement(TagName.P));
-    }
-  }
-
-  /**
-   * Saves editor data to source element
-   *
-   * @return {void}
-   */
-  save() {
-    if (this.orig instanceof HTMLTextAreaElement) {
-      this.orig.value = this.getHtml();
-    } else {
-      this.orig.innerHTML = this.getHtml();
-    }
-
-    this.textareaDispatcher.dispatch("save");
-  }
-
-  /**
-   * Returns relative or absolute URL depending on its origin
-   *
-   * @param {string} url
-   * @return {string}
-   */
-  url(url) {
-    const origin = this.dom.window.origin || this.dom.window.location.origin;
-    /** @type {HTMLAnchorElement} */
-    const a = this.dom.createElement(TagName.A, { attributes: { href: url } });
-
-    return origin === a.origin ? a.pathname : a.href;
   }
 
   /**

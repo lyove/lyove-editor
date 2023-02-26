@@ -71,7 +71,7 @@ export default class EditableListener extends Listener {
     } else if (/^[A-Z]$/.test(event.key) && isKey(event, event.key, { alt: true, shift: true })) {
       event.preventDefault();
       event.stopPropagation();
-      this.editor.formatbar
+      this.editor.toolbar
         .querySelector(`${TagName.BUTTON}[data-key=${event.key.toLowerCase()}]`)
         ?.click();
     }

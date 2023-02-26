@@ -171,7 +171,7 @@ export default class Dialog {
     dialog.addEventListener("close", close);
     dialog.appendChild(form);
     dialog.show();
-    this.editor.element.appendChild(dialog);
+    this.editor.editorElement.appendChild(dialog);
   }
 
   /**
@@ -180,7 +180,7 @@ export default class Dialog {
    * @return {void}
    */
   cleanup() {
-    Array.from(this.editor.element.getElementsByTagName(TagName.DIALOG)).forEach((item) => {
+    Array.from(this.editor.editorElement.getElementsByTagName(TagName.DIALOG)).forEach((item) => {
       item.parentElement.removeChild(item);
     });
   }
