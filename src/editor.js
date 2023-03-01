@@ -101,37 +101,6 @@ export default class Editor extends Core {
   }
 
   /**
-   * Returns editor content textarea element's innerHTML
-   *
-   * @return {string}
-   */
-  getHtml() {
-    const textarea = this.dom.createElement(this.textarea.localName, {
-      html: this.textarea.innerHTML,
-    });
-    this.filters.filter(textarea);
-    this.textareaDispatcher.dispatch("gethtml", textarea);
-
-    return textarea.innerHTML;
-  }
-
-  /**
-   * Sets editor content textarea element's innerHTML
-   *
-   * @param {string} html
-   * @return {void}
-   */
-  setHtml(html) {
-    const textarea = this.dom.createElement(this.textarea.localName, { html });
-    this.textareaDispatcher.dispatch("sethtml", textarea);
-    this.filters.filter(textarea);
-    this.textarea.innerHTML = textarea.innerHTML;
-    if (!textarea.innerHTML) {
-      this.textarea.appendChild(this.dom.createElement("p"));
-    }
-  }
-
-  /**
    * Returns relative or absolute URL depending on its origin
    *
    * @param {string} url
@@ -145,16 +114,45 @@ export default class Editor extends Core {
     return origin === a.origin ? a.pathname : a.href;
   }
 
-  focus() {
-    //
+  /**
+   * Input change event
+   *
+   * @param {CustomEvent} event
+   * @return {void}
+   */
+  onInput(e) {
+    const { onValueChange, onInput } = this.config;
+    if (typeof onInput === "function") {
+      onInput(e?.currentTarget?.innerHTML, e);
+    }
+    if (typeof onValueChange === "function") {
+      onValueChange(e?.currentTarget?.innerHTML, e);
+    }
+    console.log("onInput", e);
   }
 
-  focusToEnd() {
-    //
+  onClick(e) {
+    const { onClick } = this.config;
+    if (typeof onClick === "function") {
+      onClick(e);
+    }
+    console.log("onClick", e);
   }
 
-  blur() {
-    //
+  onKeydown(e) {
+    const { onKeydown } = this.config;
+    if (typeof onKeydown === "function") {
+      onKeydown(e);
+    }
+    console.log("onKeydown", e);
+  }
+
+  onKeyup(e) {
+    const { onKeyup } = this.config;
+    if (typeof onKeyup === "function") {
+      onKeyup(e);
+    }
+    console.log("onKeyup", e);
   }
 
   /**
