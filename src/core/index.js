@@ -407,6 +407,18 @@ export default class Core {
     this.#textarea = this.dom.createElement(TagName.TEXTAREA);
     this.editorElement.appendChild(this.textarea);
     this.#textareaDispatcher = new Dispatcher(this.textarea);
+
+    // init
+    this.init();
+
+    // load
+    this.load();
+
+    // freeze
+    this.freeze();
+
+    // bind event
+    this.bindEvent(this);
   }
 
   /**
@@ -444,6 +456,37 @@ export default class Core {
     this.toolbarDispatcher.dispatch("init");
     this.focusbarDispatcher.dispatch("init");
     this.textareaDispatcher.dispatch("init");
+  }
+
+  /**
+   * Returns editor content textarea element's innerHTML
+   *
+   * @return {string}
+   */
+  getHtml() {
+    const textarea = this.dom.createElement(this.textarea.localName, {
+      html: this.textarea.innerHTML,
+    });
+    this.filters.filter(textarea);
+    this.textareaDispatcher.dispatch("gethtml", textarea);
+
+    return textarea.innerHTML;
+  }
+
+  /**
+   * Sets editor content textarea element's innerHTML
+   *
+   * @param {string} html
+   * @return {void}
+   */
+  setHtml(html) {
+    const textarea = this.dom.createElement(this.textarea.localName, { html });
+    this.textareaDispatcher.dispatch("sethtml", textarea);
+    this.filters.filter(textarea);
+    this.textarea.innerHTML = textarea.innerHTML;
+    if (!textarea.innerHTML) {
+      this.textarea.appendChild(this.dom.createElement("p"));
+    }
   }
 
   /**
@@ -499,6 +542,16 @@ export default class Core {
   }
 
   /**
+   * Event
+   */
+  bindEvent() {
+    this.textarea.addEventListener("input", this.onInput.bind(this));
+    this.textarea.addEventListener("click", this.onClick.bind(this));
+    this.textarea.addEventListener("keydown", this.onKeydown.bind(this));
+    this.textarea.addEventListener("keyup", this.onKeyup.bind(this));
+  }
+
+  /**
    * Factory method to create a new editor instance with given configuration
    *
    * @param {HTMLElement} element
@@ -507,9 +560,6 @@ export default class Core {
    */
   static create(element, config = {}) {
     const editor = new this(element, config);
-    editor.init();
-    editor.load();
-    editor.freeze();
     return editor;
   }
 }
