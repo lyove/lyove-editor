@@ -32,7 +32,6 @@ export default class OrderedList extends Plugin {
       command: this.constructor.name,
       attributes: ["class", "data-command"],
       children: [TagGroup.LISTITEM],
-      arbitrary: true,
       deletable: true,
       focusable: true,
       navigable: true,
