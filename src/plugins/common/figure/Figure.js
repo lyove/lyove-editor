@@ -40,7 +40,6 @@ export default class Figure extends Plugin {
         TagGroup.TABLE,
         TagGroup.VIDEO,
       ],
-      alignable: true,
       deletable: true,
       focusable: true,
       navigable: true,
