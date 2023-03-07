@@ -1,6 +1,5 @@
 import Listener from "./Listener.js";
-import { TagName, Key } from "../utils/Enum.js";
-import { isKey } from "../utils/util.js";
+import { TagName } from "../utils/Enum.js";
 
 /**
  * Abstract Textarea Listener
@@ -14,7 +13,6 @@ export default class TextareaListener extends Listener {
   constructor(editor) {
     super(editor);
     this.editor.dom.document.addEventListener("selectionchange", this);
-    this.editor.textarea.addEventListener("delete", this);
   }
 
   /**
@@ -30,53 +28,6 @@ export default class TextareaListener extends Listener {
         selctedElement.parentElement.contentEditable === "true")
     ) {
       this.activeBarItem();
-    }
-  }
-
-  /**
-   * Remove nodes event
-   *
-   * @param {CustomEvent} event
-   * @return {void}
-   */
-  delete(e) {
-    const { onValueChange } = this.editor.config;
-    if (typeof onValueChange === "function") {
-      onValueChange(e?.currentTarget?.innerHTML, e);
-    }
-    if (e?.currentTarget?.innerHTML === "") {
-      this.editor.textarea.appendChild(this.editor.dom.createElement(TagName.P));
-    }
-  }
-
-  /**
-   * Handles key combinations for navigation
-   *
-   * @param {KeyboardEvent} event
-   * @param {HTMLElement} event.target
-   * @return {void}
-   */
-  keydown(event) {
-    if (isKey(event, [Key.LEFT, Key.RIGHT, Key.HOME, Key.END])) {
-      const prev = event.target.previousElementSibling;
-      const next = event.target.nextElementSibling;
-      const first = event.target.parentElement.firstElementChild;
-      const last = event.target.parentElement.lastElementChild;
-      const isFirst = event.target === first;
-      const isLast = event.target === last;
-
-      if (event.key === Key.LEFT && !isFirst) {
-        prev.focus();
-      } else if (event.key === Key.RIGHT && !isLast) {
-        next.focus();
-      } else if (event.key === Key.HOME || (event.key === Key.RIGHT && isLast)) {
-        first.focus();
-      } else if (event.key === Key.END || (event.key === Key.LEFT && isFirst)) {
-        last.focus();
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
     }
   }
 
