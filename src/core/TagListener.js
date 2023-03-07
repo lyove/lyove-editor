@@ -26,16 +26,7 @@ export default class TagListener extends Listener {
       if (tag.editable) {
         event.detail.element.contentEditable = "true";
       }
-
-      [
-        "alignable",
-        "arbitrary",
-        "deletable",
-        "focusable",
-        "navigable",
-        "slotable",
-        "sortable",
-      ].forEach((item) => {
+      ["deletable", "focusable", "navigable", "sortable"].forEach((item) => {
         if (tag[item]) {
           event.detail.element.dataset[item] = "";
         }
