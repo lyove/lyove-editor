@@ -41,7 +41,6 @@ export default class DropdownElement extends HTMLElement {
    */
   connectedCallback() {
     this.setAttribute("role", "dropdown");
-    this.tabIndex = -1;
     this.focus();
   }
 
