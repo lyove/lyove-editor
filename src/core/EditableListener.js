@@ -1,6 +1,6 @@
 import Listener from "./Listener.js";
 import { Key, Position, TagName } from "../utils/Enum.js";
-import { isKey } from "../utils/util.js";
+import { isKey, asyncFn } from "../utils/util.js";
 
 /**
  * Editable Listener
@@ -22,11 +22,13 @@ export default class EditableListener extends Listener {
    * @return {void}
    */
   insert(event) {
-    if (event.detail.element?.contentEditable === "true") {
-      event.detail.element.addEventListener("keydown", this);
-    } else if (event.detail.element?.parentElement?.contentEditable === "true") {
-      event.detail.element.addEventListener("dblclick", this);
-    }
+    asyncFn(() => {
+      if (event.detail.element?.contentEditable === "true") {
+        event.detail.element.addEventListener("keydown", this);
+      } else if (event.detail.element?.parentElement?.contentEditable === "true") {
+        event.detail.element.addEventListener("dblclick", this);
+      }
+    });
   }
 
   /**
@@ -74,6 +76,26 @@ export default class EditableListener extends Listener {
       this.editor.toolbar
         .querySelector(`${TagName.BUTTON}[data-key=${event.key.toLowerCase()}]`)
         ?.click();
+    } else if (isKey(event, [Key.LEFT, Key.RIGHT, Key.HOME, Key.END])) {
+      const prev = event.target.previousElementSibling;
+      const next = event.target.nextElementSibling;
+      const first = event.target.parentElement.firstElementChild;
+      const last = event.target.parentElement.lastElementChild;
+      const isFirst = event.target === first;
+      const isLast = event.target === last;
+
+      if (event.key === Key.LEFT && !isFirst) {
+        prev.focus();
+      } else if (event.key === Key.RIGHT && !isLast) {
+        next.focus();
+      } else if (event.key === Key.HOME || (event.key === Key.RIGHT && isLast)) {
+        first.focus();
+      } else if (event.key === Key.END || (event.key === Key.LEFT && isFirst)) {
+        last.focus();
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
     }
   }
 
@@ -86,6 +108,5 @@ export default class EditableListener extends Listener {
    */
   dblclick(event) {
     this.editor.dom.selectContents(event.target);
-    this.editor.commands.find(event.target.localName)?.execute();
   }
 }
