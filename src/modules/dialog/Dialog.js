@@ -1,3 +1,4 @@
+import DialogElement from "./DialogElement.js";
 import DialogFormCreator from "./DialogFormCreator.js";
 import { ErrorMessage, TagName } from "../../utils/Enum.js";
 import { isOptString, isString } from "../../utils/util.js";
@@ -84,6 +85,8 @@ export default class Dialog {
     this.#editor = editor;
     this.#name = name;
     this.#url = url;
+
+    this.editor.dom.registerElement(TagName.DIALOG, DialogElement);
   }
 
   /**
