@@ -150,14 +150,8 @@ export default class Dom {
 
     const editable = this.getSelectedEditable();
 
-    if (
-      editable instanceof HTMLSlotElement &&
-      this.editor.tags.allowed(editable.parentElement, element)
-    ) {
-      editable.insertAdjacentElement(Position.BEFOREBEGIN, element);
-    } else if (editable) {
+    if (editable) {
       this.closest(editable, element)?.insertAdjacentElement(Position.AFTEREND, element);
-
       if (editable.hasAttribute("data-deletable") && !editable.textContent.trim()) {
         editable.parentElement.removeChild(editable);
       }
@@ -247,16 +241,6 @@ export default class Dom {
   }
 
   /**
-   * Indicates if element allows arbitrary amount of child elements
-   *
-   * @param {HTMLElement} element
-   * @return {boolean}
-   */
-  arbitrary(element) {
-    return element === this.editor.textarea || element?.hasAttribute("data-arbitrary");
-  }
-
-  /**
    * Indicates if given element is contained by editor content textarea or by a clone of it
    *
    * @param {HTMLElement} element
@@ -293,7 +277,7 @@ export default class Dom {
     let parent = element.parentElement;
 
     do {
-      if (this.arbitrary(parent) && this.editor.tags.allowed(parent, child)) {
+      if (this.editor.tags.allowed(parent, child)) {
         return sibling;
       }
     } while ((sibling = parent) && (parent = parent.parentElement) && this.contains(parent));
