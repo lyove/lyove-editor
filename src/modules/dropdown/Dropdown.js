@@ -1,4 +1,5 @@
 import DropdownContent from "./DropdownContent.js";
+import DropdownElement from "./DropdownElement.js";
 import { ErrorMessage, Position, TagName } from "../../utils/Enum.js";
 import { isString } from "../../utils/util.js";
 
@@ -66,6 +67,8 @@ export default class Dropdown {
 
     this.#editor = editor;
     this.#name = name;
+
+    this.editor.dom.registerElement(TagName.DROPDOWN, DropdownElement);
   }
 
   /**
