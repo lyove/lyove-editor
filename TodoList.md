@@ -21,6 +21,7 @@
 ## FixMe
 
 - [ ] - Icon active 时颜色问题
+- [ ] - 内敛样式问题，比如text-indent 取消的清除style操作肯能会把其他样式清除
 
 ## More
 
