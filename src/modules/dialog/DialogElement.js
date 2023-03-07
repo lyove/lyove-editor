@@ -41,7 +41,6 @@ export default class DialogElement extends HTMLElement {
    */
   connectedCallback() {
     this.setAttribute("role", "dialog");
-    this.tabIndex = -1;
     this.focus();
   }
 
