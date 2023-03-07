@@ -23,7 +23,6 @@ export default class NavigableListener extends Listener {
    */
   insert(event) {
     if (event.detail.element.hasAttribute("data-navigable")) {
-      event.detail.element.tabIndex = 0;
       event.detail.element.addEventListener("keydown", this);
     }
   }
