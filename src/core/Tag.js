@@ -1,5 +1,5 @@
 import { ErrorMessage } from "../utils/Enum.js";
-import { isString, isOptArray, isOptString } from "../utils/util.js";
+import { isString } from "../utils/util.js";
 
 /**
  * Tag
@@ -32,20 +32,6 @@ export default class Tag {
    * @type {string[]}
    */
   attributes;
-
-  /**
-   * Is element alignable
-   *
-   * @type {boolean}
-   */
-  alignable;
-
-  /**
-   * Does element allow arbitrary amount of child elements
-   *
-   * @type {boolean}
-   */
-  arbitrary;
 
   /**
    * Is element deletable
@@ -83,13 +69,6 @@ export default class Tag {
   navigable;
 
   /**
-   * Does element define a slot
-   *
-   * @type {boolean}
-   */
-  slotable;
-
-  /**
    * Is element sortable
    *
    * @type {boolean}
@@ -108,33 +87,24 @@ export default class Tag {
    *
    * @param {string} name
    * @param {string} group
-   * @param {Object.<string, any>} [opts = {}]
+   * @param {Object.<string, any>} [rest = {}]
    */
-  constructor({ name, group, command, ...opts } = {}) {
-    if (
-      !isString(name) ||
-      !isString(group) ||
-      !isOptArray(opts.children) ||
-      !isOptArray(opts.attributes) ||
-      !isOptString(opts.enter)
-    ) {
+  constructor({ name, group, command, ...rest } = {}) {
+    if (!isString(name) || !isString(group)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 
     this.name = name;
     this.group = group;
     this.command = command;
-    this.children = opts.children || [];
-    this.attributes = opts.attributes || [];
-    this.arbitrary = opts.arbitrary === true;
-    this.alignable = opts.alignable === true;
-    this.editable = opts.editable === true;
-    this.focusable = opts.focusable === true;
-    this.navigable = opts.navigable === true;
-    this.slotable = opts.slotable === true;
-    this.sortable = opts.sortable === true;
-    this.deletable = opts.deletable === true;
-    this.empty = opts.empty === true;
-    this.enter = opts.enter;
+    this.children = rest.children || [];
+    this.attributes = rest.attributes || [];
+    this.editable = rest.editable === true;
+    this.focusable = rest.focusable === true;
+    this.navigable = rest.navigable === true;
+    this.sortable = rest.sortable === true;
+    this.deletable = rest.deletable === true;
+    this.empty = rest.empty === true;
+    this.enter = rest.enter;
   }
 }
