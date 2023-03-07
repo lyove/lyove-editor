@@ -132,9 +132,7 @@ export default class SortableListener extends Listener {
       this.editor.dom.contains(target) &&
       ![this.editor.textarea, element].includes(target) &&
       target.hasAttribute("data-sortable") &&
-      (element.parentElement === target.parentElement ||
-        (this.editor.dom.arbitrary(element.parentElement) &&
-          this.editor.dom.arbitrary(target.parentElement))) &&
+      element.parentElement === target.parentElement &&
       this.editor.tags.allowed(target.parentElement, element)
     );
   }
