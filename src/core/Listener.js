@@ -38,7 +38,7 @@ export default class Listener {
    * @return {void}
    */
   handleEvent(event) {
-    if(isFunction(this[event.type])) {
+    if (isFunction(this[event.type])) {
       this[event.type](event);
     }
   }
