@@ -74,6 +74,45 @@ export default class Dom {
   }
 
   /**
+   * Creates HTML element in editor document
+   *
+   * @param {string} name
+   * @param {Object.<string, string>} [attributes = {}]
+   * @param {string} [html = '']
+   * @return {HTMLElement}
+   */
+  static create(name, { attributes = {}, html = "" } = {}) {
+    const element = this.document.createElement(name);
+    element.innerHTML = html;
+    Object.entries(attributes).forEach(([key, val]) => val && element.setAttribute(key, `${val}`));
+    return element;
+  }
+
+  /**
+   * Wraps element with given parent
+   *
+   * @param {HTMLElement} element
+   * @param {string} tag
+   * @param {Object} [options = {}]
+   * @return {void}
+   */
+  static wrap(element, tag, options) {
+    const wrapper = Dom.isNode(tag) ? tag : Dom.create(tag, options);
+
+    if (Dom.isNode(element)) {
+      if (!element.parentNode) {
+        throw new Error("Element should be in DOM");
+      }
+      element.parentNode.insertBefore(wrapper, element);
+      wrapper.appendChild(element);
+    } else {
+      const fragment = element.extractContents();
+      element.insertNode(wrapper);
+      wrapper.appendChild(fragment);
+    }
+  }
+
+  /**
    * Insert newElement after element
    */
   static after(elm, newElement) {
