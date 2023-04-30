@@ -54,13 +54,16 @@
   },
   "lint-staged": {
     "./**/*.{js,cjs,ts,jsx,tsx}": [
-      "eslint --fix"
+      "eslint --fix",
+      "git add"
     ],
     "./**/*.{js,cjs,ts,css,scss,sass,html,json,md}": [
-      "prettier . --write "
+      "prettier . --write",
+      "git add"
     ],
     "./**/*.{css,less,scss,sass}": [
-      "stylelint --fix"
+      "stylelint --fix",
+      "git add"
     ]
   }
 }
