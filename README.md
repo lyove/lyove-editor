@@ -1,7 +1,7 @@
 <div align="center">
   <br />
   <a href="https://github.com/lyove/editor">
-    <img width="100" src="./public/logo.svg" alt="Logo of Lyove-Editor">
+    <img width="100" src="https://raw.githubusercontent.com/lyove/editor/dev/public/logo.svg" alt="Logo of Lyove-Editor">
   </a>
   <br />
 </div>
