@@ -1,7 +1,7 @@
 /**
  * Variable
  */
- :root {
+:root {
   --editor-block-background: #191919;
   --editor-block-color: #fff;
   --editor-border-color: #19191933;
@@ -44,10 +44,10 @@ lyove-editor[lang="zh-cn"] {
  * Editor
  */
 lyove-editor {
-  display: block;
-  position: relative;
   border: 1px solid var(--editor-border-color);
   border-radius: 6px;
+  display: block;
+  position: relative;
 
   [draggable="true"] {
     cursor: move;
@@ -254,12 +254,12 @@ lyove-editor {
   }
 
   editor-focusbar > .trigger-content {
-    display: flex;
     align-items: center;
     background: var(--editor-toolbar-background);
     border: 1px solid var(--editor-border-color);
     border-radius: 3px;
     box-shadow: 0 3px 15px -3px rgb(13 20 33 / 13%);
+    display: flex;
     margin-left: 2px;
     padding: 2px;
   }
@@ -330,14 +330,30 @@ lyove-editor {
       outline: 0 none;
     }
 
-    input:is([type="email"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="text"], [type="url"]),
+    input:is(
+        [type="email"],
+        [type="number"],
+        [type="password"],
+        [type="search"],
+        [type="tel"],
+        [type="text"],
+        [type="url"]
+      ),
     select {
       border-bottom: 1px solid var(--editor-border-color);
       padding: 0.5rem 0;
       width: 100%;
     }
 
-    input:is([type="email"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="text"], [type="url"]):invalid,
+    input:is(
+        [type="email"],
+        [type="number"],
+        [type="password"],
+        [type="search"],
+        [type="tel"],
+        [type="text"],
+        [type="url"]
+      ):invalid,
     select:invalid {
       border-color: var(--editor-error);
     }
@@ -349,12 +365,12 @@ lyove-editor {
 
   editor-dialog button {
     background: var(--editor-form-button-bg);
+    border-radius: 4px;
     border-width: 0;
     color: var(--editor-form-button-color);
+    cursor: pointer;
     outline: none;
     padding: 0.375rem 0.75rem;
-    border-radius: 4px;
-    cursor: pointer;
   }
 
   editor-dialog button + button {
@@ -417,12 +433,12 @@ lyove-editor {
     border-bottom: transparent;
     border-left: transparent;
     content: "";
-    width: 10px;
     height: 10px;
+    left: calc(50% - 6.4px);
     position: absolute;
     top: -5px;
-    left: calc(50% - 6.4px);
     transform: rotate(-45deg);
+    width: 10px;
     z-index: 0;
   }
 
@@ -545,9 +561,9 @@ lyove-editor {
   */
 
   editor-textarea [contenteditable] {
+    cursor: auto;
     line-height: 1.5;
     outline: none;
-    cursor: auto;
   }
 
   editor-textarea [contenteditable="true"]:hover {
@@ -703,9 +719,9 @@ lyove-editor {
   */
   editor-textarea blockquote,
   editor-textarea blockquote[data-command="blockquote"] {
-    position: relative;
     margin: 0.5rem 0;
     padding: 0 0.75rem;
+    position: relative;
   }
 
   editor-textarea blockquote::before,

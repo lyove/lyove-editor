@@ -1,220 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>@Lyove/Editor</title>
-  <link rel="shortcut icon" href="./logo.svg" type="image/png" />
-  <link rel="stylesheet" href="./lyove-editor.css?v=1" />
-  <script src="./lyove-editor.umd.js"></script>
-  <style>
-    /**
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>@Lyove/Editor</title>
+    <link rel="shortcut icon" href="./logo.svg" type="image/png" />
+    <link rel="stylesheet" href="./lyove-editor.css?v=1" />
+    <script src="./lyove-editor.umd.js"></script>
+    <style>
+      /**
        * Variable
        */
-    :root {
-      --app-color-error: #d23632;
-      --app-color-error-text: #fff;
-      --app-color-primary: #056de8;
-      --app-color-primary-dark: #24292f;
-      --app-color-primary-light: #2a9d8f;
-      --app-color-primary-text: #fff;
-    }
+      :root {
+        --app-color-error: #d23632;
+        --app-color-error-text: #fff;
+        --app-color-primary: #056de8;
+        --app-color-primary-dark: #24292f;
+        --app-color-primary-light: #2a9d8f;
+        --app-color-primary-text: #fff;
+      }
 
-    body {
-      margin: 0;
-      padding: 0;
-    }
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
-    #header {
-      display: flex;
-      background: var(--app-color-primary-dark);
-      color: var(--app-color-primary-text);
-    }
+      #header {
+        display: flex;
+        background: var(--app-color-primary-dark);
+        color: var(--app-color-primary-text);
+      }
 
-    #header .nav {
-      flex: 1;
-      padding: 0.75rem 2rem;
-    }
+      #header .nav {
+        flex: 1;
+        padding: 0.75rem 2rem;
+      }
 
-    #header .nav ul {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
+      #header .nav ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
 
-    #header .nav ul li {
-      display: inline-block;
-      padding: 0.5rem;
-    }
+      #header .nav ul li {
+        display: inline-block;
+        padding: 0.5rem;
+      }
 
-    #header .nav ul li a {
-      color: var(--app-color-primary);
-    }
+      #header .nav ul li a {
+        color: var(--app-color-primary);
+      }
 
-    #header .right {
-      flex: 0 0 200px;
-      padding: 0.75rem 0;
-    }
+      #header .right {
+        flex: 0 0 200px;
+        padding: 0.75rem 0;
+      }
 
-    #header select {
-      background: var(--app-color-primary-dark);
-      color: var(--app-color-primary-text);
-    }
+      #header select {
+        background: var(--app-color-primary-dark);
+        color: var(--app-color-primary-text);
+      }
 
-    #header :is(option, select) {
-      cursor: pointer;
-      height: 1.5rem;
-      line-height: 1.5rem;
-      vertical-align: middle;
-      border: 1px solid #f0f0f0;
-      border-radius: 6px;
-    }
+      #header :is(option, select) {
+        cursor: pointer;
+        height: 1.5rem;
+        line-height: 1.5rem;
+        vertical-align: middle;
+        border: 1px solid #f0f0f0;
+        border-radius: 6px;
+      }
 
-    main {
-      margin: 0.625rem auto 4rem;
-      max-width: 66rem;
-      padding: 0.75rem;
-    }
+      main {
+        margin: 0.625rem auto 4rem;
+        max-width: 66rem;
+        padding: 0.75rem;
+      }
 
-    main .desc {
-      margin-bottom: 2rem;
-    }
+      main .desc {
+        margin-bottom: 2rem;
+      }
 
-    #footer {
-      display: flex;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-    }
+      #footer {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
 
-    #footer #save,
-    #footer #clear {
-      width: 100%;
-      padding: 0.75rem 0.375rem;
-      border: 0;
-    }
+      #footer #save,
+      #footer #clear {
+        width: 100%;
+        padding: 0.75rem 0.375rem;
+        border: 0;
+      }
 
-    #clear {
-      background: var(--app-color-primary-light);
-      color: var(--app-color-primary-text);
-      cursor: pointer;
-    }
+      #clear {
+        background: var(--app-color-primary-light);
+        color: var(--app-color-primary-text);
+        cursor: pointer;
+      }
 
-    #save {
-      background: var(--app-color-error);
-      color: var(--app-color-error-text);
-      cursor: pointer;
-    }
-  </style>
-</head>
+      #save {
+        background: var(--app-color-error);
+        color: var(--app-color-error-text);
+        cursor: pointer;
+      }
+    </style>
+  </head>
 
-<body>
-  <header id="header">
-    <div class="nav">
-      <ul>
-        <li>@Lyove/Editor</li>
-        <li><a href="https://github.com/lyove/editor" target="_blank">GitHub</a></li>
-      </ul>
-    </div>
-    <div class="right">
-      <label for="lang">Lang</label>
-      <select id="lang">
-        <option value="en" selected>en</option>
-        <option value="zh-cn">zh-cn</option>
-      </select>
-    </div>
-  </header>
-  <main>
-    <p class="desc">🎨A Html5 standards-compliant and dependency-free WYSIWYG rich text editor</p>
+  <body>
+    <header id="header">
+      <div class="nav">
+        <ul>
+          <li>@Lyove/Editor</li>
+          <li><a href="https://github.com/lyove/editor" target="_blank">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="right">
+        <label for="lang">Lang</label>
+        <select id="lang">
+          <option value="en" selected>en</option>
+          <option value="zh-cn">zh-cn</option>
+        </select>
+      </div>
+    </header>
+    <main>
+      <p class="desc">🎨A Html5 standards-compliant and dependency-free WYSIWYG rich text editor</p>
 
-    <!-- Editor ================== -->
-    <div id="rte">
-      <h1>Consetetur Sadipscing</h1>
-      <p>
-        Vel eum <var>velit</var> esse molestie consequat, <em>vel illum</em> dolore eu feugiat
-        <strong>nulla facilisis</strong> at vero eros et accumsan et iusto odio
-        <small>dolor</small> dignissim qui blandit praesent luptatum <sup>TM</sup> zzril delenit
-        augue duis dolore <sub>42</sub> te feugait nulla facilisi. Stet <kbd>clita</kbd> kasd
-        gubergren. Lorem <a href="http://www.example.com">ipsum</a> dolor sit amet, consectetuer
-        <del>adipiscing elit</del>, sed <ins>diam nonummy</ins> nibh euismod tincidunt ut laoreet
-        <data value="10">dolore</data> magna aliquam
-        <time datetime="2022-12-12">12.12.2022</time> erat volutpat. consetetur
-        <cite>sadipscing</cite> elitr, sed diam nonumy eirmod tempor sed diam nonumy eirmod tempor
-        <code>invidunt</code> ut labore et, Stet <dfn>clita kasd</dfn> gubergren, no sea takimata
-        <abbr title="Test">sanctus est</abbr>. Lorem ipsum dolor sit amet.
-      </p>
+      <!-- Editor ================== -->
+      <div id="rte">
+        <h1>Consetetur Sadipscing</h1>
+        <p>
+          Vel eum <var>velit</var> esse molestie consequat, <em>vel illum</em> dolore eu feugiat
+          <strong>nulla facilisis</strong> at vero eros et accumsan et iusto odio
+          <small>dolor</small> dignissim qui blandit praesent luptatum <sup>TM</sup> zzril delenit
+          augue duis dolore <sub>42</sub> te feugait nulla facilisi. Stet <kbd>clita</kbd> kasd
+          gubergren. Lorem <a href="http://www.example.com">ipsum</a> dolor sit amet, consectetuer
+          <del>adipiscing elit</del>, sed <ins>diam nonummy</ins> nibh euismod tincidunt ut laoreet
+          <data value="10">dolore</data> magna aliquam
+          <time datetime="2022-12-12">12.12.2022</time> erat volutpat. consetetur
+          <cite>sadipscing</cite> elitr, sed diam nonumy eirmod tempor sed diam nonumy eirmod tempor
+          <code>invidunt</code> ut labore et, Stet <dfn>clita kasd</dfn> gubergren, no sea takimata
+          <abbr title="Test">sanctus est</abbr>. Lorem ipsum dolor sit amet.
+        </p>
 
-      <h2>Ordered list</h2>
-      <ol>
-        <li>Nam liber tempor cum soluta nobis eleifend</li>
-        <li>At vero eos et accusam et justo</li>
-        <li>Ut wisi enim ad minim veniam</li>
-      </ol>
+        <h2>Ordered list</h2>
+        <ol>
+          <li>Nam liber tempor cum soluta nobis eleifend</li>
+          <li>At vero eos et accusam et justo</li>
+          <li>Ut wisi enim ad minim veniam</li>
+        </ol>
 
-      <h2>Unordered list</h2>
-      <ul>
-        <li>Nam liber tempor cum soluta nobis eleifend</li>
-        <li>At vero eos et accusam et justo</li>
-        <li>Ut wisi enim ad minim veniam</li>
-      </ul>
+        <h2>Unordered list</h2>
+        <ul>
+          <li>Nam liber tempor cum soluta nobis eleifend</li>
+          <li>At vero eos et accusam et justo</li>
+          <li>Ut wisi enim ad minim veniam</li>
+        </ul>
 
-      <h3>Table</h3>
-      <table style="width: 100%">
-        <thead>
-          <tr>
-            <th>Head A</th>
-            <th>Head B</th>
-            <th>Head C</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Cell A1</td>
-            <td>Cell B1</td>
-            <td>Cell C1</td>
-          </tr>
-          <tr>
-            <td>Cell A2</td>
-            <td>Cell B2</td>
-            <td>Cell C2</td>
-          </tr>
-          <tr>
-            <td>Cell A3</td>
-            <td>Cell B3</td>
-            <td>Cell C3</td>
-          </tr>
-          <tr>
-            <td>Cell A4</td>
-            <td>Cell B4</td>
-            <td>Cell C4</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>Foot A</td>
-            <td>Foot B</td>
-            <td>Foot C</td>
-          </tr>
-        </tfoot>
-      </table>
-      <br />
-      <blockquote>
-        <p>Ut wisi enim ad minim veniam, quis nostrud exerci</p>
-      </blockquote>
+        <h3>Table</h3>
+        <table style="width: 100%">
+          <thead>
+            <tr>
+              <th>Head A</th>
+              <th>Head B</th>
+              <th>Head C</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cell A1</td>
+              <td>Cell B1</td>
+              <td>Cell C1</td>
+            </tr>
+            <tr>
+              <td>Cell A2</td>
+              <td>Cell B2</td>
+              <td>Cell C2</td>
+            </tr>
+            <tr>
+              <td>Cell A3</td>
+              <td>Cell B3</td>
+              <td>Cell C3</td>
+            </tr>
+            <tr>
+              <td>Cell A4</td>
+              <td>Cell B4</td>
+              <td>Cell C4</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Foot A</td>
+              <td>Foot B</td>
+              <td>Foot C</td>
+            </tr>
+          </tfoot>
+        </table>
+        <br />
+        <blockquote>
+          <p>Ut wisi enim ad minim veniam, quis nostrud exerci</p>
+        </blockquote>
 
-      <h3>footer</h3>
-      <footer>footer footer footer footer</footer>
-    </div>
-  </main>
-  <footer id="footer">
-    <button id="clear" type="button">Clear</button>
-    <button id="save" type="button">Save</button>
-  </footer>
-  <script src="./index.js"></script>
-</body>
-
+        <h3>footer</h3>
+        <footer>footer footer footer footer</footer>
+      </div>
+    </main>
+    <footer id="footer">
+      <button id="clear" type="button">Clear</button>
+      <button id="save" type="button">Save</button>
+    </footer>
+    <script src="./index.js"></script>
+  </body>
 </html>

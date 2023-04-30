@@ -2,94 +2,82 @@
  * Variable
  */
 :root {
-    --app-color-accent: #4166f5;
-    --app-color-accent-text: #fff;
-    --app-color-primary: #222;
-    --app-color-primary-dark: #000;
-    --app-color-primary-text: #fff;
+  --app-color-accent: #4166f5;
+  --app-color-accent-text: #fff;
+  --app-color-primary: #222;
+  --app-color-primary-dark: #000;
+  --app-color-primary-text: #fff;
 }
 
 /**
  * Global
  */
 body {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1.5rem;
-    align-items: end;
-    min-height: 0;
-    padding: 1.5rem;
+  align-items: end;
+  background: var(--app-color-primary);
+  color: var(--app-color-primary-text);
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  min-height: 0;
+  padding: 1.5rem;
 }
 
 body > * {
-    cursor: pointer;
+  border: 0.0625rem solid var(--app-color-primary-dark);
+  cursor: pointer;
 }
 
 /**
  * Margin
  */
 section > :not(:first-child) {
-    margin-top: 0.75rem;
+  margin-top: 0.75rem;
 }
 
 /**
  * Font
  */
 h2 {
-    font-size: 1.25rem;
-}
-
-figcaption {
-    font-size: 0.85rem;
+  font-size: 1.25rem;
 }
 
 /**
  * Color
  */
-body {
-    color: var(--app-color-primary-text);
-    background: var(--app-color-primary);
-}
-
 figcaption {
-    background: var(--app-color-primary-dark);
+  background: var(--app-color-primary-dark);
+  font-size: 0.85rem;
+  padding: 0.75rem;
 }
 
 section:hover,
 body > figure:hover > figcaption {
-    color: var(--app-color-accent-text);
-    background: var(--app-color-accent);
-}
-
-body > * {
-    border: 0.0625rem solid var(--app-color-primary-dark);
+  background: var(--app-color-accent);
+  color: var(--app-color-accent-text);
 }
 
 body > :hover {
-    border-color: var(--app-color-accent);
+  border-color: var(--app-color-accent);
 }
 
 /**
  * Figure
  */
-figcaption {
-    padding: 0.75rem;
-}
-
 audio,
 iframe,
 img,
 video {
-    width: 100%;
-    max-height: 14rem;
-    object-fit: cover;
-    pointer-events: none;
+  max-height: 14rem;
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
 }
 
 /**
  * Section
  */
 section {
-    align-self: start;
-    padding: 0.75rem;
+  align-self: start;
+  padding: 0.75rem;
 }

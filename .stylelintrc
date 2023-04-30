@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-recommended", 
-    "stylelint-config-sass-guidelines"
-  ],
+  "extends": ["stylelint-config-recommended", "stylelint-config-sass-guidelines"],
   "rules": {
     "function-parentheses-space-inside": null,
     "no-descending-specificity": null,
