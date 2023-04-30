@@ -9,7 +9,7 @@ const { resolve } = path;
  * @type { import('vite').UserConfig }
  */
 export default defineConfig(({ mode }) => {
-  const envDir = './env';
+  const envDir = "./env";
   const envPrefix = ["VITE", "APP"];
 
   // Env var
