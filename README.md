@@ -1,7 +1,7 @@
 <div align="center">
   <br />
   <a href="https://github.com/lyove/editor">
-    <img width="100" src="./public/logo.svg" alt="Logo of Lyove-Editor">
+    <img width="100" src="https://raw.githubusercontent.com/lyove/editor/dev/public/logo.svg" alt="Logo of Lyove-Editor">
   </a>
   <br />
 </div>
@@ -62,9 +62,7 @@ key will add a new list item.
 
 ### Sortable elements
 
-You can reorder *sortable* elements either by drag'n'drop or by keyboard shortcuts. Note that not all elements are
-configured to be sortable, p.e. the *summary* element within the *details* widget will always be the first child
-element.
+You can reorder *sortable* elements either by drag'n'drop or by keyboard shortcuts.
 
 You can move the *sortable* element before its previous or after its next sibling or to first or last position by
 combining the `Control` key with one of the `ArrowUp`, `ArrowDown`, `Home` or `End` keys.
@@ -75,12 +73,6 @@ You can delete a *deletable* element by combining the `Control` key with the `De
 can also use the `Backspace` key, if the editable is empty. Note that not all elements are configured to be deletable,
 p.e. the *details* widget will not allow to delete the *summary* element unless it is the only child in which case
 deleting the *summary* element will delete the whole *details* widget.
-
-### Alignable elements
-
-Figure widgets like blockquote, table or media elements allow changing alignment by adding or removing the CSS
-class `left`, `center` or `right`. This is done by combining the `Shift` key with the `ArrowLeft` (`left`)
-, `ArrowDown` (`center`) or `ArrowRight` (`right`) or `ArrowUp` (*removes CSS classes*) keys.
 
 ### Table widget keyboard shortcuts
 
@@ -100,7 +92,7 @@ the **arrow keys**.
 
 ### Text-level elements
 
-Each formatting command registers a keyboard shortcut in the form `Alt` + `Shift` + a letter. If you hover a formatbar
+Each formatting command registers a keyboard shortcut in the form `Alt` + `Shift` + a letter. If you hover a toolbar
 button for such a text-level element, the actual keyboard shortcut will be shown. Using such a shortcut will execute the
 corresponding command. 
 
@@ -121,7 +113,6 @@ const rte = document.getElementById("rich_text_editor");
 ```js
 Editor.create(rte, {
     lang: "en",
-    mode: 'default', // default | max | min
 });
 ```
 

@@ -17,6 +17,9 @@ document.body.insertBefore(
   document.body.lastChild,
 );
 
+// Desc
+const descDom = document.querySelector(".desc");
+
 /**
  * Load editor
  */
@@ -26,6 +29,15 @@ const loadEditor = (Editor) => {
   const rte = document.getElementById("rte") || document.getElementById("rich-text-editor");
   const clear = document.getElementById("clear");
   const save = document.getElementById("save");
+
+  const changeDesc = (l) => {
+    if (descDom) {
+      descDom.innerHTML =
+        l === "zh-cn"
+          ? "🎨 Html5标准、且无任何依赖的所见即所得富文本编辑器"
+          : "🎨 A Html5 standards-compliant and dependency-free WYSIWYG rich text editor";
+    }
+  };
 
   // Config
   const configs = {
@@ -58,11 +70,11 @@ const loadEditor = (Editor) => {
   // Init
   let editor = Editor.create(rte, configs);
 
-  const reLoad = (v) => {
+  const reLoad = (langVal) => {
     editor?.destroy();
     editor = Editor.create(rte, {
       ...configs,
-      lang: v,
+      lang: langVal,
     });
   };
 
@@ -73,7 +85,9 @@ const loadEditor = (Editor) => {
 
   // Lang change
   lang.addEventListener("change", (e) => {
-    reLoad(e.target.value);
+    const lv = e.target.value;
+    reLoad(lv);
+    changeDesc(lv);
   });
 
   // Clear

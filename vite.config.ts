@@ -9,7 +9,7 @@ const { resolve } = path;
  * @type { import('vite').UserConfig }
  */
 export default defineConfig(({ mode }) => {
-  const envDir = './env';
+  const envDir = "./env";
   const envPrefix = ["VITE", "APP"];
 
   // Env var
@@ -30,13 +30,11 @@ export default defineConfig(({ mode }) => {
     base: APP_BASE_URL,
     resolve: {
       alias: {
-        "@": resolve(__dirname, "src"),
+        "@/*": resolve(__dirname, "src"),
       },
     },
     server: {
       port: 3000,
-      https: false,
-      open: true
     },
     build: {
       lib: {
