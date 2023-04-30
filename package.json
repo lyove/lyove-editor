@@ -56,11 +56,11 @@
     "./**/*.{js,cjs,ts,jsx,tsx}": [
       "eslint --fix"
     ],
-    "./**/*.{js,cjs,ts,css,scss,sass,html,json,md}": [
-      "prettier . --write"
-    ],
     "./**/*.{css,less,scss,sass}": [
       "stylelint --fix"
+    ],
+    "./**/*.{js,cjs,ts,css,scss,sass,html,json,md}": [
+      "prettier . --write"
     ]
   }
 }
