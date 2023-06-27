@@ -133,7 +133,7 @@ export default class Dom {
    * @return {HTMLElement}
    */
   createElement(name = "div", { attributes = {}, html = "" } = {}) {
-    if(typeof name !== "string") {
+    if (typeof name !== "string") {
       return null;
     }
     const element = this.document.createElement(name);
