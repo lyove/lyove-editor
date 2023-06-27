@@ -132,7 +132,10 @@ export default class Dom {
    * @param {string} [html = '']
    * @return {HTMLElement}
    */
-  createElement(name, { attributes = {}, html = "" } = {}) {
+  createElement(name = "div", { attributes = {}, html = "" } = {}) {
+    if(typeof name !== "string") {
+      return null;
+    }
     const element = this.document.createElement(name);
     element.innerHTML = html;
     Object.entries(attributes).forEach(([key, val]) => val && element.setAttribute(key, `${val}`));
