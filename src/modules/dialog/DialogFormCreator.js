@@ -44,8 +44,8 @@ export default class DialogFormCreator {
    * @param {string} cancel
    * @param {function} close
    */
-  constructor(dom, submit, cancel, close) {
-    if (!(dom instanceof Dom) || !isString(submit) || !isString(cancel) || !isFunction(close)) {
+  constructor(dom, submitText, cancelText, close) {
+    if (!(dom instanceof Dom) || !isString(submitText) || !isString(cancelText) || !isFunction(close)) {
       throw new Error(ErrorMessage.INVALID_ARGUMENT);
     }
 
@@ -54,8 +54,8 @@ export default class DialogFormCreator {
       attributes: { method: "dialog" },
     });
     this.addFieldset();
-    this.#addCancelButton(cancel, close);
-    this.#addSubmitButton(submit);
+    this.#addCancelButton(cancelText, close);
+    this.#addSubmitButton(submitText);
   }
 
   /**
