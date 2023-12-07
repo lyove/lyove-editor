@@ -11,12 +11,14 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "preserveConstEnums": true,
     "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noImplicitThis": false,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["vite/client", "node", "jest"]
+    // "types": ["vite/client", "node", "jest"]
   },
   "include": ["src"],
   "exclude": ["**/*.test.ts", "node_modules", "test/**", ".history/**"]

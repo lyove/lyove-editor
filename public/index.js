@@ -27,8 +27,8 @@ const loadEditor = (Editor) => {
   const header = document.getElementById("header");
   const lang = document.getElementById("lang");
   const rte = document.getElementById("rte") || document.getElementById("rich-text-editor");
-  const clear = document.getElementById("clear");
-  const save = document.getElementById("save");
+  // const clear = document.getElementById("clear");
+  // const save = document.getElementById("save");
 
   const changeDesc = (l) => {
     if (descDom) {
@@ -90,27 +90,27 @@ const loadEditor = (Editor) => {
     changeDesc(lv);
   });
 
-  // Clear
-  clear.addEventListener("click", () => {
-    editor.setHtml("");
-    window.scrollTo(0, 0);
-  });
+  // // Clear
+  // clear.addEventListener("click", () => {
+  //   editor.setHtml("");
+  //   window.scrollTo(0, 0);
+  // });
 
-  // Save
-  save.addEventListener("click", () => {
-    if (rte?.hidden) {
-      editor.save();
-      editor.destroy();
-      save.textContent = "Edit";
-      toggle(true);
-    } else {
-      editor.load();
-      save.textContent = "Save";
-      toggle(false);
-    }
-  });
+  // // Save
+  // save.addEventListener("click", () => {
+  //   if (rte?.hidden) {
+  //     editor.save();
+  //     editor.destroy();
+  //     save.textContent = "Edit";
+  //     toggle(true);
+  //   } else {
+  //     editor.load();
+  //     save.textContent = "Save";
+  //     toggle(false);
+  //   }
+  // });
 
-  save.textContent = rte?.hidden ? "Save" : "Edit";
+  // save.textContent = rte?.hidden ? "Save" : "Edit";
 };
 
 /**
