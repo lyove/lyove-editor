@@ -24,7 +24,7 @@ A HTML standards-compliant and dependency-free rich text editor.
 
 ## Demo
 
-https://lyove.github.io/editor
+https://lyove.github.io/lyove_editor
 
 ## Development
 
